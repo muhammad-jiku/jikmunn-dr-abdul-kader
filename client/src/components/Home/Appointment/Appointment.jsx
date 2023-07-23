@@ -37,22 +37,22 @@ const Appointment = () => {
                     <input
                       type='text'
                       placeholder='Name'
-                      className='input input-bordered w-full border-main m-2'
+                      className='input input-bordered w-full bg-white border-main m-2'
                     />
                     <input
                       type='email'
                       placeholder='Email'
-                      className='input input-bordered w-full border-main m-2'
+                      className='input input-bordered w-full bg-white border-main m-2'
                     />
                     <input
                       type='tel'
                       placeholder='Phone'
-                      className='input input-bordered w-full border-main m-2'
+                      className='input input-bordered w-full bg-white border-main m-2'
                     />
                   </div>
                   <div className='flex flex-col justify-start items-start w-full'>
                     <textarea
-                      className='textarea textarea-bordered textarea-lg border-main w-full mx-1 my-2'
+                      className='textarea textarea-bordered textarea-lg bg-white border-main w-full mx-1 my-2'
                       placeholder='Message'
                     ></textarea>
                     <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mx-1 my-2'>

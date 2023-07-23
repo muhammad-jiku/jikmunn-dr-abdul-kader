@@ -9,3 +9,4 @@ export { default as About } from './Home/About/About';
 export { default as Services } from './Home/Services/Services';
 export { default as Testimonials } from './Home/Testimonials/Testimonials';
 export { default as Prices } from './Home/Prices/Prices';
+export { default as Appointment } from './Home/Appointment/Appointment';
