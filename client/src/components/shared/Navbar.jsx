@@ -45,7 +45,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className='navbar bg-base-100'>
+    <div className='navbar bg-white text-black'>
       <div className='navbar-start'>
         <a href={'/'}>
           {/* <img src={logoImg.src} alt='logo' width={50} height={50} /> */}
