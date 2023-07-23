@@ -16,7 +16,7 @@ const Footer = () => {
       description: [
         'Dr. Abdul Kader is a B.M.D.C registered Family Medicine physician who provides primary care',
       ],
-      image: `${aboutmeImg?.src}`,
+      image: `${aboutmeImg}`,
     },
     {
       name: 'Working Hours',
@@ -25,7 +25,7 @@ const Footer = () => {
         'Saturday: 10.00 am - 3.00 pm',
         'Friday: Closed',
       ],
-      image: `${workTimeImg?.src}`,
+      image: `${workTimeImg}`,
     },
     {
       name: 'Contacts',
@@ -33,7 +33,7 @@ const Footer = () => {
         'Phone: +880 183 227 8260',
         '310 Razzak Complex, SSK Road, Feni',
       ],
-      image: `${contactImg?.src}`,
+      image: `${contactImg}`,
       link: 'contacts',
     },
   ];
@@ -41,7 +41,7 @@ const Footer = () => {
   return (
     <div
       className={`hero min-h-[600px] lg:min-h-screen bg-cover bg-no-repeat bg-opacity-80 w-full flex flex-col opacity-75`}
-      style={{ backgroundImage: `url(${bgImg?.src})` }}
+      style={{ backgroundImage: `url(${bgImg})` }}
     >
       <div className='container mx-auto my-10 p-10 box-border flex flex-col items-center'>
         <h2 className='text-lg lg:text-xl font-semibold font-oswald tracking-widest my-2'>
