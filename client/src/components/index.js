@@ -6,3 +6,4 @@ export { default as Banner } from './Home/Banner/Banner';
 export { default as Features } from './Home/Features/Features';
 export { default as About } from './Home/About/About';
 export { default as Services } from './Home/Services/Services';
+export { default as Testimonials } from './Home/Testimonials/Testimonials';

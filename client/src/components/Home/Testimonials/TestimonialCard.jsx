@@ -9,7 +9,7 @@ import 'swiper/css/navigation';
 import '../../../styles/testimonial.css';
 
 // import required modules
-import { Autoplay, Parallax, Pagination, Navigation } from 'swiper';
+import { Autoplay, Parallax, Pagination, Navigation } from 'swiper/modules';
 
 const TestimonialCard = () => {
   const data = [
