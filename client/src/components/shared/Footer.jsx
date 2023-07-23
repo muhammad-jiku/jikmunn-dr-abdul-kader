@@ -49,7 +49,7 @@ const Footer = () => {
         </h2>
         <div className='join my-6'>
           <input
-            className='input input-bordered border-main join-item'
+            className='input input-bordered bg-white border-main join-item'
             placeholder='Email'
           />
           <button className='btn join-item bg-main text-white border-main hover:bg-white hover:text-main hover:border-main'>

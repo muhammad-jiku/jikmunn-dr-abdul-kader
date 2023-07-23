@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import firstAppointmentImg from '../../../assets/images/first-appointment.jpg';
 import followUpAppointmentImg from '../../../assets/images/follow-up-appointment.jpg';
 import weAcceptImg from '../../../assets/images/we-accept.jpg';
-import CustomPriceCard from '../../shared/CustomPriceCard';
+import { CustomPriceCard } from '../../';
 
 const Prices = () => {
   const prices = [

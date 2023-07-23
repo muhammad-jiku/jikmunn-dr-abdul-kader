@@ -4,7 +4,7 @@ import diabeteseImg from '../../../assets/images/diabetes.jpg';
 import asthmaImg from '../../../assets/images/asthma2.jpg';
 import strokeImg from '../../../assets/images/stroke2.jpg';
 import { Link } from 'react-router-dom';
-import CustomServiceCard from '../../shared/CustomServiceCard';
+import { CustomServiceCard } from '../../';
 
 const Services = () => {
   const services = [
