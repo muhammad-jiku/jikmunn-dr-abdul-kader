@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
 import { Navbar, Footer } from './components';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './pages';
 
 function App() {
   return (
     <div className='App'>
       <Navbar />
-      <h1 className='text-3xl font-bold underline'>Hello world!</h1>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+      </Routes>
       <Footer />
     </div>
   );
