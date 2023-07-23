@@ -5,6 +5,7 @@ import {
   About,
   Services,
   Testimonials,
+  Prices,
 } from '../../components';
 
 const HomePage = () => {
@@ -15,6 +16,7 @@ const HomePage = () => {
       <About />
       <Services />
       <Testimonials />
+      <Prices />
     </>
   );
 };
