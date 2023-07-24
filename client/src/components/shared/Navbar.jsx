@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { IoLocation, IoCall } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
+
+import logoImg from '../../assets/images/logo.png';
+import profileImg from '../../assets/images/default_profile_avatar.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,29 +11,29 @@ const Navbar = () => {
   const menuItems = (
     <>
       <li>
-        <a href={'/about'} className='hover:bg-white hover:text-main'>
+        <Link to={'/about'} className='hover:bg-white hover:text-main'>
           About
-        </a>
+        </Link>
       </li>
       <li>
-        <a href={'/services'} className='hover:bg-white hover:text-main'>
+        <Link to={'/services'} className='hover:bg-white hover:text-main'>
           Services
-        </a>
+        </Link>
       </li>
       <li>
-        <a href={'/prices'} className='hover:bg-white hover:text-main'>
+        <Link to={'/prices'} className='hover:bg-white hover:text-main'>
           Prices
-        </a>
+        </Link>
       </li>
       {/* <li>
-        <a href={'/blogs'} className='hover:bg-white hover:text-main'>
+        <Link to={'/blogs'} className='hover:bg-white hover:text-main'>
           Blogs
-        </a>
+        </Link>
       </li> */}
       <li>
-        <a href={'/contacts'} className='hover:bg-white hover:text-main'>
+        <Link to={'/contacts'} className='hover:bg-white hover:text-main'>
           Contacts
-        </a>
+        </Link>
       </li>
 
       <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 flex uppercase'>
@@ -37,9 +41,9 @@ const Navbar = () => {
       </button>
 
       <li>
-        <a href={'/signin'} className='hover:bg-white hover:text-main'>
+        <Link to={'/signin'} className='hover:bg-white hover:text-main'>
           Sign in
-        </a>
+        </Link>
       </li>
     </>
   );
@@ -47,9 +51,9 @@ const Navbar = () => {
   return (
     <div className='navbar bg-white text-black'>
       <div className='navbar-start'>
-        <a href={'/'}>
-          {/* <img src={logoImg.src} alt='logo' width={50} height={50} /> */}
-        </a>
+        <Link to={'/'}>
+          <img src={logoImg} alt='logo' width={50} height={50} />
+        </Link>
         <div className='ml-2 hidden md:flex md:flex-col cursor-pointer'>
           <h1 className='text-xl font-lobster leading-none'>Dr. Abdul Kader</h1>
           <h1 className='text-sm font-oswald leading-none text-gray'>
@@ -71,11 +75,12 @@ const Navbar = () => {
         </ul>
       </div>
       <div className='navbar-end'>
-        <a href='/dashboard/me'>
+        <Link to='/dashboard/me'>
           <div className='flex items-center my-4 space-x-3 cursor-pointer'>
             <img
               className='w-10 h-10 rounded-full'
               // src={user?.avatar ? user?.avatar?.url : profileImg?.src}
+              src={profileImg}
               loading='lazy'
             />
             <div className='hidden sm:block space-y-1 font-medium'>
@@ -87,7 +92,7 @@ const Navbar = () => {
               </p>
             </div>
           </div>
-        </a>
+        </Link>
 
         <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 hidden lg:flex'>
           <IoCall /> <span>+880 183 227 8260</span>
