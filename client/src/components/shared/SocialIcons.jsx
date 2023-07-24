@@ -9,7 +9,7 @@ const SocialIcons = () => {
         target='_blank'
         rel='noopener noreferrer'
       >
-        <button className='btn btn-circle btn-sm md:btn-md mr-2 hover:bg-main hover:text-white'>
+        <button className='btn btn-circle btn-sm md:btn-md mr-2 bg-[#DEE4E7] text-black hover:bg-main hover:text-white'>
           <FaFacebookF className='text-lg md:text-2xl' />
         </button>
       </a>
@@ -18,7 +18,7 @@ const SocialIcons = () => {
         target='_blank'
         rel='noopener noreferrer'
       >
-        <button className='btn btn-circle btn-sm md:btn-md mr-2 hover:bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:text-white'>
+        <button className='btn btn-circle btn-sm md:btn-md mr-2 bg-[#DEE4E7] text-black hover:bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:text-white'>
           <FaInstagram className='text-lg md:text-2xl' />
         </button>
       </a>
@@ -27,7 +27,7 @@ const SocialIcons = () => {
         target='_blank'
         rel='noopener noreferrer'
       >
-        <button className='btn btn-circle btn-sm md:btn-md mr-2 hover:bg-info hover:text-white'>
+        <button className='btn btn-circle btn-sm md:btn-md mr-2 bg-[#DEE4E7] text-black hover:bg-info hover:text-white'>
           <FaLinkedinIn className='text-lg md:text-2xl' />
         </button>
       </a>
