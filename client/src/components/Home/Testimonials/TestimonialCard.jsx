@@ -1,15 +1,10 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
-import '../../../styles/testimonial.css';
-
-// import required modules
 import { Autoplay, Parallax, Pagination, Navigation } from 'swiper/modules';
+// import '../../../styles/testimonial.css';
 
 const TestimonialCard = () => {
   const data = [
