@@ -2,7 +2,13 @@ import React from 'react';
 import './App.css';
 import { Navbar, Footer, NotFound } from './components';
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, AboutPage, ServicesPage, ContactsPage } from './pages';
+import {
+  HomePage,
+  AboutPage,
+  ServicesPage,
+  PricesPage,
+  ContactsPage,
+} from './pages';
 
 function App() {
   return (
@@ -12,6 +18,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/services' element={<ServicesPage />} />
+        <Route path='/prices' element={<PricesPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
