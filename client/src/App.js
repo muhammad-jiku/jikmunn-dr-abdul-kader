@@ -8,6 +8,7 @@ import {
   ServicesPage,
   PricesPage,
   ContactsPage,
+  AuthPage,
 } from './pages';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/services' element={<ServicesPage />} />
         <Route path='/prices' element={<PricesPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
+        <Route path='/signin' element={<AuthPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
