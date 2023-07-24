@@ -14,3 +14,4 @@ export { default as Prices } from './Home/Prices/Prices';
 export { default as Appointment } from './Home/Appointment/Appointment';
 export { default as Partners } from './Home/Partners/Partners';
 export { default as Location } from './Home/Location/Location';
+export { default as AboutDetails } from './About/AboutDetails';
