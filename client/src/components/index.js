@@ -19,3 +19,4 @@ export { default as AboutDetails } from './About/AboutDetails';
 export { default as AboutTimeline } from './About/AboutTimeline';
 export { default as AboutCertificates } from './About/AboutCertificates';
 export { default as ContactDetails } from './Contacts/ContactDetails';
+export { default as ServicesDetails } from './Services/ServicesDetails';
