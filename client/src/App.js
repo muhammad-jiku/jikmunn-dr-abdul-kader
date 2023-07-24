@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Navbar, Footer, NotFound } from './components';
 import { Route, Routes } from 'react-router-dom';
-import { HomePage, AboutPage } from './pages';
+import { HomePage, AboutPage, ContactsPage } from './pages';
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
+        <Route path='/contacts' element={<ContactsPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

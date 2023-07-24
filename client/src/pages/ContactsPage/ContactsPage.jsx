@@ -1,6 +1,6 @@
 import React from 'react';
 import bgImg from '../../assets/images/bg3.jpg';
-import { CustomBanner, ContactDetials } from '../../components';
+import { CustomBanner, ContactDetails } from '../../components';
 
 const ContactsPage = () => {
   const bannerData = {
@@ -13,7 +13,7 @@ const ContactsPage = () => {
   return (
     <>
       <CustomBanner data={bannerData} />
-      <ContactDetials />
+      <ContactDetails />
     </>
   );
 };
