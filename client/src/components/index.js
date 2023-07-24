@@ -18,3 +18,4 @@ export { default as Location } from './Home/Location/Location';
 export { default as AboutDetails } from './About/AboutDetails';
 export { default as AboutTimeline } from './About/AboutTimeline';
 export { default as AboutCertificates } from './About/AboutCertificates';
+export { default as ContactDetials } from './Contacts/ContactDetails';
