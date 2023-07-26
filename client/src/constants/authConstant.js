@@ -1,0 +1,19 @@
+// exporting Signup Actions Constants
+export const SIGNUP_AUTH_REQUEST = 'SIGNUP_AUTH_REQUEST';
+export const SIGNUP_AUTH_SUCCESS = 'SIGNUP_AUTH_SUCCESS';
+export const SIGNUP_AUTH_FAIL = 'SIGNUP_AUTH_FAIL';
+
+// exporting Signin Actions Constants
+export const SIGNIN_AUTH_REQUEST = 'SIGNIN_AUTH_REQUEST';
+export const SIGNIN_AUTH_SUCCESS = 'SIGNIN_AUTH_SUCCESS';
+export const SIGNIN_AUTH_FAIL = 'SIGNIN_AUTH_FAIL';
+
+// exporting Google Actions Constants
+export const GOOGLE_AUTH_REQUEST = 'GOOGLE_AUTH_REQUEST';
+export const GOOGLE_AUTH_SUCCESS = 'GOOGLE_AUTH_SUCCESS';
+export const GOOGLE_AUTH_FAILURE = 'GOOGLE_AUTH_FAILURE';
+
+// exporting Logout Actions Constants
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAIL = 'LOGOUT_FAIL';
