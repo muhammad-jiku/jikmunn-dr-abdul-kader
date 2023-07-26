@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 
 const generateToken = (user) => {
@@ -11,6 +12,42 @@ const generateToken = (user) => {
       expiresIn: `${process.env.EXPIRES_IN}s`,
     }
   );
+};
+
+const signUp = async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    // Check if the user already exists in the database
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).json({
+        message: 'User already exists',
+      });
+    }
+
+    // Hash the password and create a new user
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({
+      username: username.toLowerCase(),
+      email,
+      password: hashedPassword,
+    });
+    await newUser.save();
+
+    // Generate JWT token and send it in the response
+    const token = generateToken(newUser);
+    return res.status(201).json({
+      success: true,
+      data: newUser,
+      token,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
 };
 
 const googleAuthCallback = (req, res) => {
@@ -58,5 +95,6 @@ const googleAuthCallback = (req, res) => {
 };
 
 module.exports = {
+  signUp,
   googleAuthCallback,
 };
