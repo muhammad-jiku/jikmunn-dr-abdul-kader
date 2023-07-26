@@ -13,7 +13,7 @@ export const GOOGLE_AUTH_REQUEST = 'GOOGLE_AUTH_REQUEST';
 export const GOOGLE_AUTH_SUCCESS = 'GOOGLE_AUTH_SUCCESS';
 export const GOOGLE_AUTH_FAILURE = 'GOOGLE_AUTH_FAILURE';
 
-// exporting Logout Actions Constants
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAIL = 'LOGOUT_FAIL';
+// exporting Signout Actions Constants
+export const SIGNOUT_REQUEST = 'SIGNOUT_REQUEST';
+export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS';
+export const SIGNOUT_FAIL = 'SIGNOUT_FAIL';
