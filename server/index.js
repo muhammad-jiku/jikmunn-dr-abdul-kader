@@ -1,5 +1,5 @@
- 
-const app = require('./app'); 
+const app = require('./app');
+const connectToDB = require('./utils/connectToDB');
 
 // port
 const port = process.env.PORT || 5000;
@@ -13,9 +13,9 @@ process.on('uncaughtException', (err) => {
 });
 
 // connecting to database
+connectToDB();
 
 // cloudinary config
- 
 
 // listening to the port
 const server = app.listen(port, () => {
