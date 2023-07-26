@@ -15,7 +15,7 @@ const generateToken = (user) => {
 };
 
 const signUp = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password } = await req.body;
 
   try {
     // Check if the user already exists in the database
@@ -50,10 +50,46 @@ const signUp = async (req, res) => {
   }
 };
 
-const googleAuthCallback = (req, res) => {
+const signIn = async (req, res) => {
+  const { email, password } = await req.body;
+
+  try {
+    // Check if the user exists in the database
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({
+        message: 'Invalid credentials',
+      });
+    }
+
+    // Check if the password is correct
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({
+        message: 'Invalid credentials',
+      });
+    }
+
+    // Generate JWT token and send it in the response
+    const token = generateToken(user);
+    return res.status(200).json({
+      success: true,
+      data: user,
+      token,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+};
+
+const googleAuthCallback = async (req, res) => {
   // This callback function will handle the Google OAuth authentication callback
   // Extract the user data from req.user obtained by Passport.js
-  const { id, displayName, emails } = req.user;
+  const { id, displayName, emails } = await req.user;
   const email = emails[0].value;
 
   // Check if the user already exists in the database based on the Google ID
@@ -96,5 +132,6 @@ const googleAuthCallback = (req, res) => {
 
 module.exports = {
   signUp,
+  signIn,
   googleAuthCallback,
 };
