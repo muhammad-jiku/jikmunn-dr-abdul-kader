@@ -31,6 +31,7 @@ const googleAuthCallback = (req, res) => {
       // User already exists, generate a JWT token and send it as a response
       const token = generateToken(user);
       return res.redirect(`/signin?token=${token}`);
+      //   return res.redirect(`http://localhost:3000/google-auth-success/${token}`);
     } else {
       // User does not exist, create a new user with the Google profile data
       const newUser = new User({
@@ -44,6 +45,9 @@ const googleAuthCallback = (req, res) => {
         // Generate a JWT token and send it as a response
         const token = generateToken(newUser);
         return res.redirect(`/signin?token=${token}`);
+        // return res.redirect(
+        //   `http://localhost:3000/google-auth-success/${token}`
+        // );
       } catch (error) {
         return res.status(500).json({
           message: 'Internal server error',
