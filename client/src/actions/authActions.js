@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  CLEAR_ERRORS,
   SIGNUP_AUTH_FAILURE,
   SIGNUP_AUTH_REQUEST,
   SIGNUP_AUTH_SUCCESS,
@@ -31,4 +32,10 @@ export const signUpUser = (userData) => async (dispatch) => {
       payload: error.response.data.message,
     });
   }
+};
+
+export const clearErrors = () => async (dispatch) => {
+  await dispatch({
+    type: CLEAR_ERRORS,
+  });
 };
