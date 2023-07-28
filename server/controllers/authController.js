@@ -1,19 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-const { v4: uuidv4 } = require('uuid');
-
-const generateToken = (user) => {
-  return jwt.sign(
-    {
-      id: user._id,
-    },
-    `${process.env.SECRET_KEY}`,
-    {
-      expiresIn: `${process.env.EXPIRES_IN}s`,
-    }
-  );
-};
+const { generateToken } = require('../utils/generateToken');
 
 const signUp = async (req, res) => {
   const { username, email, password } = await req.body;
@@ -35,10 +23,10 @@ const signUp = async (req, res) => {
       email,
       password: hashedPassword,
     });
-    await newUser.save();
+    const user = await newUser.save();
 
     // Generate JWT token and send it in the response
-    const token = generateToken(newUser);
+    const token = generateToken(user);
     return res.status(201).json({
       success: true,
       data: newUser,
