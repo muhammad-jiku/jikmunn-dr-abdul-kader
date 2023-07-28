@@ -95,7 +95,7 @@ const googleAuthCallback = async (req, res) => {
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://www.example.com/auth/google/callback',
+        callbackURL: `/auth/google/callback`,
       },
       async function (accessToken, refreshToken, profile, cb) {
         const publicId = uuidv4();

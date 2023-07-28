@@ -12,14 +12,15 @@ const authRoute = express.Router({
 
 authRoute.route('/signup').post(signUp);
 authRoute.route('/signin').post(signIn);
-authRoute.route('/google').get(
+authRoute.route('/auth/google').get(
   passport.authenticate('google', {
-    scope: ['profile', 'email'],
+    scope: ['profile'],
   })
 );
-authRoute.route('/google/callback').get(
+
+authRoute.route('/auth/google/callback').get(
   passport.authenticate('google', {
-    failureRedirect: '/',
+    failureRedirect: '/signin',
   }),
   googleAuthCallback
 );
