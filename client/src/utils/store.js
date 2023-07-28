@@ -7,16 +7,7 @@ const reducer = combineReducers({
   auth: authReducer,
 });
 
-let initialState = {
-  appointment: {
-    appointments: localStorage.getItem('appointments')
-      ? JSON.parse(localStorage.getItem('appointments'))
-      : [],
-    appointmentInfo: localStorage.getItem('appointmentInfo')
-      ? JSON.parse(localStorage.getItem('appointmentInfo'))
-      : {},
-  },
-};
+let initialState = {};
 
 const middleware = [thunk];
 

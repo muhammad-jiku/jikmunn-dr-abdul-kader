@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SocialSignIn from './SocialSignIn';
+import { clearErrors, signUpUser } from '../../actions/authActions';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const {
+    error,
+    // loading,
+    isAuthenticated,
+  } = useSelector((state) => state?.auth);
+  console.log(error, isAuthenticated);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,16 +37,39 @@ const SignUp = () => {
     // resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
+    await e.preventDefault();
     console.log(data);
-    console.log({ username, email, password, confirmPassword });
+    const userData = { username, email, password, confirmPassword };
+
+    console.log(userData);
+    if (password === confirmPassword) {
+      dispatch(signUpUser(userData));
+    }
   };
+
+  let from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     if (password === confirmPassword && isSubmitSuccessful) {
       reset();
     }
   }, [password, confirmPassword, isSubmitSuccessful, reset]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Invalid Email or Password! 😔');
+      dispatch(clearErrors());
+    }
+
+    if (isAuthenticated) {
+      toast.success('Welcome here!! 😊');
+      navigate(from, {
+        replace: true,
+      });
+    }
+  }, [dispatch, error, isAuthenticated, navigate, from]);
 
   return (
     <div className='container mx-auto my-28 p-2 md:p-4 flex flex-col items-center'>

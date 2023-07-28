@@ -17,7 +17,11 @@ export const signUpUser = (userData) => async (dispatch) => {
       headers: { 'content-type': 'application/json' },
     };
 
-    const { data } = await axios.post(`/api/v1/auth/signup`, userData, config);
+    const { data } = await axios.post(
+      `http://localhost:5000/api/v1/auth/signup`,
+      userData,
+      config
+    );
 
     await dispatch({
       type: SIGNUP_AUTH_SUCCESS,

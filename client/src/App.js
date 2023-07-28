@@ -10,6 +10,7 @@ import {
   ContactsPage,
   AuthPage,
 } from './pages';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/signin' element={<AuthPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <ToastContainer position='bottom-right' />
       <Footer />
     </div>
   );
