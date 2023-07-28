@@ -21,7 +21,7 @@ export const signUpUser = (userData) => async (dispatch) => {
 
     await dispatch({
       type: SIGNUP_AUTH_SUCCESS,
-      payload: data.user,
+      payload: data?.data,
     });
 
     const token = await data?.token;

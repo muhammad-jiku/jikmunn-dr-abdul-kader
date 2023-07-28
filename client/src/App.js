@@ -15,7 +15,7 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
-  console.log('first', axios.defaults.baseURL);
+
   return (
     <div className='App'>
       <Navbar />
