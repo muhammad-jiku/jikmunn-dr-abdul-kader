@@ -32,6 +32,20 @@ const isAuthenticated = AsyncError(async (req, res, next) => {
   }
 });
 
+const authorizeRoles = async (req, res, next) => {
+  if (req.user?.role === 'admin') {
+    next();
+  } else {
+    return next(
+      new ErrorHandler(
+        `Role: ${req.user.role} is not allowed to access this resouce `,
+        403
+      )
+    );
+  }
+};
+
 module.exports = {
   isAuthenticated,
+  authorizeRoles,
 };
