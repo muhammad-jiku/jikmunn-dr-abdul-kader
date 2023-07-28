@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { v4: uuidv4 } = require('uuid');
 
 const generateToken = (user) => {
   return jwt.sign(
@@ -87,46 +90,52 @@ const signIn = async (req, res) => {
 };
 
 const googleAuthCallback = async (req, res) => {
-  // This callback function will handle the Google OAuth authentication callback
-  // Extract the user data from req.user obtained by Passport.js
-  const { id, displayName, emails } = await req.user;
-  const email = emails[0].value;
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: GOOGLE_CLIENT_ID,
+        clientSecret: GOOGLE_CLIENT_SECRET,
+        callbackURL: 'http://www.example.com/auth/google/callback',
+      },
+      async function (accessToken, refreshToken, profile, cb) {
+        const publicId = uuidv4();
+        console.log('profile: ', profile);
+        //  console.log('public id: ', publicId)
+        console.log('public id: ', publicId());
+        const newUser = {
+          googleId: profile.id,
+          username: profile.displayName.toLowerCase(),
+          email: profile.emails[0].value,
+          avatar: {
+            public_id: publicId(),
+            url: profile.photos[0].value,
+          },
+        };
 
-  // Check if the user already exists in the database based on the Google ID
-  User.findOne({ googleId: id }, async (err, user) => {
-    if (err) {
-      return res.status(500).json({
-        message: 'Internal server error',
-      });
-    }
+        try {
+          let user = await User.findOne({ googleId: profile.id });
 
-    if (user) {
-      // User already exists, generate a JWT token and send it as a response
-      const token = generateToken(user);
-      return res.redirect(`/signin?token=${token}`);
-      //   return res.redirect(`http://localhost:3000/google-auth-success/${token}`);
-    } else {
-      // User does not exist, create a new user with the Google profile data
-      const newUser = new User({
-        googleId: id,
-        email,
-        username: displayName.toLowerCase(),
-      });
-
-      try {
-        await newUser.save();
-        // Generate a JWT token and send it as a response
-        const token = generateToken(newUser);
-        return res.redirect(`/signin?token=${token}`);
-        // return res.redirect(
-        //   `http://localhost:3000/google-auth-success/${token}`
-        // );
-      } catch (error) {
-        return res.status(500).json({
-          message: 'Internal server error',
-        });
+          if (user) {
+            await generateToken(user);
+            done(null, user);
+          } else {
+            user = await User.create(newUser);
+            await generateToken(user);
+            done(null, user);
+          }
+        } catch (err) {
+          console.error(err);
+        }
       }
-    }
+    )
+  );
+
+  passport.serializeUser((user, done) => {
+    done(null, user.id);
+  });
+
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => done(err, user));
   });
 };
 
