@@ -42,7 +42,7 @@ const signIn = AsyncError(async (req, res) => {
   const { email, password } = await req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
       return res.status(401).json({
@@ -65,6 +65,7 @@ const signIn = AsyncError(async (req, res) => {
       token,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });

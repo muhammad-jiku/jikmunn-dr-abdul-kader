@@ -40,7 +40,7 @@ const SignUp = () => {
   const onSubmit = async (data, e) => {
     await e.preventDefault();
     console.log(data);
-    const userData = { username, email, password, confirmPassword };
+    const userData = { username, email, password };
 
     console.log(userData);
     if (password === confirmPassword) {
