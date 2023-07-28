@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 });
 
 // routing intialize
-app.use('/api/v1', authRoute);
+app.use('/api/v1/auth', authRoute);
 
 // middleware for errors
 
