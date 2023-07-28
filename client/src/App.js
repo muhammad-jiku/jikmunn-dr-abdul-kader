@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import './App.css';
 import { Navbar, Footer, NotFound } from './components';
 import { Route, Routes } from 'react-router-dom';
@@ -13,6 +14,8 @@ import {
 import { ToastContainer } from 'react-toastify';
 
 function App() {
+  axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+  console.log('first', axios.defaults.baseURL);
   return (
     <div className='App'>
       <Navbar />
