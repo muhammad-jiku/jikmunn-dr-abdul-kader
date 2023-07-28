@@ -1,9 +1,9 @@
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { generateToken } = require('../utils/generateToken');
+const AsyncError = require('../middlewares/errors/AsyncError');
 
-const signUp = async (req, res) => {
+const signUp = AsyncError(async (req, res) => {
   const { username, email, password } = await req.body;
 
   try {
@@ -24,12 +24,11 @@ const signUp = async (req, res) => {
       password: hashedPassword,
     });
     const user = await newUser.save();
-
-    // Generate JWT token and send it in the response
     const token = generateToken(user);
+
     return res.status(201).json({
       success: true,
-      data: newUser,
+      data: user,
       token,
     });
   } catch (error) {
@@ -37,22 +36,20 @@ const signUp = async (req, res) => {
       message: 'Internal server error',
     });
   }
-};
+});
 
-const signIn = async (req, res) => {
+const signIn = AsyncError(async (req, res) => {
   const { email, password } = await req.body;
 
   try {
-    // Check if the user exists in the database
     const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({
-        message: 'Invalid credentials',
+        message: 'Invalid User',
       });
     }
 
-    // Check if the password is correct
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -61,7 +58,6 @@ const signIn = async (req, res) => {
       });
     }
 
-    // Generate JWT token and send it in the response
     const token = generateToken(user);
     return res.status(200).json({
       success: true,
@@ -73,7 +69,7 @@ const signIn = async (req, res) => {
       message: 'Internal server error',
     });
   }
-};
+});
 
 module.exports = {
   signUp,
