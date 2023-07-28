@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const { v4: uuidv4 } = require('uuid');
 
 const generateToken = (user) => {
@@ -89,58 +87,7 @@ const signIn = async (req, res) => {
   }
 };
 
-const googleAuthCallback = async (req, res) => {
-  passport.use(
-    new GoogleStrategy(
-      {
-        clientID: GOOGLE_CLIENT_ID,
-        clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: `/auth/google/callback`,
-      },
-      async function (accessToken, refreshToken, profile, cb) {
-        const publicId = uuidv4();
-        console.log('profile: ', profile);
-        //  console.log('public id: ', publicId)
-        console.log('public id: ', publicId());
-        const newUser = {
-          googleId: profile.id,
-          username: profile.displayName.toLowerCase(),
-          email: profile.emails[0].value,
-          avatar: {
-            public_id: publicId(),
-            url: profile.photos[0].value,
-          },
-        };
-
-        try {
-          let user = await User.findOne({ googleId: profile.id });
-
-          if (user) {
-            await generateToken(user);
-            done(null, user);
-          } else {
-            user = await User.create(newUser);
-            await generateToken(user);
-            done(null, user);
-          }
-        } catch (err) {
-          console.error(err);
-        }
-      }
-    )
-  );
-
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
-
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => done(err, user));
-  });
-};
-
 module.exports = {
   signUp,
   signIn,
-  googleAuthCallback,
 };

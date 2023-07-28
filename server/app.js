@@ -4,7 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
-const passport = require('passport');
 const session = require('express-session');
 const authRoute = require('./routes/authRoute');
 
@@ -38,8 +37,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
 app.disable('x-powered-by'); // less hackers know about our stack
 
 // displaying welcome message
