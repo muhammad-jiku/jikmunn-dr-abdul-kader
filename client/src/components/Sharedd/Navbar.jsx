@@ -1,14 +1,24 @@
 import React, { useState } from 'react';
 import { IoLocation, IoCall } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import logoImg from '../../assets/images/logo.png';
 import profileImg from '../../assets/images/default_profile_avatar.png';
+import { toast } from 'react-toastify';
+import { signOutUser } from '../../actions/authActions';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, user } = useSelector((state) => state?.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state?.user);
   console.log(user);
+
+  const signOutHandler = () => {
+    dispatch(signOutUser());
+    toast.success('Sign Out Successfully!! 👍');
+    navigate('/');
+  };
 
   const menuItems = (
     <>
@@ -38,7 +48,10 @@ const Navbar = () => {
         </Link>
       </li>
       {isAuthenticated && user ? (
-        <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 flex uppercase'>
+        <button
+          className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 flex uppercase'
+          onClick={signOutHandler}
+        >
           sign out
         </button>
       ) : (
