@@ -7,7 +7,7 @@ import {
   SIGNIN_AUTH_REQUEST,
   SIGNIN_AUTH_SUCCESS,
   SIGNOUT_FAILURE,
-  // SIGNOUT_REQUEST,
+  SIGNOUT_REQUEST,
   SIGNOUT_SUCCESS,
   SIGNUP_AUTH_FAILURE,
   SIGNUP_AUTH_REQUEST,
@@ -41,6 +41,13 @@ export const authReducer = (state = { user: {} }, action) => {
         isAuthenticated: false,
         user: null,
         error: action.payload,
+      };
+    case SIGNOUT_REQUEST:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        user: action.payload,
       };
     case SIGNOUT_SUCCESS:
       return {
