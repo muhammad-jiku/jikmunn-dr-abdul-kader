@@ -4,7 +4,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { authReducer } from '../reducers/authReducer';
 
 const reducer = combineReducers({
-  auth: authReducer,
+  user: authReducer,
 });
 
 let initialState = {};

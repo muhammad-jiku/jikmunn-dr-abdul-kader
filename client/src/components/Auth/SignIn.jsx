@@ -15,7 +15,7 @@ const SignIn = () => {
     error,
     // loading,
     isAuthenticated,
-  } = useSelector((state) => state?.auth);
+  } = useSelector((state) => state?.user);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

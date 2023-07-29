@@ -14,7 +14,7 @@ const SignUp = () => {
     error,
     // loading,
     isAuthenticated,
-  } = useSelector((state) => state?.auth);
+  } = useSelector((state) => state?.user);
   console.log(error, isAuthenticated);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
