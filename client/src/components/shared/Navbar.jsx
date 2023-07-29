@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { IoLocation, IoCall } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
 import logoImg from '../../assets/images/logo.png';
 import profileImg from '../../assets/images/default_profile_avatar.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAuthenticated, user } = useSelector((state) => state?.auth);
+  console.log(user);
 
   const menuItems = (
     <>
@@ -35,16 +37,17 @@ const Navbar = () => {
           Contacts
         </Link>
       </li>
-
-      <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 flex uppercase'>
-        sign out
-      </button>
-
-      <li>
-        <Link to={'/signin'} className='hover:bg-white hover:text-main'>
-          Sign in
-        </Link>
-      </li>
+      {isAuthenticated && user ? (
+        <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 flex uppercase'>
+          sign out
+        </button>
+      ) : (
+        <li>
+          <Link to={'/signin'} className='hover:bg-white hover:text-main'>
+            Sign in
+          </Link>
+        </li>
+      )}
     </>
   );
 
@@ -75,24 +78,26 @@ const Navbar = () => {
         </ul>
       </div>
       <div className='navbar-end'>
-        <Link to='/dashboard/me'>
-          <div className='flex items-center my-4 space-x-3 cursor-pointer'>
-            <img
-              className='w-10 h-10 rounded-full'
-              // src={user?.avatar ? user?.avatar?.url : profileImg?.src}
-              src={profileImg}
-              loading='lazy'
-            />
-            <div className='hidden sm:block space-y-1 font-medium'>
-              <p className='text-xs'>
-                {/* {user?.username} */}
-                <time className='block text-xs text-gray'>
-                  {/* {user?.email} */}
-                </time>
-              </p>
+        {isAuthenticated && user ? (
+          <Link to='/dashboard/me'>
+            <div className='flex items-center my-4 space-x-3 cursor-pointer'>
+              <img
+                className='w-10 h-10 rounded-full'
+                // src={user?.avatar ? user?.avatar?.url : profileImg?.src}
+                src={profileImg}
+                loading='lazy'
+              />
+              <div className='hidden sm:block space-y-1 font-medium'>
+                <p className='text-xs'>
+                  {/* {user?.username} */}
+                  <time className='block text-xs text-gray'>
+                    {/* {user?.email} */}
+                  </time>
+                </p>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        ) : null}
 
         <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 hidden lg:flex'>
           <IoCall /> <span>+880 183 227 8260</span>
