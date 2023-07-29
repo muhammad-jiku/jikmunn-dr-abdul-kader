@@ -80,7 +80,7 @@ const signOut = AsyncError(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    message: 'Logged Out',
+    message: 'Signed Out Successfully!',
   });
 });
 
