@@ -2,6 +2,9 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { generateToken } = require('../utils/generateToken');
 const AsyncError = require('../middlewares/errors/AsyncError');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { v4: uuidv4 } = require('uuid');
 
 const signUp = AsyncError(async (req, res) => {
   const { username, email, password } = await req.body;
@@ -78,7 +81,7 @@ const googleSignIn = AsyncError(async (req, res) => {
       {
         clientID: `${process.env.GOOGLE_CLIENT_ID}`,
         clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-        callbackURL: GOOGLE_CALLBACK_URL,
+        callbackURL: `${process.env.GOOGLE_CALLBACK_URL}`,
         scope: ['profile', 'email'],
       },
       async function (accessToken, refreshToken, profile, cb) {
@@ -105,23 +108,25 @@ const googleSignIn = AsyncError(async (req, res) => {
 
           if (user) {
             token = await generateToken(user);
+            console.log('generated token...', token);
 
+            cb(null, user);
             res.status(200).json({
               success: true,
               data: user,
               token,
             });
-            cb(null, user);
           } else {
             user = await User.create(newUser);
             token = await generateToken(user);
+            console.log('generated token...', token);
 
+            cb(null, user);
             res.status(201).json({
               success: true,
               data: user,
               token,
             });
-            cb(null, user);
           }
 
           console.log('user profile', user);
