@@ -72,6 +72,87 @@ const signIn = AsyncError(async (req, res) => {
   }
 });
 
+const googleSignIn = AsyncError(async (req, res) => {
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+        clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+        callbackURL: GOOGLE_CALLBACK_URL,
+        scope: ['profile', 'email'],
+      },
+      async function (accessToken, refreshToken, profile, cb) {
+        console.log('profile : ', profile);
+        const publicId = uuidv4();
+
+        const newUser = {
+          googleId: profile.id,
+          username: profile.displayName
+            .toString()
+            .toLowerCase()
+            .split(' ')
+            .join(''),
+          email: profile.emails[0].value,
+          avatar: {
+            public_id: publicId,
+            url: profile.photos[0].value,
+          },
+        };
+
+        try {
+          let user = await User.findOne({ googleId: profile.id });
+          let token = null;
+
+          if (user) {
+            token = await generateToken(user);
+
+            res.status(200).json({
+              success: true,
+              data: user,
+              token,
+            });
+            cb(null, user);
+          } else {
+            user = await User.create(newUser);
+            token = await generateToken(user);
+
+            res.status(201).json({
+              success: true,
+              data: user,
+              token,
+            });
+            cb(null, user);
+          }
+
+          console.log('user profile', user);
+          console.log('user profile..', user[0]);
+          if (user && user[0]) {
+            return cb(null, user && user[0]);
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    )
+  );
+
+  passport.serializeUser((user, cb) => {
+    console.log('Serializing user:', user);
+    cb(null, user.id);
+  });
+
+  passport.deserializeUser(async (id, cb) => {
+    const user = await User.findOne({ where: { id } }).catch((err) => {
+      console.log('Error deserializing', err);
+      cb(err, null);
+    });
+
+    console.log('DeSerialized user', user);
+
+    if (user) cb(null, user);
+  });
+});
+
 const signOut = AsyncError(async (req, res) => {
   res.cookie('token', null, {
     expires: new Date(Date.now()),
@@ -87,5 +168,6 @@ const signOut = AsyncError(async (req, res) => {
 module.exports = {
   signUp,
   signIn,
+  googleSignIn,
   signOut,
 };
