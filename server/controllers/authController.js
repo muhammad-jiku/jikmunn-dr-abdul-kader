@@ -156,6 +156,8 @@ const googleSignIn = AsyncError(async (req, res) => {
 
     if (user) cb(null, user);
   });
+
+  console.log(first);
 });
 
 const signOut = AsyncError(async (req, res) => {

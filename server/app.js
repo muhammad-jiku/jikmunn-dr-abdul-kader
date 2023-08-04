@@ -5,24 +5,13 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
+const passport = require('passport');
 const authRoute = require('./routes/authRoute');
+const { googleSignIn } = require('./controllers/authController');
 
 // app initialize
 const app = express();
-
-// cors config
-// const corsConfig = {
-//   origin: true,
-//   // origin: 'http://localhost:3000/',
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   credentials: true,
-// };
-
-// app.options('*', cors(corsConfig));
-// app.use(cors(corsConfig));
-// // app.options('*', cors());
-// // app.use(cors(origin, 'http://localhost:3000/'));
-// app.use(express.json());
+googleSignIn();
 
 // middlewares
 app.use(cors());
@@ -37,6 +26,8 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 app.disable('x-powered-by'); // less hackers know about our stack
 
 // displaying welcome message
