@@ -3,6 +3,13 @@ const User = require('../models/User');
 const { generateToken } = require('../utils/generateToken');
 const AsyncError = require('../middlewares/errors/AsyncError');
 const { v4: uuidv4 } = require('uuid');
+const { OAuth2Client } = require('google-auth-library');
+
+const oAuth2Client = new OAuth2Client(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  'postmessage'
+);
 
 const signUp = AsyncError(async (req, res) => {
   const { username, email, password } = await req.body;
@@ -73,6 +80,70 @@ const signIn = AsyncError(async (req, res) => {
   }
 });
 
+const googleSignIn = AsyncError(async (req, res) => {
+  const { tokens } = await oAuth2Client.getToken(req.body.code);
+
+  const ticket = await oAuth2Client.verifyIdToken({
+    idToken: tokens?.id_token,
+    audience: process.env.GOOGLE_CLIENT_ID,
+  });
+  const payload = ticket.getPayload();
+  const userid = payload['sub'];
+  const publicId = uuidv4();
+  const newUser = {
+    googleId: payload?.sub,
+    username: payload?.name.toString().toLowerCase().split(' ').join(''),
+    email: payload?.email,
+    avatar: {
+      public_id: publicId,
+      url: payload?.picture,
+    },
+  };
+
+  console.log(tokens);
+  console.log(
+    '----------------------------------------------------------------'
+  );
+  console.log(userid);
+  console.log(
+    '----------------------------------------------------------------'
+  );
+  console.log(payload);
+  console.log(
+    '----------------------------------------------------------------'
+  );
+
+  try {
+    let user = await User.findOne({ googleId: payload?.sub });
+    let token = null;
+
+    if (user) {
+      token = generateToken(user);
+      console.log('existed user...', user);
+      console.log('generated token...', token);
+
+      return res.status(200).json({
+        success: true,
+        data: user,
+        token,
+      });
+    } else {
+      user = await User.create(newUser);
+      token = generateToken(user);
+      console.log('new user...', user);
+      console.log('generated token...', token);
+
+      return res.status(201).json({
+        success: true,
+        data: user,
+        token,
+      });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 const signOut = AsyncError(async (req, res) => {
   res.cookie('token', null, {
     expires: new Date(Date.now()),
@@ -88,5 +159,6 @@ const signOut = AsyncError(async (req, res) => {
 module.exports = {
   signUp,
   signIn,
+  googleSignIn,
   signOut,
 };
