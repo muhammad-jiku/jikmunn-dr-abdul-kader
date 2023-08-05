@@ -1,6 +1,9 @@
 import axios from 'axios';
 import {
   CLEAR_ERRORS,
+  GOOGLE_AUTH_FAILURE,
+  GOOGLE_AUTH_REQUEST,
+  GOOGLE_AUTH_SUCCESS,
   SIGNIN_AUTH_FAILURE,
   SIGNIN_AUTH_REQUEST,
   SIGNIN_AUTH_SUCCESS,
@@ -34,6 +37,37 @@ export const signUpUser = (userData) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: SIGNUP_AUTH_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const googleSignInUser = (userDataCode) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: GOOGLE_AUTH_REQUEST,
+    });
+
+    const config = {
+      headers: { 'content-type': 'application/json' },
+    };
+
+    const { data } = await axios.post(
+      `/api/v1/auth/google`,
+      userDataCode,
+      config
+    );
+
+    await dispatch({
+      type: GOOGLE_AUTH_SUCCESS,
+      payload: data?.data,
+    });
+
+    const token = await data?.token;
+    localStorage?.setItem('token', token);
+  } catch (error) {
+    await dispatch({
+      type: GOOGLE_AUTH_FAILURE,
       payload: error.response.data.message,
     });
   }
