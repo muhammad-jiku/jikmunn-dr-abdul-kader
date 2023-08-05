@@ -1,6 +1,7 @@
 export { default as Navbar } from './Shared/Navbar';
 export { default as Footer } from './Shared/Footer';
 export { default as NotFound } from './Shared/NotFound';
+export { default as Loader } from './Shared/Loader';
 export { default as CustomServiceCard } from './Shared/CustomServiceCard';
 export { default as CustomPriceCard } from './Shared/CustomPriceCard';
 export { default as CustomLocation } from './Shared/CustomLocation';
