@@ -27,10 +27,8 @@ const SocialSignIn = () => {
       const userDataCode = {
         code: code,
       };
-
       await dispatch(googleSignInUser(userDataCode));
     },
-
     onError: (errorResponse) => console.log(errorResponse),
   });
 
