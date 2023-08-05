@@ -58,6 +58,8 @@ export const googleSignInUser = (userDataCode) => async (dispatch) => {
       config
     );
 
+    console.log('data...', data);
+
     await dispatch({
       type: GOOGLE_AUTH_SUCCESS,
       payload: data?.data,
