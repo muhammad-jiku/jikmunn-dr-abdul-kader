@@ -33,14 +33,16 @@ const Sidebar = () => {
               My Appointments
             </Link>
           </li>
-          <li>
-            <Link
-              href='/dashboard/me/update-password'
-              className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
-            >
-              Update Password
-            </Link>
-          </li>
+          {user?.googleId?.length === 0 && (
+            <li>
+              <Link
+                href='/dashboard/me/update-password'
+                className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
+              >
+                Update Password
+              </Link>
+            </li>
+          )}
           <hr className='my-2 border-2 border-slate-300' />
           {user?.role === 'Admin' && (
             <>
