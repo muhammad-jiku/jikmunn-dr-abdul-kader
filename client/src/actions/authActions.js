@@ -4,6 +4,9 @@ import {
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
   GOOGLE_AUTH_SUCCESS,
+  LOAD_USER_FAILURE,
+  LOAD_USER_REQUEST,
+  LOAD_USER_SUCCESS,
   SIGNIN_AUTH_FAILURE,
   SIGNIN_AUTH_REQUEST,
   SIGNIN_AUTH_SUCCESS,
@@ -116,6 +119,33 @@ export const signOutUser = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: SIGNOUT_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const loadUser = () => async (dispatch) => {
+  try {
+    await dispatch({
+      type: LOAD_USER_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/auth/me`, config);
+
+    await dispatch({
+      type: LOAD_USER_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: LOAD_USER_FAILURE,
       payload: error.response.data.message,
     });
   }
