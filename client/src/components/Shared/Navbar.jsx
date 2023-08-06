@@ -91,29 +91,28 @@ const Navbar = ({ isAuthenticated, user }) => {
       </div>
       <div className='navbar-end'>
         {isAuthenticated && user ? (
-          <Link to='/dashboard/me'>
+          <Link to='/dashboard'>
             <div className='flex items-center my-4 space-x-3 cursor-pointer'>
               <img
                 className='w-10 h-10 rounded-full'
-                // src={user?.avatar ? user?.avatar?.url : profileImg?.src}
-                src={profileImg}
+                src={user ? user?.avatar?.url : profileImg}
+                // src={profileImg}
                 loading='lazy'
+                alt={user ? user?.username : 'user'}
               />
               <div className='hidden sm:block space-y-1 font-medium'>
                 <p className='text-xs'>
-                  {/* {user?.username} */}
-                  <time className='block text-xs text-gray'>
-                    {/* {user?.email} */}
-                  </time>
+                  {user?.username}
+                  <time className='block text-xs text-gray'>{user?.email}</time>
                 </p>
               </div>
             </div>
           </Link>
-        ) : null}
-
-        <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 hidden lg:flex'>
-          <IoCall /> <span>+880 183 227 8260</span>
-        </button>
+        ) : (
+          <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 hidden lg:flex'>
+            <IoCall /> <span>+880 183 227 8260</span>
+          </button>
+        )}
 
         <div className='dropdown dropdown-bottom dropdown-end lg:hidden'>
           <label tabIndex={-1}>

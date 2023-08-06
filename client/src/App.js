@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import { Navbar, Footer, NotFound } from './components';
+import { Navbar, Footer, NotFound, RequiredAuth } from './components';
 import { Route, Routes } from 'react-router-dom';
 import {
   HomePage,
@@ -10,6 +10,7 @@ import {
   PricesPage,
   ContactsPage,
   AuthPage,
+  MyDashboardPage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './actions/authActions';
@@ -37,6 +38,14 @@ function App() {
         <Route path='/prices' element={<PricesPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='/signin' element={<AuthPage />} />
+        <Route
+          path='/dashboard'
+          element={
+            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <MyDashboardPage />
+            </RequiredAuth>
+          }
+        ></Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
       <ToastContainer position='bottom-right' />

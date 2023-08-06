@@ -23,3 +23,6 @@ export { default as ServicesDetails } from './Services/ServicesDetails';
 export { default as PricesDetails } from './Prices/PricesDetails';
 export { default as ContactDetails } from './Contacts/ContactDetails';
 export { default as Auth } from './Auth/Auth';
+export { default as RequiredAuth } from './ProtectedRoute/RequiredAuth';
+export { default as RequiredAdmin } from './ProtectedRoute/RequiredAdmin';
+export { default as Dashboard } from './Dashboard/Dashboard';

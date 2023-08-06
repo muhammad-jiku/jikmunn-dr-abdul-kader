@@ -4,3 +4,4 @@ export { default as ServicesPage } from './ServicesPage/ServicesPage';
 export { default as PricesPage } from './PricesPage/PricesPage';
 export { default as ContactsPage } from './ContactsPage/ContactsPage';
 export { default as AuthPage } from './AuthPage/AuthPage';
+export { default as MyDashboardPage } from './DashboardPages/MyDashboardPage';
