@@ -11,6 +11,7 @@ import {
   ContactsPage,
   AuthPage,
   MyDashboardPage,
+  MyProfilePage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './actions/authActions';
@@ -45,7 +46,16 @@ function App() {
               <MyDashboardPage />
             </RequiredAuth>
           }
-        ></Route>
+        >
+          <Route
+            index
+            element={
+              <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+                <MyProfilePage />
+              </RequiredAuth>
+            }
+          />
+        </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
       <ToastContainer position='bottom-right' />
