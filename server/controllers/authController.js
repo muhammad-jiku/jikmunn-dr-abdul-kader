@@ -156,9 +156,22 @@ const signOut = AsyncError(async (req, res) => {
   });
 });
 
+const getUserDetails = AsyncError(async (req, res) => {
+  const { id } = await req.user;
+  const user = await User.findById({
+    _id: id,
+  });
+
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
+});
+
 module.exports = {
   signUp,
   signIn,
   googleSignIn,
   signOut,
+  getUserDetails,
 };
