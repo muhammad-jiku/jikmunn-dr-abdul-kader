@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { IoLocation, IoCall } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import logoImg from '../../assets/images/logo.png';
 import profileImg from '../../assets/images/default_profile_avatar.png';
 import { toast } from 'react-toastify';
 import { signOutUser } from '../../actions/authActions';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector((state) => state?.user);
   console.log(user);
 
   const signOutHandler = () => {

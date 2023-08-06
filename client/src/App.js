@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import { Navbar, Footer, NotFound } from './components';
@@ -12,13 +12,24 @@ import {
   AuthPage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
+import { loadUser } from './actions/authActions';
+import { useSelector } from 'react-redux';
+import { appointmentStore } from './utils/store';
 
 function App() {
+  const { loading, isAuthenticated, user, error } = useSelector(
+    (state) => state?.user
+  );
+
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
+
+  useEffect(() => {
+    appointmentStore.dispatch(loadUser());
+  }, []);
 
   return (
     <div className='App'>
-      <Navbar />
+      <Navbar isAuthenticated={isAuthenticated} user={user} />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
