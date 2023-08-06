@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
 const authRoute = require('./routes/authRoute');
+const ErrorChecker = require('./middlewares/errors/ErrorChecker');
 
 // app initialize
 const app = express();
@@ -35,7 +36,8 @@ app.get('/', (req, res) => {
 // routing intialize
 app.use('/api/v1/auth', authRoute);
 
-// middleware for errors
+// Middleware for Errors
+app.use(ErrorChecker);
 
 // exporting module
 module.exports = app;

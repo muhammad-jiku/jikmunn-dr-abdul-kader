@@ -32,7 +32,7 @@ const isAuthenticated = AsyncError(async (req, res, next) => {
   }
 });
 
-const authorizeRoles = async (req, res, next) => {
+const authorizeRoles = AsyncError(async (req, res, next) => {
   if (req.user?.role === 'admin') {
     next();
   } else {
@@ -43,7 +43,7 @@ const authorizeRoles = async (req, res, next) => {
       )
     );
   }
-};
+});
 
 module.exports = {
   isAuthenticated,
