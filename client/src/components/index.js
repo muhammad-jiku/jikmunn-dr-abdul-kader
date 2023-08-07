@@ -27,3 +27,4 @@ export { default as RequiredAuth } from './ProtectedRoute/RequiredAuth';
 export { default as RequiredAdmin } from './ProtectedRoute/RequiredAdmin';
 export { default as Dashboard } from './Dashboard/Dashboard';
 export { default as Profile } from './Dashboard/Profile';
+export { default as UpdatePassword } from './Dashboard/UpdatePassword';
