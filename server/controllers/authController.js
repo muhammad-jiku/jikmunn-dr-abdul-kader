@@ -29,7 +29,7 @@ const signUp = AsyncError(async (req, res) => {
     // Hash the password and create a new user
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
-      username: username.toLowerCase(),
+      username: username.toString().toLowerCase().split(' ').join(''),
       email,
       password: hashedPassword,
     });
