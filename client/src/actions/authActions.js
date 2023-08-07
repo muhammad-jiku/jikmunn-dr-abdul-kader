@@ -16,6 +16,9 @@ import {
   SIGNUP_AUTH_FAILURE,
   SIGNUP_AUTH_REQUEST,
   SIGNUP_AUTH_SUCCESS,
+  UPDATE_PROFILE_FAILURE,
+  UPDATE_PROFILE_REQUEST,
+  UPDATE_PROFILE_SUCCESS,
 } from '../constants/authConstant';
 
 export const signUpUser = (userData) => async (dispatch) => {
@@ -146,6 +149,38 @@ export const loadUser = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: LOAD_USER_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updateUserProfile = (userData) => async (dispatch) => {
+  console.log('user data...', userData);
+  try {
+    await dispatch({
+      type: UPDATE_PROFILE_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/auth/me/update`,
+      userData,
+      config
+    );
+
+    await dispatch({
+      type: UPDATE_PROFILE_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: UPDATE_PROFILE_FAILURE,
       payload: error.response.data.message,
     });
   }

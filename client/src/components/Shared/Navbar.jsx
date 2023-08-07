@@ -95,7 +95,9 @@ const Navbar = ({ isAuthenticated, user }) => {
             <div className='flex items-center my-4 space-x-3 cursor-pointer'>
               <img
                 className='w-10 h-10 rounded-full'
-                src={user ? user?.avatar?.url : profileImg}
+                src={
+                  user.avatar?.url?.length > 0 ? user?.avatar?.url : profileImg
+                }
                 // src={profileImg}
                 loading='lazy'
                 alt={user ? user?.username : 'user'}

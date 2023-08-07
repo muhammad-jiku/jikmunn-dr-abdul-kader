@@ -187,9 +187,9 @@ const updateProfile = AsyncError(async (req, res) => {
     if (avatar !== '') {
       const user = await User.findById({ _id: id });
 
-      const imageId = user.avatar.public_id;
+      const imageId = user?.avatar?.public_id;
 
-      await cloudinary.v2.uploader.destroy(imageId);
+      imageId?.length > 0 && (await cloudinary.v2.uploader.destroy(imageId));
 
       const myCloud = await cloudinary.v2.uploader.upload(avatar, {
         folder: 'jikmunn-doctor-abdul-kader/avatars',
@@ -203,7 +203,7 @@ const updateProfile = AsyncError(async (req, res) => {
       };
     }
 
-    const user = await User.findByIdAndUpdate(
+    let user = await User.findByIdAndUpdate(
       { _id: id },
       { $set: updatedUserData },
       {
@@ -211,10 +211,11 @@ const updateProfile = AsyncError(async (req, res) => {
       }
     ).exec();
 
+    user = await User.findById({ _id: id });
+
     return res.status(200).json({
       success: true,
-      user,
-      updatedUserData,
+      data: user,
     });
   } catch (error) {
     console.log(error);

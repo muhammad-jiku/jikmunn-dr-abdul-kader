@@ -3,13 +3,26 @@ import { useForm } from 'react-hook-form';
 import { Country, State } from 'country-state-city';
 import { toast } from 'react-toastify';
 import profileImg from '../../assets/images/default_profile_avatar.png';
-import { clearErrors } from '../../actions/authActions';
-import { useSelector } from 'react-redux';
+import {
+  clearErrors,
+  loadUser,
+  updateUserProfile,
+} from '../../actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { UPDATE_PROFILE_RESET } from '../../constants/authConstant';
 
 const Profile = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { loading, isAuthenticated, user, error } = useSelector(
     (state) => state?.user
   );
+  const {
+    error: updateError,
+    isUpdated,
+    loading: updateLoading,
+  } = useSelector((state) => state.profile);
 
   const [avatar, setAvatar] = useState(
     user ? user?.avatar?.url : `${profileImg}`
@@ -28,7 +41,7 @@ const Profile = () => {
   const {
     register,
     formState: { errors, isSubmitSuccessful },
-    reset,
+    // reset,
     handleSubmit,
   } = useForm({
     // resolver: zodResolver(loginSchema),
@@ -51,13 +64,13 @@ const Profile = () => {
     }
   };
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const onSubmit = async (data, e) => {
+    e.preventDefault();
 
     const updatedData = {
       avatar,
       username,
-      email: user?.email,
+      // email: user?.email,
       phone,
       country,
       state,
@@ -66,21 +79,31 @@ const Profile = () => {
     };
 
     console.log(updatedData);
+    await dispatch(updateUserProfile(updatedData));
   };
 
   useEffect(() => {
-    if (isSubmitSuccessful) {
+    if (isSubmitSuccessful && isUpdated) {
       toast.success('Your profile has been updated!!');
-      reset();
+      dispatch(loadUser());
+      navigate('/dashboard');
+      dispatch({
+        type: UPDATE_PROFILE_RESET,
+      });
     }
-  }, [isSubmitSuccessful, reset]);
+  }, [isSubmitSuccessful, isUpdated, dispatch, navigate]);
 
   useEffect(() => {
     if (error) {
       toast.error(error);
       clearErrors();
     }
-  }, [error]);
+
+    if (updateError) {
+      toast.error(updateError);
+      clearErrors();
+    }
+  }, [error, updateError]);
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>
