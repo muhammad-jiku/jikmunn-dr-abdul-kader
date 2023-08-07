@@ -19,7 +19,7 @@ const Sidebar = () => {
         <ul>
           <li>
             <Link
-              to='/dashboard/me'
+              to={'/dashboard'}
               className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
             >
               My Profile
@@ -27,7 +27,7 @@ const Sidebar = () => {
           </li>
           <li>
             <Link
-              href='/dashboard/me/appointments'
+              to={'/dashboard/me/appointments'}
               className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
             >
               My Appointments
@@ -36,7 +36,7 @@ const Sidebar = () => {
           {!user?.googleId && (
             <li>
               <Link
-                href='/dashboard/me/update-password'
+                to={'/dashboard/me/update-password'}
                 className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
               >
                 Update Password
@@ -48,7 +48,7 @@ const Sidebar = () => {
             <>
               <li>
                 <Link
-                  href='/dashboard/admin/new/service'
+                  to={'/dashboard/admin/new/service'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
                   New Service
@@ -57,7 +57,7 @@ const Sidebar = () => {
 
               <li>
                 <Link
-                  href='/dashboard/admin/services'
+                  to={'/dashboard/admin/services'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
                   All Services
@@ -65,7 +65,7 @@ const Sidebar = () => {
               </li>
               <li>
                 <Link
-                  href='/dashboard/admin/new/price'
+                  to={'/dashboard/admin/new/price'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
                   New Price
@@ -74,7 +74,7 @@ const Sidebar = () => {
 
               <li>
                 <Link
-                  href='/dashboard/admin/prices'
+                  to={'/dashboard/admin/prices'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
                   All Prices
@@ -83,7 +83,7 @@ const Sidebar = () => {
 
               <li>
                 <Link
-                  href='/dashboard/admin/users'
+                  to={'/dashboard/admin/users'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
                   All Users
@@ -92,7 +92,7 @@ const Sidebar = () => {
 
               <li>
                 <Link
-                  href='/dashboard/admin/appointments'
+                  to={'/dashboard/admin/appointments'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
                   All Appointments
@@ -101,7 +101,7 @@ const Sidebar = () => {
 
               <li>
                 <Link
-                  href='/dashboard/admin/reviews'
+                  to={'/dashboard/admin/reviews'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
                   All Reviews
