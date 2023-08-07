@@ -5,6 +5,7 @@ const {
   googleSignIn,
   signOut,
   getUserDetails,
+  updateProfile,
 } = require('../controllers/authController');
 const { isAuthenticated } = require('../middlewares/auth/AuthHandler');
 
@@ -17,5 +18,6 @@ authRoute.route('/signin').post(signIn);
 authRoute.route('/google').post(googleSignIn);
 authRoute.route('/signout').post(signOut);
 authRoute.route('/me').get(isAuthenticated, getUserDetails);
+authRoute.route('/me/update').put(isAuthenticated, updateProfile);
 
 module.exports = authRoute;
