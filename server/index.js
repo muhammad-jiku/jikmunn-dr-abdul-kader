@@ -1,10 +1,11 @@
 const app = require('./app');
 const connectToDB = require('./utils/connectToDB');
+const cloudinary = require('cloudinary');
 
 // port
 const port = process.env.PORT || 5000;
 
-// // development purpose error handling =>
+// development purpose error handling =>
 // handling uncaught exception
 process.on('uncaughtException', (err) => {
   console.log(`Error: ${err.message}`);
@@ -16,14 +17,18 @@ process.on('uncaughtException', (err) => {
 connectToDB();
 
 // cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // listening to the port
 const server = app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-//  deveopment purpose error handling =>
-
+// deveopment purpose error handling =>
 // if express fail to handle any error for that there's global errorHandler: Unhandled Promise Rejection
 process.on('unhandledRejection', (err) => {
   console.log(`Error: ${err.message}`);
