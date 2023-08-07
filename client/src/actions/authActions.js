@@ -16,6 +16,9 @@ import {
   SIGNUP_AUTH_FAILURE,
   SIGNUP_AUTH_REQUEST,
   SIGNUP_AUTH_SUCCESS,
+  UPDATE_PASSWORD_FAILURE,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_SUCCESS,
   UPDATE_PROFILE_FAILURE,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
@@ -181,6 +184,37 @@ export const updateUserProfile = (userData) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: UPDATE_PROFILE_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const updateUserPassword = (passwords) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: UPDATE_PASSWORD_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/auth/me/update-password`,
+      passwords,
+      config
+    );
+
+    await dispatch({
+      type: UPDATE_PASSWORD_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: UPDATE_PASSWORD_FAILURE,
       payload: error.response.data.message,
     });
   }
