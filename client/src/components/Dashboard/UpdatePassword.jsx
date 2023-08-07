@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { clearErrors, updateUserPassword } from '../../actions/authActions';
+import { UPDATE_PASSWORD_RESET } from '../../constants/authConstant';
 
 const UpdatePassword = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { loading, isUpdated, error } = useSelector((state) => state?.profile);
+
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -35,13 +45,37 @@ const UpdatePassword = () => {
     };
 
     console.log(passwordsData);
+    if (newPassword === confirmPassword) {
+      await dispatch(updateUserPassword(passwordsData));
+    }
   };
 
   useEffect(() => {
-    if (newPassword === confirmPassword && isSubmitSuccessful) {
+    if (newPassword === confirmPassword && isSubmitSuccessful && isUpdated) {
+      toast.success('Your password has been updated successfully!!');
       reset();
+      navigate('/dashboard');
+      dispatch({
+        type: UPDATE_PASSWORD_RESET,
+      });
     }
-  }, [newPassword, confirmPassword, isSubmitSuccessful, reset]);
+  }, [
+    newPassword,
+    confirmPassword,
+    isSubmitSuccessful,
+    isUpdated,
+    reset,
+    dispatch,
+    navigate,
+  ]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [error, dispatch]);
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>
