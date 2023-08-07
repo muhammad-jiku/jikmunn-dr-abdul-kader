@@ -12,6 +12,7 @@ import {
   AuthPage,
   MyDashboardPage,
   MyProfilePage,
+  UpdatePasswordPage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './actions/authActions';
@@ -52,6 +53,14 @@ function App() {
             element={
               <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
                 <MyProfilePage />
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path='me/update-password'
+            element={
+              <RequiredAuth isAuthenticated={isAuthenticated}>
+                <UpdatePasswordPage />
               </RequiredAuth>
             }
           />
