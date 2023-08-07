@@ -11,15 +11,19 @@ const Profile = () => {
     (state) => state?.user
   );
 
-  const [avatar, setAvatar] = useState(`${profileImg}`);
-  const [avatarPreview, setAvatarPreview] = useState(`${profileImg}`);
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [country, setCountry] = useState('');
-  const [state, setState] = useState('');
-  const [city, setCity] = useState('');
-  const [address, setAddress] = useState('');
+  const [avatar, setAvatar] = useState(
+    user ? user?.avatar?.url : `${profileImg}`
+  );
+  const [avatarPreview, setAvatarPreview] = useState(
+    user ? user?.avatar?.url : `${profileImg}`
+  );
+  const [username, setUsername] = useState(user ? user?.username : '');
+  // const [email, setEmail] = useState(user ? user?.email : '');
+  const [phone, setPhone] = useState(user ? user?.phone : '');
+  const [country, setCountry] = useState(user ? user?.country : '');
+  const [state, setState] = useState(user ? user?.state : '');
+  const [city, setCity] = useState(user ? user?.city : '');
+  const [address, setAddress] = useState(user ? user?.address : '');
 
   const {
     register,
@@ -53,7 +57,7 @@ const Profile = () => {
     const updatedData = {
       avatar,
       username,
-      email,
+      email: user?.email,
       phone,
       country,
       state,
@@ -87,7 +91,9 @@ const Profile = () => {
           src={
             user?.avatar?.url?.length > 0
               ? user?.avatar?.url
-              : avatarPreview || profileImg
+              : avatarPreview
+              ? avatarPreview
+              : profileImg
           }
           alt={user?.username}
         />
@@ -105,8 +111,7 @@ const Profile = () => {
           type='text'
           placeholder='Username'
           // value={username}
-          defaultValue={user?.username}
-          // onChange={(e) => setUsername(e.target.value)}
+          defaultValue={username}
           {...register('username', {
             onChange: (e) => setUsername(e.target.value),
             required: {
@@ -120,33 +125,34 @@ const Profile = () => {
           })}
           className='input input-bordered border-main w-full my-2'
         />
+
         {/* Email */}
         <input
           type='email'
           placeholder='Email'
           // value={email}
           defaultValue={user?.email}
-          // onChange={(e) => setEmail(e.target.value)}
           {...register('email', {
-            onChange: (e) => setEmail(e.target.value),
-            required: {
-              value: true,
-              message: 'Please fill up the Email field',
-            },
-            pattern: {
-              value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-              message: 'Invalid Email',
-            },
+            // onChange: (e) => setEmail(e.target.value),
+            // required: {
+            //   value: true,
+            //   message: 'Please fill up the Email field',
+            // },
+            // pattern: {
+            //   value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+            //   message: 'Invalid Email',
+            // },
           })}
+          disabled
           className='input input-bordered border-main w-full my-2'
         />
+
         {/* Phone */}
         <input
           type='tel'
           placeholder='Phone'
           // value={user?.phone}
-          defaultValue={user?.phone}
-          // onChange={(e) => setUsername(e.target.value)}
+          defaultValue={phone}
           {...register('phone', {
             onChange: (e) => setPhone(e.target.value),
             required: {
@@ -154,7 +160,7 @@ const Profile = () => {
               message: 'Please fill up the Phone field',
             },
             minLength: {
-              value: 11,
+              value: 5,
               message: 'Invalid Phone number length',
             },
             maxLength: {
@@ -164,12 +170,12 @@ const Profile = () => {
           })}
           className='input input-bordered border-main w-full my-2'
         />
+
         {/* Country */}
         <select
           // label={'Country'}
           // value={user?.country}
-          defaultValue={user?.country}
-          // onChange={(e) => setCountry(e.target.value)}
+          defaultValue={country}
           className='select border-main w-full my-2'
           {...register('country', {
             onChange: (e) => setCountry(e.target.value),
@@ -199,14 +205,14 @@ const Profile = () => {
               </option>
             ))}
         </select>
+
         {/* State */}
         {country && (
           <select
             // label={'State'}
             placeholder={'State'}
             // value={user?.state}
-            defaultValue={user?.state}
-            // onChange={(e) => setState(e.target.value)}
+            defaultValue={state}
             className='select border-main w-full my-2'
             {...register('state', {
               onChange: (e) => setState(e.target.value),
@@ -239,13 +245,13 @@ const Profile = () => {
             ))}
           </select>
         )}
+
         {/* City */}
         <input
           type='text'
           placeholder='City'
           // value={user?.city}
-          defaultValue={user?.city}
-          // onChange={(e) => setUsername(e.target.value)}
+          defaultValue={city}
           {...register('city', {
             onChange: (e) => setCity(e.target.value),
             required: {
@@ -263,13 +269,13 @@ const Profile = () => {
           })}
           className='input input-bordered border-main w-full my-2'
         />
+
         {/* Address */}
         <input
           type='text'
           placeholder='Address'
           // value={user?.address}
-          defaultValue={user?.address}
-          // onChange={(e) => setUsername(e.target.value)}
+          defaultValue={address}
           {...register('address', {
             onChange: (e) => setAddress(e.target.value),
             required: {
@@ -287,6 +293,7 @@ const Profile = () => {
           })}
           className='input input-bordered border-main w-full my-2'
         />
+
         {/* Avatar */}
         <div className='flex items-center justify-center w-full my-2'>
           <label
@@ -303,9 +310,9 @@ const Profile = () => {
               >
                 <path
                   stroke='currentColor'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
                   d='M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2'
                 />
               </svg>
@@ -335,7 +342,7 @@ const Profile = () => {
             <span>{errors?.username?.message}</span>
           )}
         </p>
-        <p className='my-2 text-sm text-red-500 font-semibold'>
+        {/* <p className='my-2 text-sm text-red-500 font-semibold'>
           {errors?.email?.type === 'required' && (
             <span>{errors?.email?.message}</span>
           )}
@@ -344,7 +351,7 @@ const Profile = () => {
           {errors?.email?.type === 'pattern' && (
             <span>{errors?.email?.message}</span>
           )}
-        </p>
+        </p> */}
         <p className='my-2 text-sm text-red-500 font-semibold'>
           {errors?.phone?.type === 'required' && (
             <span>{errors?.phone?.message}</span>
@@ -420,7 +427,6 @@ const Profile = () => {
             <span>{errors?.address?.message}</span>
           )}
         </p>
-
         <div className='form-control mt-6'>
           <input
             type='submit'

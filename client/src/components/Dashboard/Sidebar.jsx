@@ -33,7 +33,7 @@ const Sidebar = () => {
               My Appointments
             </Link>
           </li>
-          {user?.googleId?.length === 0 && (
+          {!user?.googleId && (
             <li>
               <Link
                 href='/dashboard/me/update-password'

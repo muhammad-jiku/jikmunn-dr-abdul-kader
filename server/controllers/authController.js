@@ -40,6 +40,7 @@ const signUp = AsyncError(async (req, res) => {
       token,
     });
   } catch (error) {
+    // console.log(error)
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -73,7 +74,7 @@ const signIn = AsyncError(async (req, res) => {
       token,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -100,27 +101,12 @@ const googleSignIn = AsyncError(async (req, res) => {
     },
   };
 
-  console.log(tokens);
-  console.log(
-    '----------------------------------------------------------------'
-  );
-  console.log(userid);
-  console.log(
-    '----------------------------------------------------------------'
-  );
-  console.log(payload);
-  console.log(
-    '----------------------------------------------------------------'
-  );
-
   try {
     let user = await User.findOne({ googleId: payload?.sub });
     let token = null;
 
     if (user) {
       token = generateToken(user);
-      console.log('existed user...', user);
-      console.log('generated token...', token);
 
       return res.status(200).json({
         success: true,
@@ -130,8 +116,6 @@ const googleSignIn = AsyncError(async (req, res) => {
     } else {
       user = await User.create(newUser);
       token = generateToken(user);
-      console.log('new user...', user);
-      console.log('generated token...', token);
 
       return res.status(201).json({
         success: true,
@@ -139,8 +123,11 @@ const googleSignIn = AsyncError(async (req, res) => {
         token,
       });
     }
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    // console.log(error);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
   }
 });
 
@@ -157,15 +144,22 @@ const signOut = AsyncError(async (req, res) => {
 });
 
 const getUserDetails = AsyncError(async (req, res) => {
-  const { id } = await req.user;
-  const user = await User.findById({
-    _id: id,
-  });
+  try {
+    const { id } = await req.user;
+    const user = await User.findById({
+      _id: id,
+    });
 
-  res.status(200).json({
-    success: true,
-    data: user,
-  });
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    // console.log(error)
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
 });
 
 module.exports = {
