@@ -54,7 +54,7 @@ const UpdatePassword = () => {
         <div className='relative'>
           <input
             type={showOldPassword ? 'text' : 'password'}
-            placeholder='Password'
+            placeholder='Previous Password'
             defaultValue={oldPassword}
             // onChange={(e) => setPassword(e.target.value)}
             {...register('oldPassword', {
@@ -117,7 +117,7 @@ const UpdatePassword = () => {
         <div className='relative'>
           <input
             type={showNewPassword ? 'text' : 'password'}
-            placeholder='Password'
+            placeholder='New Password'
             defaultValue={newPassword}
             // onChange={(e) => setPassword(e.target.value)}
             {...register('newPassword', {
