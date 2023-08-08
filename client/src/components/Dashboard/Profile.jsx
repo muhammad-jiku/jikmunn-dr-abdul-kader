@@ -25,10 +25,10 @@ const Profile = () => {
   } = useSelector((state) => state.profile);
 
   const [avatar, setAvatar] = useState(
-    user ? user?.avatar?.url : `${profileImg}`
+    user?.avatar?.url?.length > 0 ? user?.avatar?.url : `${profileImg}`
   );
   const [avatarPreview, setAvatarPreview] = useState(
-    user ? user?.avatar?.url : `${profileImg}`
+    user?.avatar?.url?.length > 0 ? user?.avatar?.url : `${profileImg}`
   );
   const [username, setUsername] = useState(user ? user?.username : '');
   // const [email, setEmail] = useState(user ? user?.email : '');
