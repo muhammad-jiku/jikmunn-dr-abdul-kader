@@ -28,3 +28,4 @@ export { default as RequiredAdmin } from './ProtectedRoute/RequiredAdmin';
 export { default as Dashboard } from './Dashboard/Dashboard';
 export { default as Profile } from './Dashboard/Profile';
 export { default as UpdatePassword } from './Dashboard/UpdatePassword';
+export { default as NewService } from './Dashboard/Admin/Services/NewService';
