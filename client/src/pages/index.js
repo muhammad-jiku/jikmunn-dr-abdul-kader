@@ -7,3 +7,4 @@ export { default as AuthPage } from './AuthPage/AuthPage';
 export { default as MyDashboardPage } from './DashboardPages/MyDashboardPage';
 export { default as MyProfilePage } from './DashboardPages/MyProfilePage';
 export { default as UpdatePasswordPage } from './DashboardPages/UpdatePasswordPage';
+export { default as NewServicePage } from './DashboardPages/Admin/Services/NewServicePage';

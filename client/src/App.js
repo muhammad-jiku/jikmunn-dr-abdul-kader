@@ -13,6 +13,7 @@ import {
   MyDashboardPage,
   MyProfilePage,
   UpdatePasswordPage,
+  NewServicePage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './actions/authActions';
@@ -61,6 +62,14 @@ function App() {
             element={
               <RequiredAuth isAuthenticated={isAuthenticated}>
                 <UpdatePasswordPage />
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path='admin/new/service'
+            element={
+              <RequiredAuth isAuthenticated={isAuthenticated}>
+                <NewServicePage />
               </RequiredAuth>
             }
           />
