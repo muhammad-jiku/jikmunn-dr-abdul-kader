@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-const NewService = () => {
+const NewPrice = () => {
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
-  const [desc, setDesc] = useState('');
-  const [serviceImg, setServiceImg] = useState('');
-  const [serviceImgPreview, setServiceImgPreview] = useState('');
+  const [subTitle, setSubTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [priceImg, setPriceImg] = useState('');
+  const [priceImgPreview, setPriceImgPreview] = useState('');
   const [selectImg, setSelectImg] = useState(false);
-  const [slotTimes, setSlotTimes] = useState([]);
+  const [diagnosisLists, setDiagnosisLists] = useState([]);
 
-  const slots = [
-    '04:30 PM - 05:00 PM',
-    '05:00 PM - 05:30 PM',
-    '05:30 PM - 06:00 PM',
-    '06:00 PM - 06:30 PM',
-    '06:30 PM - 07:00 PM',
-    '07:00 PM - 07:30 PM',
-    '07:30 PM - 08:00 PM',
-    '08:30 PM - 09:00 PM',
-    '09:00 PM - 09:30 PM',
-    '09:30 PM - 10:00 PM',
+  const diagnosis = [
+    'Medical History',
+    'Physical Exam',
+    'Diagnosis & Prescription',
   ];
 
   const {
@@ -32,7 +26,7 @@ const NewService = () => {
     // resolver: zodResolver(loginSchema),
   });
 
-  const handleServiceImg = (e) => {
+  const handlePriceImg = (e) => {
     const selectedFile = e.target.files[0];
 
     if (selectedFile instanceof Blob) {
@@ -41,8 +35,8 @@ const NewService = () => {
       reader.onload = () => {
         if (reader.readyState === 2) {
           setSelectImg(true);
-          setServiceImgPreview(reader?.result);
-          setServiceImg(reader?.result);
+          setPriceImgPreview(reader?.result);
+          setPriceImg(reader?.result);
         }
       };
     } else {
@@ -50,20 +44,20 @@ const NewService = () => {
     }
   };
 
-  const handleCloseServiceImg = (e) => {
+  const handleClosePriceImg = (e) => {
     e.preventDefault();
 
     setSelectImg(false);
   };
 
-  const handleSlotsChange = (e) => {
-    let slotsArray = [...slotTimes];
+  const handleDiagnosisChange = (e) => {
+    let diagnosisArray = [...diagnosisLists];
     if (e.target.checked) {
-      slotsArray = [...slotTimes, e.target.value];
+      diagnosisArray = [...diagnosisLists, e.target.value];
     } else {
-      slotsArray.splice(slotTimes.indexOf(e.target.value), 1);
+      diagnosisArray.splice(diagnosisLists.indexOf(e.target.value), 1);
     }
-    setSlotTimes(slotsArray);
+    setDiagnosisLists(diagnosisArray);
   };
 
   const onSubmit = async (data, e) => {
@@ -73,17 +67,17 @@ const NewService = () => {
     console.log({
       id,
       title,
-      desc,
-      slotTimes,
-      serviceImg,
-      serviceImgPreview,
+      subTitle,
+      diagnosisLists,
+      priceImg,
+      priceImgPreview,
     });
   };
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>
       <h2 className='text-3xl lg:text-5xl font-bold font-lobster text-main tracking-wider mt-2 mb-4'>
-        Add New Service
+        Add New Price
       </h2>
       <hr className='w-1/3 lg:w-1/4 mb-2 border-2 border-slate-300' />
       <form className='p-1 md:p-4 w-full' onSubmit={handleSubmit(onSubmit)}>
@@ -118,45 +112,64 @@ const NewService = () => {
               message: 'Please fill up the title field',
             },
             minLength: {
-              value: 10,
-              message: 'Title must be at least 10 characters',
+              value: 5,
+              message: 'Title must be at least 5 characters',
             },
           })}
           className='input input-bordered border-main w-full my-2'
         />
 
-        {/* Description */}
+        {/* Subtitle */}
         <input
           type='text'
-          placeholder='Description'
-          defaultValue={desc}
-          {...register('desc', {
-            onChange: (e) => setDesc(e.target.value),
+          placeholder='Sub-Title'
+          defaultValue={subTitle}
+          {...register('subTitle', {
+            onChange: (e) => setSubTitle(e.target.value),
             required: {
               value: true,
-              message: 'Please fill up the Description field',
+              message: 'Please fill up the sub-title field',
             },
             minLength: {
-              value: 10,
-              message: 'Description must be at least 10 characters',
+              value: 5,
+              message: 'Sub-Title must be at least 5 characters',
             },
           })}
           className='input input-bordered border-main w-full my-2'
         />
 
-        {/* Slots */}
+        {/* Price */}
+        <input
+          type='number'
+          placeholder='Price'
+          defaultValue={price}
+          {...register('price', {
+            onChange: (e) => setPrice(e.target.value),
+            required: {
+              value: true,
+              message: 'Please fill up the price tag field',
+            },
+            minLength: {
+              value: 1,
+              message: 'Invalid Price tag field',
+            },
+          })}
+          className='input input-bordered border-main w-full my-2'
+        />
+
+        {/* Diagnosis */}
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 container mx-auto my-10'>
-          {slots.map((slot, i) => {
+          {diagnosis.map((d, i) => {
             return (
-              <label key={i} className='flex justify-center' htmlFor={slot}>
+              <label key={i} className='flex justify-center' htmlFor={d}>
                 <input
                   type='checkbox'
                   className='checkbox border-main'
-                  id={slot}
-                  value={slot}
-                  onChange={handleSlotsChange}
+                  id={d}
+                  value={d}
+                  onChange={handleDiagnosisChange}
                 />
-                <span className='ml-2'>{slot}</span>
+                <span className='ml-2'>{d}</span>
               </label>
             );
           })}
@@ -164,17 +177,17 @@ const NewService = () => {
 
         {selectImg ? (
           <div className='relative w-full'>
-            <img src={serviceImgPreview} alt='Service Preview' className='' />
+            <img src={priceImgPreview} alt='Price Preview' className='' />
             <button
               className='absolute top-[-10px] right-0 w-10 h-10 rounded-full border-[1px] border-main p-1 bg-white text-black'
-              onClick={handleCloseServiceImg}
+              onClick={handleClosePriceImg}
             >
               X
             </button>
           </div>
         ) : null}
 
-        {/* Service Image */}
+        {/* Price Image */}
         <div className='flex items-center justify-center w-full my-6'>
           <label
             htmlFor='dropzone-file'
@@ -206,7 +219,7 @@ const NewService = () => {
               id='dropzone-file'
               type='file'
               className='hidden'
-              onChange={handleServiceImg}
+              onChange={handlePriceImg}
             />
           </label>
         </div>
@@ -233,17 +246,27 @@ const NewService = () => {
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {errors?.desc?.type === 'required' && (
-            <span>{errors?.desc?.message}</span>
+          {errors?.subTitle?.type === 'required' && (
+            <span>{errors?.subTitle?.message}</span>
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {errors?.desc?.type === 'minLength' && (
-            <span>{errors?.desc?.message}</span>
+          {errors?.subTitle?.type === 'minLength' && (
+            <span>{errors?.subTitle?.message}</span>
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {slotTimes?.length < 1 ? (
+          {errors?.price?.type === 'required' && (
+            <span>{errors?.price?.message}</span>
+          )}
+        </p>
+        <p className='my-2 text-sm text-red-500 font-semibold'>
+          {errors?.price?.type === 'minLength' && (
+            <span>{errors?.price?.message}</span>
+          )}
+        </p>
+        <p className='my-2 text-sm text-red-500 font-semibold'>
+          {diagnosisLists?.length < 1 ? (
             <span>You must select the slot time!</span>
           ) : null}
         </p>
@@ -254,7 +277,7 @@ const NewService = () => {
           <input
             type='submit'
             className='btn bg-main text-white hover:bg-white hover:text-main hover:border-main uppercase'
-            value='add new service'
+            value='add new price'
           />
         </div>
       </form>
@@ -262,4 +285,4 @@ const NewService = () => {
   );
 };
 
-export default NewService;
+export default NewPrice;
