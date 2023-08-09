@@ -1,6 +1,8 @@
 const AsyncError = require('../middlewares/errors/AsyncError');
 const User = require('../models/User');
 const cloudinary = require('cloudinary');
+const bcrypt = require('bcryptjs');
+const ErrorHandler = require('../middlewares/errors/ErrorHandler');
 
 const getUserDetails = AsyncError(async (req, res) => {
   try {
@@ -83,7 +85,41 @@ const updateProfile = AsyncError(async (req, res) => {
   }
 });
 
+const updatePassword = AsyncError(async (req, res) => {
+  try {
+    const { id } = await req.user;
+    const { oldPassword, newPassword, passwordConfirm } = await req.body;
+
+    const user = await User.findById({ _id: id }).select('+password');
+
+    const isPasswordMatched = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isPasswordMatched) {
+      return next(new ErrorHandler('Old password is incorrect', 400));
+    }
+
+    if (newPassword !== passwordConfirm) {
+      return next(new ErrorHandler('Password does not match', 400));
+    }
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+});
+
 module.exports = {
   getUserDetails,
   updateProfile,
+  updatePassword,
 };
