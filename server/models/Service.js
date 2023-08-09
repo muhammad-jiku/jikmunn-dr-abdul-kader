@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const serviceSchema = new mongoose.Schema(
   {
-    id: {
-      type: Number,
+    serviceID: {
+      type: String,
       required: [true, 'Please enter service ID number'],
       minLength: [1, 'Service ID number must be more than zero'],
     },

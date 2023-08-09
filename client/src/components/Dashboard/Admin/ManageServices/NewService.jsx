@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addNewService, clearErrors } from '../../../../actions/serviceActions';
+import { toast } from 'react-toastify';
+import { NEW_SERVICE_RESET } from '../../../../constants/serviceConstant';
 
 const NewService = () => {
-  const [id, setId] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error, success } = useSelector((state) => state?.newService);
+
+  const [serviceID, setServiceID] = useState('');
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [serviceImg, setServiceImg] = useState('');
@@ -11,13 +20,30 @@ const NewService = () => {
   const [slotTimes, setSlotTimes] = useState([]);
 
   const slots = [
+    // morning
+    '09:30 AM - 10:00 AM',
+    '10:00 AM - 10:30 AM',
+    '10:30 AM - 11:00 AM',
+    '11:00 AM - 11:30 AM',
+    // noon
+    '11:30 AM - 12:00 PM',
+    '12:00 PM - 12:30 PM',
+    '12:30 PM - 01:00 PM',
+    '01:00 PM - 01:30 PM',
+    // afternoon
+    '03:00 PM - 03:30 PM',
+    '03:30 PM - 04:00 PM',
+    '04:00 PM - 04:30 PM',
     '04:30 PM - 05:00 PM',
+    // evening
     '05:00 PM - 05:30 PM',
     '05:30 PM - 06:00 PM',
     '06:00 PM - 06:30 PM',
     '06:30 PM - 07:00 PM',
+    // night
     '07:00 PM - 07:30 PM',
     '07:30 PM - 08:00 PM',
+    '08:00 PM - 08:30 PM',
     '08:30 PM - 09:00 PM',
     '09:00 PM - 09:30 PM',
     '09:30 PM - 10:00 PM',
@@ -26,7 +52,7 @@ const NewService = () => {
   const {
     register,
     formState: { errors, isSubmitSuccessful },
-    // reset,
+    reset,
     handleSubmit,
   } = useForm({
     // resolver: zodResolver(loginSchema),
@@ -54,6 +80,8 @@ const NewService = () => {
     e.preventDefault();
 
     setSelectImg(false);
+    setServiceImg('');
+    setServiceImgPreview('');
   };
 
   const handleSlotsChange = (e) => {
@@ -70,15 +98,62 @@ const NewService = () => {
     console.log(data);
     e.preventDefault();
 
-    console.log({
-      id,
+    const serviceInfo = {
+      serviceID,
       title,
       desc,
-      slotTimes,
+      slots: slotTimes,
       serviceImg,
-      serviceImgPreview,
-    });
+    };
+
+    console.log(serviceInfo);
+    if (
+      selectImg &&
+      serviceImg?.length >= 1 &&
+      serviceImgPreview?.length >= 1 &&
+      serviceImg?.length === serviceImgPreview?.length &&
+      slotTimes?.length >= 1
+    ) {
+      await dispatch(addNewService(serviceInfo));
+    }
   };
+
+  useEffect(() => {
+    if (
+      selectImg &&
+      serviceImg?.length >= 1 &&
+      serviceImgPreview?.length >= 1 &&
+      serviceImg === serviceImgPreview &&
+      slotTimes?.length >= 1 &&
+      success &&
+      isSubmitSuccessful
+    ) {
+      reset();
+      toast.success('New Service Added Successfully!');
+      navigate('/dashboard/admin/services');
+      dispatch({
+        type: NEW_SERVICE_RESET,
+      });
+    }
+  }, [
+    dispatch,
+    reset,
+    navigate,
+    selectImg,
+    serviceImg,
+    serviceImgPreview,
+    slotTimes,
+    success,
+    isSubmitSuccessful,
+  ]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, navigate]);
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>
@@ -87,13 +162,13 @@ const NewService = () => {
       </h2>
       <hr className='w-1/3 lg:w-1/4 mb-2 border-2 border-slate-300' />
       <form className='p-1 md:p-4 w-full' onSubmit={handleSubmit(onSubmit)}>
-        {/* ID */}
+        {/* Service ID */}
         <input
           type='number'
-          placeholder='ID'
-          defaultValue={id}
-          {...register('id', {
-            onChange: (e) => setId(e.target.value),
+          placeholder='Service ID'
+          defaultValue={serviceID}
+          {...register('serviceID', {
+            onChange: (e) => setServiceID(e.target.value),
             required: {
               value: true,
               message: 'Please fill up the ID field',
@@ -118,8 +193,8 @@ const NewService = () => {
               message: 'Please fill up the title field',
             },
             minLength: {
-              value: 10,
-              message: 'Title must be at least 10 characters',
+              value: 5,
+              message: 'Title must be at least 5 characters',
             },
           })}
           className='input input-bordered border-main w-full my-2'
@@ -213,13 +288,13 @@ const NewService = () => {
 
         {/* Error messages */}
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {errors?.id?.type === 'required' && (
-            <span>{errors?.id?.message}</span>
+          {errors?.serviceID?.type === 'required' && (
+            <span>{errors?.serviceID?.message}</span>
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {errors?.id?.type === 'minLength' && (
-            <span>{errors?.id?.message}</span>
+          {errors?.serviceID?.type === 'minLength' && (
+            <span>{errors?.serviceID?.message}</span>
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
@@ -248,7 +323,12 @@ const NewService = () => {
           ) : null}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {!selectImg ? <span>You must select an image!</span> : null}
+          {!selectImg &&
+          serviceImg?.length < 1 &&
+          serviceImg?.length < 1 &&
+          serviceImg !== serviceImgPreview ? (
+            <span>You must select an image!</span>
+          ) : null}
         </p>
         <div className='form-control mt-6'>
           <input

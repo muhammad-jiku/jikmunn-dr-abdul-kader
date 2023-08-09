@@ -4,10 +4,11 @@ const cloudinary = require('cloudinary');
 
 const createService = AsyncError(async (req, res) => {
   try {
-    const { id, title, desc, slots, serviceImg } = await req.body;
+    const { id } = await req.user;
+    const { serviceID, title, desc, slots, serviceImg } = await req.body;
 
     const serviceData = {
-      id,
+      serviceID,
       title,
       desc,
       slots,
@@ -15,8 +16,8 @@ const createService = AsyncError(async (req, res) => {
 
     const myCloud = await cloudinary.v2.uploader.upload(serviceImg, {
       folder: 'jikmunn-doctor-abdul-kader/services',
-      width: 150,
-      crop: 'scale',
+      // width: 150,
+      // crop: 'scale',
     });
 
     serviceData.serviceImg = {
@@ -24,7 +25,7 @@ const createService = AsyncError(async (req, res) => {
       url: myCloud.secure_url,
     };
 
-    serviceData.user = req?.user?.id;
+    serviceData.user = id;
 
     const service = await Service.create(serviceData);
 
@@ -41,4 +42,6 @@ const createService = AsyncError(async (req, res) => {
   }
 });
 
-module.exports = { createService };
+module.exports = {
+  createService,
+};
