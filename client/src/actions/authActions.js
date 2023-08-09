@@ -51,6 +51,33 @@ export const signUpUser = (userData) => async (dispatch) => {
   }
 };
 
+export const signInUser = (userData) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: SIGNIN_AUTH_REQUEST,
+    });
+
+    const config = {
+      headers: { 'content-type': 'application/json' },
+    };
+
+    const { data } = await axios.post(`/api/v1/auth/signin`, userData, config);
+
+    await dispatch({
+      type: SIGNIN_AUTH_SUCCESS,
+      payload: data?.data,
+    });
+
+    const token = await data?.token;
+    localStorage?.setItem('token', token);
+  } catch (error) {
+    await dispatch({
+      type: SIGNIN_AUTH_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const googleSignInUser = (userDataCode) => async (dispatch) => {
   try {
     await dispatch({
@@ -82,54 +109,6 @@ export const googleSignInUser = (userDataCode) => async (dispatch) => {
   }
 };
 
-export const signInUser = (userData) => async (dispatch) => {
-  try {
-    await dispatch({
-      type: SIGNIN_AUTH_REQUEST,
-    });
-
-    const config = {
-      headers: { 'content-type': 'application/json' },
-    };
-
-    const { data } = await axios.post(`/api/v1/auth/signin`, userData, config);
-
-    await dispatch({
-      type: SIGNIN_AUTH_SUCCESS,
-      payload: data?.data,
-    });
-
-    const token = await data?.token;
-    localStorage?.setItem('token', token);
-  } catch (error) {
-    await dispatch({
-      type: SIGNIN_AUTH_FAILURE,
-      payload: error.response.data.message,
-    });
-  }
-};
-
-export const signOutUser = () => async (dispatch) => {
-  try {
-    await dispatch({
-      type: SIGNOUT_REQUEST,
-    });
-
-    const { data } = await axios.post(`/api/v1/auth/signout`);
-    console.log(data);
-
-    await dispatch({
-      type: SIGNOUT_SUCCESS,
-    });
-    localStorage?.removeItem('token');
-  } catch (error) {
-    await dispatch({
-      type: SIGNOUT_FAILURE,
-      payload: error.response.data.message,
-    });
-  }
-};
-
 export const loadUser = () => async (dispatch) => {
   try {
     await dispatch({
@@ -143,7 +122,7 @@ export const loadUser = () => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.get(`/api/v1/auth/me`, config);
+    const { data } = await axios.get(`/api/v1/me`, config);
 
     await dispatch({
       type: LOAD_USER_SUCCESS,
@@ -171,11 +150,7 @@ export const updateUserProfile = (userData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/v1/auth/me/update`,
-      userData,
-      config
-    );
+    const { data } = await axios.put(`/api/v1/me/update`, userData, config);
 
     await dispatch({
       type: UPDATE_PROFILE_SUCCESS,
@@ -203,7 +178,7 @@ export const updateUserPassword = (passwords) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `/api/v1/auth/me/update-password`,
+      `/api/v1/me/update-password`,
       passwords,
       config
     );
@@ -215,6 +190,27 @@ export const updateUserPassword = (passwords) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: UPDATE_PASSWORD_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const signOutUser = () => async (dispatch) => {
+  try {
+    await dispatch({
+      type: SIGNOUT_REQUEST,
+    });
+
+    const { data } = await axios.post(`/api/v1/auth/signout`);
+    console.log(data);
+
+    await dispatch({
+      type: SIGNOUT_SUCCESS,
+    });
+    localStorage?.removeItem('token');
+  } catch (error) {
+    await dispatch({
+      type: SIGNOUT_FAILURE,
       payload: error.response.data.message,
     });
   }
