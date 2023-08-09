@@ -14,6 +14,7 @@ import {
   MyProfilePage,
   UpdatePasswordPage,
   NewServicePage,
+  NewPricePage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './actions/authActions';
@@ -70,6 +71,14 @@ function App() {
             element={
               <RequiredAuth isAuthenticated={isAuthenticated}>
                 <NewServicePage />
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path='admin/new/price'
+            element={
+              <RequiredAuth isAuthenticated={isAuthenticated}>
+                <NewPricePage />
               </RequiredAuth>
             }
           />

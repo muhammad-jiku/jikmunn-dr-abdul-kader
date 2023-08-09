@@ -158,7 +158,7 @@ const NewPrice = () => {
         />
 
         {/* Diagnosis */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 container mx-auto my-10'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-5 container mx-auto my-10'>
           {diagnosis.map((d, i) => {
             return (
               <label key={i} className='flex justify-center' htmlFor={d}>
@@ -266,8 +266,8 @@ const NewPrice = () => {
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {diagnosisLists?.length < 1 ? (
-            <span>You must select the slot time!</span>
+          {diagnosisLists?.length !== 3 ? (
+            <span>You must select all the diagnosis process!</span>
           ) : null}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>

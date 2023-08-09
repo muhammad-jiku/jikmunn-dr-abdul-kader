@@ -145,7 +145,7 @@ const NewService = () => {
         />
 
         {/* Slots */}
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 container mx-auto my-10'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 container mx-auto my-10'>
           {slots.map((slot, i) => {
             return (
               <label key={i} className='flex justify-center' htmlFor={slot}>
