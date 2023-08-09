@@ -9,6 +9,7 @@ const ErrorChecker = require('./middlewares/errors/ErrorChecker');
 const authRoute = require('./routes/authRoute');
 const serviceRoute = require('./routes/serviceRoute');
 const userRoute = require('./routes/userRoute');
+const priceRoute = require('./routes/priceRoute');
 
 // app initialize
 const app = express();
@@ -39,6 +40,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1', authRoute);
 app.use('/api/v1', userRoute);
 app.use('/api/v1', serviceRoute);
+app.use('/api/v1', priceRoute);
 
 // Middleware for Errors
 app.use(ErrorChecker);
