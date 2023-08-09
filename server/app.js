@@ -8,6 +8,7 @@ const session = require('express-session');
 const ErrorChecker = require('./middlewares/errors/ErrorChecker');
 const authRoute = require('./routes/authRoute');
 const serviceRoute = require('./routes/serviceRoute');
+const userRoute = require('./routes/userRoute');
 
 // app initialize
 const app = express();
@@ -35,7 +36,8 @@ app.get('/', (req, res) => {
 });
 
 // routing intialize
-app.use('/api/v1/auth', authRoute);
+app.use('/api/v1', authRoute);
+app.use('/api/v1', userRoute);
 app.use('/api/v1', serviceRoute);
 
 // Middleware for Errors
