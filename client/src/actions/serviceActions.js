@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {
+  CLEAR_ERRORS,
   NEW_SERVICE_FAILURE,
   NEW_SERVICE_REQUEST,
   NEW_SERVICE_SUCCESS,
@@ -34,4 +35,10 @@ export const addNewService = (serviceData) => async (dispatch) => {
       payload: error.response.data.message,
     });
   }
+};
+
+export const clearErrors = () => async (dispatch) => {
+  await dispatch({
+    type: CLEAR_ERRORS,
+  });
 };
