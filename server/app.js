@@ -5,8 +5,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
-const authRoute = require('./routes/authRoute');
 const ErrorChecker = require('./middlewares/errors/ErrorChecker');
+const authRoute = require('./routes/authRoute');
+const serviceRoute = require('./routes/serviceRoute');
 
 // app initialize
 const app = express();
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 
 // routing intialize
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1', serviceRoute);
 
 // Middleware for Errors
 app.use(ErrorChecker);
