@@ -32,8 +32,8 @@ const isAuthenticated = AsyncError(async (req, res, next) => {
   }
 });
 
-const authorizeRoles = AsyncError(async (req, res, next) => {
-  if (req.user?.role === 'admin') {
+const authorizeAdmin = AsyncError(async (req, res, next) => {
+  if (req.user?.role === 'Admin') {
     next();
   } else {
     return next(
@@ -47,5 +47,5 @@ const authorizeRoles = AsyncError(async (req, res, next) => {
 
 module.exports = {
   isAuthenticated,
-  authorizeRoles,
+  authorizeAdmin,
 };
