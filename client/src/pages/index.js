@@ -8,5 +8,6 @@ export { default as MyDashboardPage } from './DashboardPages/MyDashboardPage';
 export { default as MyProfilePage } from './DashboardPages/MyProfilePage';
 export { default as UpdatePasswordPage } from './DashboardPages/UpdatePasswordPage';
 export { default as NewServicePage } from './DashboardPages/Admin/Services/NewServicePage';
+export { default as AllServicesPage } from './DashboardPages/Admin/Services/AllServicesPage';
 export { default as NewPricePage } from './DashboardPages/Admin/Prices/NewPricePage';
 export { default as AllUsersPage } from './DashboardPages/Admin/Users/AllUsersPage';

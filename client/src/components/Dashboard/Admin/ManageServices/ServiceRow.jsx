@@ -5,7 +5,7 @@ const ServiceRow = ({ service }) => {
   return (
     <tr>
       <th>{service?.serviceID}</th>
-      <th>{service?.email}</th>
+      <th>{service?.title}</th>
       <th>{String(service?.createdAt).substr(0, 10)}</th>
       <th className='flex'>
         <label
