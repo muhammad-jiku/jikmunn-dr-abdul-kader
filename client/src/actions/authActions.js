@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  ALL_USERS_FAILURE,
+  ALL_USERS_REQUEST,
+  ALL_USERS_SUCCESS,
   CLEAR_ERRORS,
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
@@ -190,6 +193,33 @@ export const updateUserPassword = (passwords) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: UPDATE_PASSWORD_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminAllUsers = () => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ALL_USERS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/admin/users`, config);
+
+    await dispatch({
+      type: ALL_USERS_SUCCESS,
+      payload: data.users,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ALL_USERS_FAILURE,
       payload: error.response.data.message,
     });
   }
