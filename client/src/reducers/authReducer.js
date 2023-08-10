@@ -2,6 +2,9 @@ import {
   ADMIN_ALL_USERS_FAILURE,
   ADMIN_ALL_USERS_REQUEST,
   ADMIN_ALL_USERS_SUCCESS,
+  ADMIN_USER_DETAILS_FAILURE,
+  ADMIN_USER_DETAILS_REQUEST,
+  ADMIN_USER_DETAILS_SUCCESS,
   CLEAR_ERRORS,
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
@@ -149,6 +152,38 @@ export const allUsersReducer = (state = { users: [] }, action) => {
       };
 
     case ADMIN_ALL_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const userDetailsReducer = (state = { user: {} }, action) => {
+  switch (action.type) {
+    case ADMIN_USER_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADMIN_USER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        user: action.payload,
+      };
+
+    case ADMIN_USER_DETAILS_FAILURE:
       return {
         ...state,
         loading: false,
