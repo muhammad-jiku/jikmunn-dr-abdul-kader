@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { NEW_PRICE_RESET } from '../../../../constants/priceConstant';
+import { addNewPrice, clearErrors } from '../../../../actions/priceActions';
 
 const NewPrice = () => {
-  const [id, setId] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error, success } = useSelector((state) => state?.newPrice);
+
+  const [priceID, setPriceID] = useState('');
   const [title, setTitle] = useState('');
   const [subTitle, setSubTitle] = useState('');
   const [price, setPrice] = useState('');
   const [priceImg, setPriceImg] = useState('');
   const [priceImgPreview, setPriceImgPreview] = useState('');
   const [selectImg, setSelectImg] = useState(false);
-  const [diagnosisLists, setDiagnosisLists] = useState([]);
+  const [diagnosticLists, setDiagnosticLists] = useState([]);
 
-  const diagnosis = [
+  const diagnostics = [
     'Medical History',
     'Physical Exam',
     'Diagnosis & Prescription',
@@ -20,7 +29,7 @@ const NewPrice = () => {
   const {
     register,
     formState: { errors, isSubmitSuccessful },
-    // reset,
+    reset,
     handleSubmit,
   } = useForm({
     // resolver: zodResolver(loginSchema),
@@ -50,29 +59,77 @@ const NewPrice = () => {
     setSelectImg(false);
   };
 
-  const handleDiagnosisChange = (e) => {
-    let diagnosisArray = [...diagnosisLists];
+  const handleDiagnosticsChange = (e) => {
+    let diagnosticsArray = [...diagnosticLists];
     if (e.target.checked) {
-      diagnosisArray = [...diagnosisLists, e.target.value];
+      diagnosticsArray = [...diagnosticLists, e.target.value];
     } else {
-      diagnosisArray.splice(diagnosisLists.indexOf(e.target.value), 1);
+      diagnosticsArray.splice(diagnosticLists.indexOf(e.target.value), 1);
     }
-    setDiagnosisLists(diagnosisArray);
+    setDiagnosticLists(diagnosticsArray);
   };
 
   const onSubmit = async (data, e) => {
     console.log(data);
     e.preventDefault();
 
-    console.log({
-      id,
+    const priceInfo = {
+      priceID,
       title,
       subTitle,
-      diagnosisLists,
+      price,
+      diagnostics: diagnosticLists,
       priceImg,
-      priceImgPreview,
-    });
+    };
+
+    console.log(priceInfo);
+    if (
+      selectImg &&
+      priceImg?.length >= 1 &&
+      priceImgPreview?.length >= 1 &&
+      priceImg === priceImgPreview &&
+      diagnosticLists?.length === 3
+    ) {
+      await dispatch(addNewPrice(priceInfo));
+    }
   };
+
+  useEffect(() => {
+    if (
+      selectImg &&
+      priceImg?.length >= 1 &&
+      priceImgPreview?.length >= 1 &&
+      priceImg === priceImgPreview &&
+      diagnosticLists?.length === 3 &&
+      success &&
+      isSubmitSuccessful
+    ) {
+      reset();
+      toast.success('New Price Added Successfully!');
+      navigate('/dashboard/admin/prices');
+      dispatch({
+        type: NEW_PRICE_RESET,
+      });
+    }
+  }, [
+    dispatch,
+    reset,
+    navigate,
+    selectImg,
+    priceImg,
+    priceImgPreview,
+    diagnosticLists,
+    success,
+    isSubmitSuccessful,
+  ]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, navigate]);
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>
@@ -84,17 +141,17 @@ const NewPrice = () => {
         {/* ID */}
         <input
           type='number'
-          placeholder='ID'
-          defaultValue={id}
-          {...register('id', {
-            onChange: (e) => setId(e.target.value),
+          placeholder='Price ID'
+          defaultValue={priceID}
+          {...register('priceID', {
+            onChange: (e) => setPriceID(e.target.value),
             required: {
               value: true,
-              message: 'Please fill up the ID field',
+              message: 'Please fill up the Price ID field',
             },
             minLength: {
               value: 1,
-              message: 'Invalid ID field',
+              message: 'Invalid Price ID field',
             },
           })}
           className='input input-bordered border-main w-full my-2'
@@ -157,9 +214,9 @@ const NewPrice = () => {
           className='input input-bordered border-main w-full my-2'
         />
 
-        {/* Diagnosis */}
+        {/* Diagnostics */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-5 container mx-auto my-10'>
-          {diagnosis.map((d, i) => {
+          {diagnostics.map((d, i) => {
             return (
               <label key={i} className='flex justify-center' htmlFor={d}>
                 <input
@@ -167,7 +224,7 @@ const NewPrice = () => {
                   className='checkbox border-main'
                   id={d}
                   value={d}
-                  onChange={handleDiagnosisChange}
+                  onChange={handleDiagnosticsChange}
                 />
                 <span className='ml-2'>{d}</span>
               </label>
@@ -226,13 +283,13 @@ const NewPrice = () => {
 
         {/* Error messages */}
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {errors?.id?.type === 'required' && (
-            <span>{errors?.id?.message}</span>
+          {errors?.priceID?.type === 'required' && (
+            <span>{errors?.priceID?.message}</span>
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {errors?.id?.type === 'minLength' && (
-            <span>{errors?.id?.message}</span>
+          {errors?.priceID?.type === 'minLength' && (
+            <span>{errors?.priceID?.message}</span>
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
@@ -266,7 +323,7 @@ const NewPrice = () => {
           )}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {diagnosisLists?.length !== 3 ? (
+          {diagnosticLists?.length !== 3 ? (
             <span>You must select all the diagnosis process!</span>
           ) : null}
         </p>
