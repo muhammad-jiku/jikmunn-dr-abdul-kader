@@ -22,6 +22,7 @@ import {
   NewServicePage,
   AllServicesPage,
   NewPricePage,
+  AllPricesPage,
   AllUsersPage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
@@ -107,6 +108,18 @@ function App() {
                 user={user}
               >
                 <NewPricePage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path='admin/prices'
+            element={
+              <RequiredAdmin
+                loading={loading}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              >
+                <AllPricesPage />
               </RequiredAdmin>
             }
           />

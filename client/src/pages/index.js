@@ -10,4 +10,5 @@ export { default as UpdatePasswordPage } from './DashboardPages/UpdatePasswordPa
 export { default as NewServicePage } from './DashboardPages/Admin/Services/NewServicePage';
 export { default as AllServicesPage } from './DashboardPages/Admin/Services/AllServicesPage';
 export { default as NewPricePage } from './DashboardPages/Admin/Prices/NewPricePage';
+export { default as AllPricesPage } from './DashboardPages/Admin/Prices/AllPricesPage';
 export { default as AllUsersPage } from './DashboardPages/Admin/Users/AllUsersPage';
