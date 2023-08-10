@@ -6,7 +6,10 @@ import {
   authReducer,
   profileReducer,
 } from '../reducers/authReducer';
-import { newServiceReducer } from '../reducers/serviceReducer';
+import {
+  allAdminServicesReducer,
+  newServiceReducer,
+} from '../reducers/serviceReducer';
 import { newPriceReducer } from '../reducers/priceReducer';
 
 const reducer = combineReducers({
@@ -16,6 +19,7 @@ const reducer = combineReducers({
   allUsers: allUsersReducer,
   // service
   newService: newServiceReducer,
+  allServices: allAdminServicesReducer,
   // price
   newPrice: newPriceReducer,
 });
