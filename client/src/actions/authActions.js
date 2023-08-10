@@ -215,7 +215,7 @@ export const adminAllUsers = () => async (dispatch) => {
 
     await dispatch({
       type: ALL_USERS_SUCCESS,
-      payload: data.users,
+      payload: data?.data,
     });
   } catch (error) {
     await dispatch({

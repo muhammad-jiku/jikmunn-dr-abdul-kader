@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import { Navbar, Footer, NotFound, RequiredAuth } from './components';
+import {
+  Navbar,
+  Footer,
+  NotFound,
+  RequiredAuth,
+  RequiredAdmin,
+} from './components';
 import { Route, Routes } from 'react-router-dom';
 import {
   HomePage,
@@ -61,7 +67,7 @@ function App() {
           <Route
             path='me/update-password'
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
                 <UpdatePasswordPage />
               </RequiredAuth>
             }
@@ -69,17 +75,25 @@ function App() {
           <Route
             path='admin/new/service'
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAdmin
+                loading={loading}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              >
                 <NewServicePage />
-              </RequiredAuth>
+              </RequiredAdmin>
             }
           />
           <Route
             path='admin/new/price'
             element={
-              <RequiredAuth isAuthenticated={isAuthenticated}>
+              <RequiredAdmin
+                loading={loading}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              >
                 <NewPricePage />
-              </RequiredAuth>
+              </RequiredAdmin>
             }
           />
         </Route>
