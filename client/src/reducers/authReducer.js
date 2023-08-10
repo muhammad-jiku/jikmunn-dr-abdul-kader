@@ -1,7 +1,7 @@
 import {
-  ALL_USERS_FAILURE,
-  ALL_USERS_REQUEST,
-  ALL_USERS_SUCCESS,
+  ADMIN_ALL_USERS_FAILURE,
+  ADMIN_ALL_USERS_REQUEST,
+  ADMIN_ALL_USERS_SUCCESS,
   CLEAR_ERRORS,
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
@@ -136,19 +136,19 @@ export const profileReducer = (state = {}, action) => {
 
 export const allUsersReducer = (state = { users: [] }, action) => {
   switch (action.type) {
-    case ALL_USERS_REQUEST:
+    case ADMIN_ALL_USERS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case ALL_USERS_SUCCESS:
+    case ADMIN_ALL_USERS_SUCCESS:
       return {
         ...state,
         loading: false,
         users: action.payload,
       };
 
-    case ALL_USERS_FAILURE:
+    case ADMIN_ALL_USERS_FAILURE:
       return {
         ...state,
         loading: false,
