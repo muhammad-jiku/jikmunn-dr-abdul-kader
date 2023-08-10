@@ -3,6 +3,9 @@ import {
   ADMIN_ALL_USERS_FAILURE,
   ADMIN_ALL_USERS_REQUEST,
   ADMIN_ALL_USERS_SUCCESS,
+  ADMIN_USER_DETAILS_FAILURE,
+  ADMIN_USER_DETAILS_REQUEST,
+  ADMIN_USER_DETAILS_SUCCESS,
   CLEAR_ERRORS,
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
@@ -220,6 +223,33 @@ export const adminAllUsers = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_ALL_USERS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminUserDetails = (id) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_USER_DETAILS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/admin/user/${id}`, config);
+
+    await dispatch({
+      type: ADMIN_USER_DETAILS_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_USER_DETAILS_FAILURE,
       payload: error.response.data.message,
     });
   }
