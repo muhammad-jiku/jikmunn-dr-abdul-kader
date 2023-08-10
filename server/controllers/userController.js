@@ -95,11 +95,11 @@ const updatePassword = AsyncError(async (req, res) => {
     const isPasswordMatched = await bcrypt.compare(oldPassword, user.password);
 
     if (!isPasswordMatched) {
-      return next(new ErrorHandler('Old password is incorrect', 400));
+      return new ErrorHandler('Old password is incorrect', 400);
     }
 
     if (newPassword !== passwordConfirm) {
-      return next(new ErrorHandler('Password does not match', 400));
+      return new ErrorHandler('Password does not match', 400);
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
@@ -118,7 +118,7 @@ const updatePassword = AsyncError(async (req, res) => {
   }
 });
 
-const getAllUser = AsyncError(async (req, res) => {
+const getAdminAllUser = AsyncError(async (req, res) => {
   try {
     const users = await User.find({});
 
@@ -134,9 +134,31 @@ const getAllUser = AsyncError(async (req, res) => {
   }
 });
 
+const getAdminSingleUser = AsyncError(async (req, res) => {
+  try {
+    const { id } = await req.params;
+    const user = await User.findById({ _id: id });
+
+    if (!user) {
+      return new ErrorHandler(`User does not exist with Id: ${id}`, 404);
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   getUserDetails,
   updateProfile,
   updatePassword,
-  getAllUser,
+  getAdminAllUser,
+  getAdminSingleUser,
 };
