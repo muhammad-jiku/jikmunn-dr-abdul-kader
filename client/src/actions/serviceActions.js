@@ -1,5 +1,8 @@
 import axios from 'axios';
 import {
+  ADMIN_ALL_SERVICES_FAILURE,
+  ADMIN_ALL_SERVICES_REQUEST,
+  ADMIN_ALL_SERVICES_SUCCESS,
   CLEAR_ERRORS,
   NEW_SERVICE_FAILURE,
   NEW_SERVICE_REQUEST,
@@ -32,6 +35,33 @@ export const addNewService = (serviceData) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: NEW_SERVICE_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminAllServices = () => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_ALL_SERVICES_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/admin/services`, config);
+
+    await dispatch({
+      type: ADMIN_ALL_SERVICES_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_ALL_SERVICES_FAILURE,
       payload: error.response.data.message,
     });
   }
