@@ -2,17 +2,18 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {
-  allUsersReducer,
   authReducer,
   profileReducer,
+  allUsersReducer,
+  userDetailsReducer,
 } from '../reducers/authReducer';
 import {
-  allAdminServicesReducer,
   newServiceReducer,
+  allAdminServicesReducer,
 } from '../reducers/serviceReducer';
 import {
-  allAdminPricesReducer,
   newPriceReducer,
+  allAdminPricesReducer,
 } from '../reducers/priceReducer';
 
 const reducer = combineReducers({
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   user: authReducer,
   profile: profileReducer,
   allUsers: allUsersReducer,
+  userDetails: userDetailsReducer,
   // service
   newService: newServiceReducer,
   allServices: allAdminServicesReducer,
