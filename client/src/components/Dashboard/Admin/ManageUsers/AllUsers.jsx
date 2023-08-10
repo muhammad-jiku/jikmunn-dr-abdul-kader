@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { adminAllUsers, clearErrors } from '../../../../actions/authActions';
+import UserRow from './UserRow';
 
 const AllUsers = () => {
   const navigate = useNavigate();
@@ -38,7 +39,11 @@ const AllUsers = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{users?.map((a, idx) => console.log(a, idx))}</tbody>
+          <tbody>
+            {users?.map((user, idx) => (
+              <UserRow user={user} idx={idx} />
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
