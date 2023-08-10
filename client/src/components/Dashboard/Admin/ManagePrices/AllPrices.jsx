@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { adminAllPrices, clearErrors } from '../../../../actions/priceActions';
+import PriceRow from './PriceRow';
 
 const AllServices = () => {
   const navigate = useNavigate();
@@ -39,7 +40,11 @@ const AllServices = () => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{prices?.map((price, idx) => console.log(price, idx))}</tbody>
+          <tbody>
+            {prices?.map((price, idx) => (
+              <PriceRow price={price} key={idx} />
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
