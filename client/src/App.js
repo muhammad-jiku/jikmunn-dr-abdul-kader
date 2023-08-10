@@ -21,6 +21,7 @@ import {
   UpdatePasswordPage,
   NewServicePage,
   NewPricePage,
+  AllUsersPage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
 import { loadUser } from './actions/authActions';
@@ -93,6 +94,18 @@ function App() {
                 user={user}
               >
                 <NewPricePage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path='admin/users'
+            element={
+              <RequiredAdmin
+                loading={loading}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              >
+                <AllUsersPage />
               </RequiredAdmin>
             }
           />
