@@ -3,7 +3,8 @@ const {
   getUserDetails,
   updateProfile,
   updatePassword,
-  getAllUser,
+  getAdminAllUser,
+  getAdminSingleUser,
 } = require('../controllers/userController');
 const {
   isAuthenticated,
@@ -19,6 +20,9 @@ userRoute.route('/me/update').put(isAuthenticated, updateProfile);
 userRoute.route('/me/update-password').put(isAuthenticated, updatePassword);
 userRoute
   .route('/admin/users')
-  .get(isAuthenticated, authorizeAdmin, getAllUser);
+  .get(isAuthenticated, authorizeAdmin, getAdminAllUser);
+userRoute
+  .route('/admin/user/:id')
+  .get(isAuthenticated, authorizeAdmin, getAdminSingleUser);
 
 module.exports = userRoute;
