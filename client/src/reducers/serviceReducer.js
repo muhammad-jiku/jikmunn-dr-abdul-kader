@@ -1,4 +1,7 @@
 import {
+  ADMIN_ALL_SERVICES_FAILURE,
+  ADMIN_ALL_SERVICES_REQUEST,
+  ADMIN_ALL_SERVICES_SUCCESS,
   CLEAR_ERRORS,
   NEW_SERVICE_FAILURE,
   NEW_SERVICE_REQUEST,
@@ -35,6 +38,38 @@ export const newServiceReducer = (state = { service: {} }, action) => {
         ...state,
         error: null,
       };
+    default:
+      return state;
+  }
+};
+
+export const allAdminServicesReducer = (state = { services: [] }, action) => {
+  switch (action.type) {
+    case ADMIN_ALL_SERVICES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADMIN_ALL_SERVICES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        services: action.payload,
+      };
+
+    case ADMIN_ALL_SERVICES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }
