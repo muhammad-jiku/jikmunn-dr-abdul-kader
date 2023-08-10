@@ -1,7 +1,7 @@
 const express = require('express');
 const {
   createService,
-  getAllService,
+  getAdminAllService,
 } = require('../controllers/serviceController');
 const {
   isAuthenticated,
@@ -17,6 +17,6 @@ serviceRoute
   .post(isAuthenticated, authorizeAdmin, createService);
 serviceRoute
   .route('/admin/services')
-  .get(isAuthenticated, authorizeAdmin, getAllService);
+  .get(isAuthenticated, authorizeAdmin, getAdminAllService);
 
 module.exports = serviceRoute;

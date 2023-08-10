@@ -42,7 +42,7 @@ const createService = AsyncError(async (req, res) => {
   }
 });
 
-const getAllService = AsyncError(async (req, res) => {
+const getAdminAllService = AsyncError(async (req, res) => {
   try {
     const services = await Service.find({});
 
@@ -60,5 +60,5 @@ const getAllService = AsyncError(async (req, res) => {
 
 module.exports = {
   createService,
-  getAllService,
+  getAdminAllService,
 };
