@@ -44,6 +44,23 @@ const createPrice = AsyncError(async (req, res) => {
   }
 });
 
+const getAdminAllPrice = AsyncError(async (req, res) => {
+  try {
+    const prices = await Price.find({});
+
+    res.status(200).json({
+      success: true,
+      data: prices,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+});
+
 module.exports = {
   createPrice,
+  getAdminAllPrice,
 };
