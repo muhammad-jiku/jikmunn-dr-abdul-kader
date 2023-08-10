@@ -10,7 +10,10 @@ import {
   allAdminServicesReducer,
   newServiceReducer,
 } from '../reducers/serviceReducer';
-import { newPriceReducer } from '../reducers/priceReducer';
+import {
+  allAdminPricesReducer,
+  newPriceReducer,
+} from '../reducers/priceReducer';
 
 const reducer = combineReducers({
   // user
@@ -22,6 +25,7 @@ const reducer = combineReducers({
   allServices: allAdminServicesReducer,
   // price
   newPrice: newPriceReducer,
+  allPrices: allAdminPricesReducer,
 });
 
 let initialState = {};
