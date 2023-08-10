@@ -30,3 +30,4 @@ export { default as Profile } from './Dashboard/Profile';
 export { default as UpdatePassword } from './Dashboard/UpdatePassword';
 export { default as NewService } from './Dashboard/Admin/ManageServices/NewService';
 export { default as NewPrice } from './Dashboard/Admin/ManagePrices/NewPrice';
+export { default as AllUsers } from './Dashboard/Admin/ManageUsers/AllUsers';
