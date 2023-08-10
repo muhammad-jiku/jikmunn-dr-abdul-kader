@@ -1,14 +1,22 @@
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { authReducer, profileReducer } from '../reducers/authReducer';
+import {
+  allUsersReducer,
+  authReducer,
+  profileReducer,
+} from '../reducers/authReducer';
 import { newServiceReducer } from '../reducers/serviceReducer';
 import { newPriceReducer } from '../reducers/priceReducer';
 
 const reducer = combineReducers({
+  // user
   user: authReducer,
   profile: profileReducer,
+  allUsers: allUsersReducer,
+  // service
   newService: newServiceReducer,
+  // price
   newPrice: newPriceReducer,
 });
 
