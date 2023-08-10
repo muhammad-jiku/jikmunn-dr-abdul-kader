@@ -42,6 +42,23 @@ const createService = AsyncError(async (req, res) => {
   }
 });
 
+const getAllService = AsyncError(async (req, res) => {
+  try {
+    const services = await Service.find({});
+
+    res.status(200).json({
+      success: true,
+      data: services,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+});
+
 module.exports = {
   createService,
+  getAllService,
 };
