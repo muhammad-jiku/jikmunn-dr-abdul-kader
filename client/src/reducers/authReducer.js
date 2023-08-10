@@ -1,4 +1,7 @@
 import {
+  ALL_USERS_FAILURE,
+  ALL_USERS_REQUEST,
+  ALL_USERS_SUCCESS,
   CLEAR_ERRORS,
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
@@ -120,6 +123,38 @@ export const profileReducer = (state = {}, action) => {
         ...state,
         isUpdated: false,
       };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const allUsersReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case ALL_USERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.payload.data,
+      };
+
+    case ALL_USERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
     case CLEAR_ERRORS:
       return {
         ...state,
