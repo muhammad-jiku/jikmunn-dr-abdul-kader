@@ -6,6 +6,7 @@ import {
   clearErrors,
 } from '../../../../actions/serviceActions';
 import { toast } from 'react-toastify';
+import ServiceRow from './ServiceRow';
 
 const AllServices = () => {
   const navigate = useNavigate();
@@ -44,7 +45,9 @@ const AllServices = () => {
             </tr>
           </thead>
           <tbody>
-            {services?.map((service, idx) => console.log(service, idx))}
+            {services?.map((service, idx) => (
+              <ServiceRow service={service} key={idx} />
+            ))}
           </tbody>
         </table>
       </div>
