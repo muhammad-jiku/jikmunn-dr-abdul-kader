@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { adminUserDetails, clearErrors } from '../../../../actions/authActions';
+import {
+  adminUpdateUser,
+  adminUserDetails,
+  clearErrors,
+} from '../../../../actions/authActions';
 import { toast } from 'react-toastify';
+import { ADMIN_UPDATE_USER_ROLE_RESET } from '../../../../constants/authConstant';
 
 const UpdateUser = () => {
   const { id } = useParams();
@@ -11,6 +16,11 @@ const UpdateUser = () => {
 
   const dispatch = useDispatch();
   const { loading, error, user } = useSelector((state) => state?.userDetails);
+  const {
+    loading: updateLoading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state?.profile);
 
   const [userRole, setUserRole] = useState(user ? user?.role : '');
 
@@ -19,7 +29,7 @@ const UpdateUser = () => {
   const {
     register,
     formState: { errors, isSubmitSuccessful },
-    reset,
+    // reset,
     handleSubmit,
   } = useForm({
     // resolver: zodResolver(loginSchema),
@@ -36,6 +46,9 @@ const UpdateUser = () => {
     };
 
     console.log(id, userInfo);
+    if (userRole?.length > 1) {
+      dispatch(adminUpdateUser(id, userInfo));
+    }
   };
 
   useEffect(() => {
@@ -43,12 +56,28 @@ const UpdateUser = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
+    if (isUpdated && isSubmitSuccessful) {
+      toast.success('User Role Updated Successfully');
+      navigate('/dashboard/admin/users');
+      dispatch({
+        type: ADMIN_UPDATE_USER_ROLE_RESET,
+      });
+    }
+  }, [dispatch, isUpdated, isSubmitSuccessful, navigate]);
+
+  useEffect(() => {
     if (error) {
       // console.log(error);
       toast.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+
+    if (updateError) {
+      // console.log(updateError);
+      toast.error('Failed to update user role!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, updateError]);
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>

@@ -158,11 +158,11 @@ const getAdminSingleUser = AsyncError(async (req, res) => {
 const adminUpdateUserRole = AsyncError(async (req, res) => {
   try {
     const { id } = await req.params;
-    const { name, email, userRole } = await req.body;
+    const { username, email, role } = await req.body;
     const userData = {
-      name,
+      username,
       email,
-      role: userRole,
+      role,
     };
     const opts = {
       runValidators: true,
@@ -185,7 +185,9 @@ const adminUpdateUserRole = AsyncError(async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
   }
 });
 
