@@ -3,6 +3,9 @@ import {
   ADMIN_ALL_USERS_FAILURE,
   ADMIN_ALL_USERS_REQUEST,
   ADMIN_ALL_USERS_SUCCESS,
+  ADMIN_UPDATE_USER_ROLE_FAILURE,
+  ADMIN_UPDATE_USER_ROLE_REQUEST,
+  ADMIN_UPDATE_USER_ROLE_SUCCESS,
   ADMIN_USER_DETAILS_FAILURE,
   ADMIN_USER_DETAILS_REQUEST,
   ADMIN_USER_DETAILS_SUCCESS,
@@ -250,6 +253,37 @@ export const adminUserDetails = (id) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_USER_DETAILS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminUpdateUser = (id, userData) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_UPDATE_USER_ROLE_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/user/${id}`,
+      userData,
+      config
+    );
+
+    await dispatch({
+      type: ADMIN_UPDATE_USER_ROLE_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_UPDATE_USER_ROLE_FAILURE,
       payload: error.response.data.message,
     });
   }
