@@ -155,10 +155,45 @@ const getAdminSingleUser = AsyncError(async (req, res) => {
   }
 });
 
+const adminUpdateUserRole = AsyncError(async (req, res) => {
+  try {
+    const { id } = await req.params;
+    const { name, email, userRole } = await req.body;
+    const userData = {
+      name,
+      email,
+      role: userRole,
+    };
+    const opts = {
+      runValidators: true,
+      new: true,
+    };
+
+    let user = await User.findByIdAndUpdate(
+      { _id: id },
+      { $set: userData },
+      {
+        opts,
+      }
+    ).exec();
+
+    user = await User.findById({ _id: id });
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 module.exports = {
   getUserDetails,
   updateProfile,
   updatePassword,
   getAdminAllUser,
   getAdminSingleUser,
+  adminUpdateUserRole,
 };
