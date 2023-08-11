@@ -191,6 +191,32 @@ const adminUpdateUserRole = AsyncError(async (req, res) => {
   }
 });
 
+const adminRemoveUser = AsyncError(async (req, res) => {
+  try {
+    const { id } = await req.params;
+    const user = await User.findById({ _id: id });
+
+    if (!user) {
+      return new ErrorHandler(`User does not exist with Id: ${id}`, 400);
+    } else {
+      const imageId = user?.avatar?.public_id;
+      imageId ? await cloudinary.v2.uploader.destroy(imageId) : null;
+
+      await User.deleteOne({ _id: id });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'User Deleted Successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   getUserDetails,
   updateProfile,
@@ -198,4 +224,5 @@ module.exports = {
   getAdminAllUser,
   getAdminSingleUser,
   adminUpdateUserRole,
+  adminRemoveUser,
 };
