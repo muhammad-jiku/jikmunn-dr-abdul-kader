@@ -2,6 +2,10 @@ import {
   ADMIN_ALL_USERS_FAILURE,
   ADMIN_ALL_USERS_REQUEST,
   ADMIN_ALL_USERS_SUCCESS,
+  ADMIN_DELETE_USER_FAILURE,
+  ADMIN_DELETE_USER_REQUEST,
+  ADMIN_DELETE_USER_RESET,
+  ADMIN_DELETE_USER_SUCCESS,
   ADMIN_UPDATE_USER_ROLE_FAILURE,
   ADMIN_UPDATE_USER_ROLE_REQUEST,
   ADMIN_UPDATE_USER_ROLE_RESET,
@@ -107,6 +111,7 @@ export const profileReducer = (state = {}, action) => {
     case UPDATE_PROFILE_REQUEST:
     case UPDATE_PASSWORD_REQUEST:
     case ADMIN_UPDATE_USER_ROLE_REQUEST:
+    case ADMIN_DELETE_USER_REQUEST:
       return {
         ...state,
         loading: true,
@@ -119,9 +124,17 @@ export const profileReducer = (state = {}, action) => {
         loading: false,
         isUpdated: action.payload,
       };
+    case ADMIN_DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+        message: action.payload.message,
+      };
     case UPDATE_PROFILE_FAILURE:
     case UPDATE_PASSWORD_FAILURE:
     case ADMIN_UPDATE_USER_ROLE_FAILURE:
+    case ADMIN_DELETE_USER_FAILURE:
       return {
         ...state,
         loading: false,
@@ -133,6 +146,11 @@ export const profileReducer = (state = {}, action) => {
       return {
         ...state,
         isUpdated: false,
+      };
+    case ADMIN_DELETE_USER_RESET:
+      return {
+        ...state,
+        isDeleted: false,
       };
     case CLEAR_ERRORS:
       return {
