@@ -33,3 +33,4 @@ export { default as AllServices } from './Dashboard/Admin/ManageServices/AllServ
 export { default as NewPrice } from './Dashboard/Admin/ManagePrices/NewPrice';
 export { default as AllPrices } from './Dashboard/Admin/ManagePrices/AllPrices';
 export { default as AllUsers } from './Dashboard/Admin/ManageUsers/AllUsers';
+export { default as UpdateUser } from './Dashboard/Admin/ManageUsers/UpdateUser';
