@@ -12,3 +12,4 @@ export { default as AllServicesPage } from './DashboardPages/Admin/Services/AllS
 export { default as NewPricePage } from './DashboardPages/Admin/Prices/NewPricePage';
 export { default as AllPricesPage } from './DashboardPages/Admin/Prices/AllPricesPage';
 export { default as AllUsersPage } from './DashboardPages/Admin/Users/AllUsersPage';
+export { default as UpdateUserPage } from './DashboardPages/Admin/Users/UpdateUserPage';
