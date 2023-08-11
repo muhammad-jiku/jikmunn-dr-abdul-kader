@@ -129,7 +129,6 @@ export const profileReducer = (state = {}, action) => {
         ...state,
         loading: false,
         isDeleted: action.payload,
-        message: action.payload.message,
       };
     case UPDATE_PROFILE_FAILURE:
     case UPDATE_PASSWORD_FAILURE:
