@@ -2,6 +2,10 @@ import {
   ADMIN_ALL_USERS_FAILURE,
   ADMIN_ALL_USERS_REQUEST,
   ADMIN_ALL_USERS_SUCCESS,
+  ADMIN_UPDATE_USER_ROLE_FAILURE,
+  ADMIN_UPDATE_USER_ROLE_REQUEST,
+  ADMIN_UPDATE_USER_ROLE_RESET,
+  ADMIN_UPDATE_USER_ROLE_SUCCESS,
   ADMIN_USER_DETAILS_FAILURE,
   ADMIN_USER_DETAILS_REQUEST,
   ADMIN_USER_DETAILS_SUCCESS,
@@ -102,12 +106,14 @@ export const profileReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:
     case UPDATE_PASSWORD_REQUEST:
+    case ADMIN_UPDATE_USER_ROLE_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case UPDATE_PROFILE_SUCCESS:
     case UPDATE_PASSWORD_SUCCESS:
+    case ADMIN_UPDATE_USER_ROLE_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -115,6 +121,7 @@ export const profileReducer = (state = {}, action) => {
       };
     case UPDATE_PROFILE_FAILURE:
     case UPDATE_PASSWORD_FAILURE:
+    case ADMIN_UPDATE_USER_ROLE_FAILURE:
       return {
         ...state,
         loading: false,
@@ -122,6 +129,7 @@ export const profileReducer = (state = {}, action) => {
       };
     case UPDATE_PROFILE_RESET:
     case UPDATE_PASSWORD_RESET:
+    case ADMIN_UPDATE_USER_ROLE_RESET:
       return {
         ...state,
         isUpdated: false,
