@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { adminAllUsers, clearErrors } from '../../../../actions/authActions';
 import UserRow from './UserRow';
 
 const AllUsers = () => {
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const { loading, error, users } = useSelector((state) => state?.allUsers);
 

@@ -107,6 +107,7 @@ const Sidebar = () => {
                   All Reviews
                 </Link>
               </li>
+              <hr className='my-2 border-2 border-slate-300' />
             </>
           )}
         </ul>

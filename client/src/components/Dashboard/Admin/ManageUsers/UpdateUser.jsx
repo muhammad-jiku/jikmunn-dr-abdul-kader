@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { adminUserDetails, clearErrors } from '../../../../actions/authActions';
+import { toast } from 'react-toastify';
 
 const UpdateUser = () => {
   const { id } = useParams();
@@ -36,11 +38,25 @@ const UpdateUser = () => {
     console.log(id, userInfo);
   };
 
+  useEffect(() => {
+    dispatch(adminUserDetails(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
+
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>
       <h2 className='text-3xl lg:text-5xl font-bold font-lobster text-main tracking-wider mt-2 mb-4'>
         Update User Role
       </h2>
+      {console.log(user)}
+      {console.log(userRole)}
       <hr className='w-1/3 lg:w-1/4 mb-2 border-2 border-slate-300' />
       <form className='p-1 md:p-4 w-full' onSubmit={handleSubmit(onSubmit)}>
         {/* Username */}
@@ -89,7 +105,7 @@ const UpdateUser = () => {
         <select
           // label={'Country'}
           // value={user?.country}
-          defaultValue={userRole}
+          defaultValue={user?.role || userRole}
           className='select border-main w-full my-2'
           {...register('role', {
             onChange: (e) => setUserRole(e.target.value),
