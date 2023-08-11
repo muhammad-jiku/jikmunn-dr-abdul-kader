@@ -3,6 +3,9 @@ import {
   ADMIN_ALL_USERS_FAILURE,
   ADMIN_ALL_USERS_REQUEST,
   ADMIN_ALL_USERS_SUCCESS,
+  ADMIN_DELETE_USER_FAILURE,
+  ADMIN_DELETE_USER_REQUEST,
+  ADMIN_DELETE_USER_SUCCESS,
   ADMIN_UPDATE_USER_ROLE_FAILURE,
   ADMIN_UPDATE_USER_ROLE_REQUEST,
   ADMIN_UPDATE_USER_ROLE_SUCCESS,
@@ -284,6 +287,33 @@ export const adminUpdateUser = (id, userData) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_UPDATE_USER_ROLE_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminDeleteUser = (id) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_DELETE_USER_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.delete(`/api/v1/admin/user/${id}`, config);
+
+    await dispatch({
+      type: ADMIN_DELETE_USER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_DELETE_USER_FAILURE,
       payload: error.response.data.message,
     });
   }
