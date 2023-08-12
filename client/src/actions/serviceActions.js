@@ -10,6 +10,9 @@ import {
   ADMIN_SERVICE_DETAILS_REQUEST,
   ADMIN_SERVICE_DETAILS_SUCCESS,
   ADMIN_SERVICE_DETAILS_FAILURE,
+  ADMIN_UPDATE_SERVICE_DETAILS_REQUEST,
+  ADMIN_UPDATE_SERVICE_DETAILS_SUCCESS,
+  ADMIN_UPDATE_SERVICE_DETAILS_FAILURE,
 } from '../constants/serviceConstant';
 
 export const adminAddNewService = (serviceData) => async (dispatch) => {
@@ -92,6 +95,37 @@ export const adminServiceDetails = (id) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_SERVICE_DETAILS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminUpdateservice = (id, serviceData) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_UPDATE_SERVICE_DETAILS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/service/${id}`,
+      serviceData,
+      config
+    );
+
+    await dispatch({
+      type: ADMIN_UPDATE_SERVICE_DETAILS_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_UPDATE_SERVICE_DETAILS_FAILURE,
       payload: error.response.data.message,
     });
   }
