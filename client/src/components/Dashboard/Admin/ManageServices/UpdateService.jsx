@@ -5,8 +5,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   adminServiceDetails,
+  adminUpdateService,
   clearErrors,
 } from '../../../../actions/serviceActions';
+import { ADMIN_UPDATE_SERVICE_DETAILS_RESET } from '../../../../constants/serviceConstant';
 
 const UpdateService = () => {
   const { id } = useParams();
@@ -15,6 +17,11 @@ const UpdateService = () => {
   const { loading, error, service } = useSelector(
     (state) => state?.serviceDetails
   );
+  const {
+    loading: updateLoading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state?.service);
 
   const [serviceID, setServiceID] = useState(service ? service?.serviceID : '');
   const [title, setTitle] = useState(service ? service?.title : '');
@@ -126,11 +133,14 @@ const UpdateService = () => {
       serviceImgPreview?.length > 0 &&
       slotTimes?.length > 0
     ) {
+      await dispatch(adminUpdateService(id, serviceInfo));
     }
   };
 
   useEffect(() => {
-    dispatch(adminServiceDetails(id));
+    if (id) {
+      dispatch(adminServiceDetails(id));
+    }
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -139,13 +149,18 @@ const UpdateService = () => {
       serviceImg?.length > 0 &&
       serviceImgPreview?.length > 0 &&
       slotTimes?.length > 0 &&
-      isSubmitSuccessful
+      isSubmitSuccessful &&
+      isUpdated
     ) {
       reset();
       toast.success('Service Detail Updated Successfully!');
       navigate('/dashboard');
+      dispatch({
+        type: ADMIN_UPDATE_SERVICE_DETAILS_RESET,
+      });
     }
   }, [
+    dispatch,
     reset,
     navigate,
     selectImg,
@@ -153,6 +168,7 @@ const UpdateService = () => {
     serviceImgPreview,
     slotTimes,
     isSubmitSuccessful,
+    isUpdated,
   ]);
 
   useEffect(() => {
@@ -161,7 +177,13 @@ const UpdateService = () => {
       toast.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
-  }, [dispatch, error, navigate]);
+
+    if (updateError) {
+      // console.log(updateError);
+      toast.error('Failed to update service details!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, updateError]);
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>

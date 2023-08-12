@@ -100,7 +100,7 @@ export const adminServiceDetails = (id) => async (dispatch) => {
   }
 };
 
-export const adminUpdateservice = (id, serviceData) => async (dispatch) => {
+export const adminUpdateService = (id, serviceData) => async (dispatch) => {
   try {
     await dispatch({
       type: ADMIN_UPDATE_SERVICE_DETAILS_REQUEST,
