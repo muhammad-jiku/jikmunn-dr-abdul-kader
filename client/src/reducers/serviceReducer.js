@@ -7,6 +7,9 @@ import {
   ADMIN_NEW_SERVICE_REQUEST,
   ADMIN_NEW_SERVICE_RESET,
   ADMIN_NEW_SERVICE_SUCCESS,
+  ADMIN_SERVICE_DETAILS_REQUEST,
+  ADMIN_SERVICE_DETAILS_SUCCESS,
+  ADMIN_SERVICE_DETAILS_FAILURE,
 } from '../constants/serviceConstant';
 
 export const newServiceReducer = (state = { service: {} }, action) => {
@@ -70,6 +73,33 @@ export const allAdminServicesReducer = (state = { services: [] }, action) => {
         error: null,
       };
 
+    default:
+      return state;
+  }
+};
+
+export const adminServiceDetailsReducer = (state = { service: {} }, action) => {
+  switch (action.type) {
+    case ADMIN_SERVICE_DETAILS_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+    case ADMIN_SERVICE_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        service: action.payload,
+      };
+    case ADMIN_SERVICE_DETAILS_FAILURE:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }
