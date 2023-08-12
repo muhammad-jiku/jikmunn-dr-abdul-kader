@@ -8,11 +8,12 @@ import {
   userDetailsReducer,
 } from '../reducers/authReducer';
 import {
-  newServiceReducer,
+  adminNewServiceReducer,
   allAdminServicesReducer,
+  adminServiceDetailsReducer,
 } from '../reducers/serviceReducer';
 import {
-  newPriceReducer,
+  adminNewPriceReducer,
   allAdminPricesReducer,
 } from '../reducers/priceReducer';
 
@@ -23,10 +24,11 @@ const reducer = combineReducers({
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
   // service
-  newService: newServiceReducer,
+  newService: adminNewServiceReducer,
   allServices: allAdminServicesReducer,
+  serviceDetails: adminServiceDetailsReducer,
   // price
-  newPrice: newPriceReducer,
+  newPrice: adminNewPriceReducer,
   allPrices: allAdminPricesReducer,
 });
 

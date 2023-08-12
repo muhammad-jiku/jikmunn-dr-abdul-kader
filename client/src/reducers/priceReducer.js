@@ -9,7 +9,7 @@ import {
   NEW_PRICE_SUCCESS,
 } from '../constants/priceConstant';
 
-export const newPriceReducer = (state = { price: {} }, action) => {
+export const adminNewPriceReducer = (state = { price: {} }, action) => {
   switch (action.type) {
     case NEW_PRICE_REQUEST:
       return {

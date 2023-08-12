@@ -12,7 +12,7 @@ import {
   ADMIN_SERVICE_DETAILS_FAILURE,
 } from '../constants/serviceConstant';
 
-export const newServiceReducer = (state = { service: {} }, action) => {
+export const adminNewServiceReducer = (state = { service: {} }, action) => {
   switch (action.type) {
     case ADMIN_NEW_SERVICE_REQUEST:
       return {
