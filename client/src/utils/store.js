@@ -11,6 +11,7 @@ import {
   adminNewServiceReducer,
   allAdminServicesReducer,
   adminServiceDetailsReducer,
+  adminServiceReducer,
 } from '../reducers/serviceReducer';
 import {
   adminNewPriceReducer,
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   newService: adminNewServiceReducer,
   allServices: allAdminServicesReducer,
   serviceDetails: adminServiceDetailsReducer,
+  service: adminServiceReducer,
   // price
   newPrice: adminNewPriceReducer,
   allPrices: allAdminPricesReducer,
