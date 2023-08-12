@@ -79,8 +79,75 @@ const getAdminServiceDetails = AsyncError(async (req, res) => {
   }
 });
 
+const adminUpdateServiceDetails = AsyncError(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { serviceID, title, desc, slots, serviceImg } = await req.body;
+
+    let service = await Service.findById({ _id: id });
+
+    if (!service) {
+      return new ErrorHandler('Service is not found', 404);
+    }
+
+    const updatedServiceInfo = {
+      serviceID,
+      title,
+      desc,
+      slots,
+      serviceImg,
+    };
+
+    const opts = {
+      runValidators: true,
+      new: true,
+    };
+
+    if (serviceImg !== '') {
+      const serviceData = await Service.findById({ _id: id });
+
+      const imageId = serviceData?.serviceImg?.public_id;
+
+      imageId?.length > 0 && (await cloudinary.v2.uploader.destroy(imageId));
+
+      const myCloud = await cloudinary.v2.uploader.upload(serviceImg, {
+        folder: 'jikmunn-doctor-abdul-kader/services',
+      });
+
+      updatedServiceInfo.serviceImg = {
+        public_id: myCloud?.public_id,
+        url: myCloud?.secure_url,
+      };
+    }
+
+    service = await Service.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: updatedServiceInfo,
+      },
+      {
+        opts,
+      }
+    ).exec();
+
+    service = await Service.findById({ _id: id });
+
+    return res.status(200).json({
+      success: true,
+      data: service,
+    });
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createService,
   getAdminAllService,
   getAdminServiceDetails,
+  adminUpdateServiceDetails,
 };
