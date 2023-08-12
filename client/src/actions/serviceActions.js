@@ -4,15 +4,15 @@ import {
   ADMIN_ALL_SERVICES_REQUEST,
   ADMIN_ALL_SERVICES_SUCCESS,
   CLEAR_ERRORS,
-  NEW_SERVICE_FAILURE,
-  NEW_SERVICE_REQUEST,
-  NEW_SERVICE_SUCCESS,
+  ADMIN_NEW_SERVICE_FAILURE,
+  ADMIN_NEW_SERVICE_REQUEST,
+  ADMIN_NEW_SERVICE_SUCCESS,
 } from '../constants/serviceConstant';
 
 export const addNewService = (serviceData) => async (dispatch) => {
   try {
     await dispatch({
-      type: NEW_SERVICE_REQUEST,
+      type: ADMIN_NEW_SERVICE_REQUEST,
     });
 
     const config = {
@@ -29,12 +29,12 @@ export const addNewService = (serviceData) => async (dispatch) => {
     );
 
     await dispatch({
-      type: NEW_SERVICE_SUCCESS,
+      type: ADMIN_NEW_SERVICE_SUCCESS,
       payload: data,
     });
   } catch (error) {
     await dispatch({
-      type: NEW_SERVICE_FAILURE,
+      type: ADMIN_NEW_SERVICE_FAILURE,
       payload: error.response.data.message,
     });
   }

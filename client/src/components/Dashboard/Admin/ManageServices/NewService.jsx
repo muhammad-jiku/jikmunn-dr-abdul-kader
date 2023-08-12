@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addNewService, clearErrors } from '../../../../actions/serviceActions';
 import { toast } from 'react-toastify';
-import { NEW_SERVICE_RESET } from '../../../../constants/serviceConstant';
+import { ADMIN_NEW_SERVICE_RESET } from '../../../../constants/serviceConstant';
 
 const NewService = () => {
   const navigate = useNavigate();
@@ -132,7 +132,7 @@ const NewService = () => {
       toast.success('New Service Added Successfully!');
       navigate('/dashboard/admin/services');
       dispatch({
-        type: NEW_SERVICE_RESET,
+        type: ADMIN_NEW_SERVICE_RESET,
       });
     }
   }, [
