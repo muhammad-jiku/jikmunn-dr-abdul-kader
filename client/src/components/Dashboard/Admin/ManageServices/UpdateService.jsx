@@ -237,7 +237,7 @@ const UpdateService = () => {
                   className='checkbox border-main'
                   id={slot}
                   value={slot}
-                  checked={slotTimes.includes(slot)}
+                  checked={slotTimes?.includes(slot)}
                   onChange={handleSlotsChange}
                 />
                 <span className='ml-2'>{slot}</span>

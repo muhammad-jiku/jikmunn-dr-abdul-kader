@@ -21,6 +21,7 @@ import {
   UpdatePasswordPage,
   NewServicePage,
   AllServicesPage,
+  UpdateServicePage,
   NewPricePage,
   AllPricesPage,
   AllUsersPage,
@@ -97,6 +98,18 @@ function App() {
                 user={user}
               >
                 <AllServicesPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path='admin/service/:id'
+            element={
+              <RequiredAdmin
+                loading={loading}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              >
+                <UpdateServicePage />
               </RequiredAdmin>
             }
           />
