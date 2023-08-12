@@ -4,15 +4,15 @@ import {
   ADMIN_ALL_PRICES_REQUEST,
   ADMIN_ALL_PRICES_SUCCESS,
   CLEAR_ERRORS,
-  NEW_PRICE_FAILURE,
-  NEW_PRICE_REQUEST,
-  NEW_PRICE_SUCCESS,
+  ADMIN_NEW_PRICE_FAILURE,
+  ADMIN_NEW_PRICE_REQUEST,
+  ADMIN_NEW_PRICE_SUCCESS,
 } from '../constants/priceConstant';
 
 export const addNewPrice = (priceData) => async (dispatch) => {
   try {
     await dispatch({
-      type: NEW_PRICE_REQUEST,
+      type: ADMIN_NEW_PRICE_REQUEST,
     });
 
     const config = {
@@ -29,12 +29,12 @@ export const addNewPrice = (priceData) => async (dispatch) => {
     );
 
     await dispatch({
-      type: NEW_PRICE_SUCCESS,
+      type: ADMIN_NEW_PRICE_SUCCESS,
       payload: data,
     });
   } catch (error) {
     await dispatch({
-      type: NEW_PRICE_FAILURE,
+      type: ADMIN_NEW_PRICE_FAILURE,
       payload: error.response.data.message,
     });
   }

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { NEW_PRICE_RESET } from '../../../../constants/priceConstant';
+import { ADMIN_NEW_PRICE_RESET } from '../../../../constants/priceConstant';
 import { addNewPrice, clearErrors } from '../../../../actions/priceActions';
 
 const NewPrice = () => {
@@ -108,7 +108,7 @@ const NewPrice = () => {
       toast.success('New Price Added Successfully!');
       navigate('/dashboard/admin/prices');
       dispatch({
-        type: NEW_PRICE_RESET,
+        type: ADMIN_NEW_PRICE_RESET,
       });
     }
   }, [
