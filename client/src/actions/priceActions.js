@@ -9,7 +9,7 @@ import {
   ADMIN_NEW_PRICE_SUCCESS,
 } from '../constants/priceConstant';
 
-export const addNewPrice = (priceData) => async (dispatch) => {
+export const adminAddNewPrice = (priceData) => async (dispatch) => {
   try {
     await dispatch({
       type: ADMIN_NEW_PRICE_REQUEST,

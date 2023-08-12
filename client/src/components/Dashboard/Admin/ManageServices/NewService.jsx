@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addNewService, clearErrors } from '../../../../actions/serviceActions';
+import {
+  adminAddNewService,
+  clearErrors,
+} from '../../../../actions/serviceActions';
 import { toast } from 'react-toastify';
 import { ADMIN_NEW_SERVICE_RESET } from '../../../../constants/serviceConstant';
 
@@ -109,22 +112,20 @@ const NewService = () => {
     console.log(serviceInfo);
     if (
       selectImg &&
-      serviceImg?.length >= 1 &&
-      serviceImgPreview?.length >= 1 &&
-      serviceImg?.length === serviceImgPreview?.length &&
-      slotTimes?.length >= 1
+      serviceImg?.length > 0 &&
+      serviceImgPreview?.length > 0 &&
+      slotTimes?.length > 0
     ) {
-      await dispatch(addNewService(serviceInfo));
+      await dispatch(adminAddNewService(serviceInfo));
     }
   };
 
   useEffect(() => {
     if (
       selectImg &&
-      serviceImg?.length >= 1 &&
-      serviceImgPreview?.length >= 1 &&
-      serviceImg === serviceImgPreview &&
-      slotTimes?.length >= 1 &&
+      serviceImg?.length > 0 &&
+      serviceImgPreview?.length > 0 &&
+      slotTimes?.length > 0 &&
       success &&
       isSubmitSuccessful
     ) {
@@ -324,9 +325,8 @@ const NewService = () => {
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
           {!selectImg &&
-          serviceImg?.length < 1 &&
-          serviceImg?.length < 1 &&
-          serviceImg !== serviceImgPreview ? (
+          serviceImg?.length === 0 &&
+          serviceImgPreview?.length === 0 ? (
             <span>You must select an image!</span>
           ) : null}
         </p>

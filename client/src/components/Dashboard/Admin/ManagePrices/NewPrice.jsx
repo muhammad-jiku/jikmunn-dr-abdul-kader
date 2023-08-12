@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ADMIN_NEW_PRICE_RESET } from '../../../../constants/priceConstant';
-import { addNewPrice, clearErrors } from '../../../../actions/priceActions';
+import {
+  adminAddNewPrice,
+  clearErrors,
+} from '../../../../actions/priceActions';
 
 const NewPrice = () => {
   const navigate = useNavigate();
@@ -57,6 +60,8 @@ const NewPrice = () => {
     e.preventDefault();
 
     setSelectImg(false);
+    setPriceImg('');
+    setPriceImgPreview('');
   };
 
   const handleDiagnosticsChange = (e) => {
@@ -85,21 +90,19 @@ const NewPrice = () => {
     console.log(priceInfo);
     if (
       selectImg &&
-      priceImg?.length >= 1 &&
-      priceImgPreview?.length >= 1 &&
-      priceImg === priceImgPreview &&
+      priceImg?.length > 0 &&
+      priceImgPreview?.length > 0 &&
       diagnosticLists?.length === 3
     ) {
-      await dispatch(addNewPrice(priceInfo));
+      await dispatch(adminAddNewPrice(priceInfo));
     }
   };
 
   useEffect(() => {
     if (
       selectImg &&
-      priceImg?.length >= 1 &&
-      priceImgPreview?.length >= 1 &&
-      priceImg === priceImgPreview &&
+      priceImg?.length > 0 &&
+      priceImgPreview?.length > 0 &&
       diagnosticLists?.length === 3 &&
       success &&
       isSubmitSuccessful
@@ -328,7 +331,11 @@ const NewPrice = () => {
           ) : null}
         </p>
         <p className='my-2 text-sm text-red-500 font-semibold'>
-          {!selectImg ? <span>You must select an image!</span> : null}
+          {!selectImg &&
+          priceImg?.length === 0 &&
+          priceImgPreview?.length === 0 ? (
+            <span>You must select an image!</span>
+          ) : null}
         </p>
         <div className='form-control mt-6'>
           <input

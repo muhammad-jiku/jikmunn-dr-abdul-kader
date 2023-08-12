@@ -12,7 +12,7 @@ import {
   ADMIN_SERVICE_DETAILS_FAILURE,
 } from '../constants/serviceConstant';
 
-export const addNewService = (serviceData) => async (dispatch) => {
+export const adminAddNewService = (serviceData) => async (dispatch) => {
   try {
     await dispatch({
       type: ADMIN_NEW_SERVICE_REQUEST,
