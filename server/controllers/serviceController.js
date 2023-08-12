@@ -58,7 +58,29 @@ const getAdminAllService = AsyncError(async (req, res) => {
   }
 });
 
+const getAdminServiceDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const service = await Service.findById({ _id: id });
+
+    if (!product) {
+      return new ErrorHandler('Product not found', 404);
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: service,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+};
+
 module.exports = {
   createService,
   getAdminAllService,
+  getAdminServiceDetails,
 };
