@@ -81,7 +81,7 @@ const getAdminServiceDetails = AsyncError(async (req, res) => {
 
 const adminUpdateServiceDetails = AsyncError(async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = await req.params;
     const { serviceID, title, desc, slots, serviceImg } = await req.body;
 
     let service = await Service.findById({ _id: id });

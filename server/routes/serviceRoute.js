@@ -3,6 +3,7 @@ const {
   createService,
   getAdminAllService,
   getAdminServiceDetails,
+  adminUpdateServiceDetails,
 } = require('../controllers/serviceController');
 const {
   isAuthenticated,
@@ -21,6 +22,7 @@ serviceRoute
   .get(isAuthenticated, authorizeAdmin, getAdminAllService);
 serviceRoute
   .route('/admin/service/:id')
-  .get(isAuthenticated, authorizeAdmin, getAdminServiceDetails);
+  .get(isAuthenticated, authorizeAdmin, getAdminServiceDetails)
+  .put(isAuthenticated, authorizeAdmin, adminUpdateServiceDetails);
 
 module.exports = serviceRoute;
