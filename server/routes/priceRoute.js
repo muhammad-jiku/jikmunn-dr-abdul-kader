@@ -4,6 +4,7 @@ const {
   getAdminAllPrice,
   getAdminPriceDetails,
   updateAdminPriceDetails,
+  deleteAdminPriceDetails,
 } = require('../controllers/priceController');
 const {
   isAuthenticated,
@@ -23,6 +24,7 @@ priceRoute
 priceRoute
   .route('/admin/price/:id')
   .get(isAuthenticated, authorizeAdmin, getAdminPriceDetails)
-  .put(isAuthenticated, authorizeAdmin, updateAdminPriceDetails);
+  .put(isAuthenticated, authorizeAdmin, updateAdminPriceDetails)
+  .delete(isAuthenticated, authorizeAdmin, deleteAdminPriceDetails);
 
 module.exports = priceRoute;
