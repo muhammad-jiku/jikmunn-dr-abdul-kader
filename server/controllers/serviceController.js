@@ -88,7 +88,7 @@ const updateAdminServiceDetails = AsyncError(async (req, res) => {
     let service = await Service.findById({ _id: id });
 
     if (!service) {
-      return new ErrorHandler('Service is not found', 404);
+      return new ErrorHandler('Service details is not found', 404);
     }
 
     const updatedServiceInfo = {
@@ -105,9 +105,7 @@ const updateAdminServiceDetails = AsyncError(async (req, res) => {
     };
 
     if (serviceImg !== '') {
-      const serviceData = await Service.findById({ _id: id });
-
-      const imageId = serviceData?.serviceImg?.public_id;
+      const imageId = service?.serviceImg?.public_id;
 
       imageId?.length > 0 && (await cloudinary.v2.uploader.destroy(imageId));
 
