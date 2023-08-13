@@ -17,6 +17,7 @@ import {
   adminNewPriceReducer,
   allAdminPricesReducer,
   adminPriceDetailsReducer,
+  adminPriceReducer,
 } from '../reducers/priceReducer';
 
 const reducer = combineReducers({
@@ -34,6 +35,7 @@ const reducer = combineReducers({
   newPrice: adminNewPriceReducer,
   allPrices: allAdminPricesReducer,
   priceDetails: adminPriceDetailsReducer,
+  price: adminPriceReducer,
 });
 
 let initialState = {};
