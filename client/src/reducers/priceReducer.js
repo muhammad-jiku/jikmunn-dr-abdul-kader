@@ -14,6 +14,10 @@ import {
   ADMIN_UPDATE_PRICE_DETAILS_SUCCESS,
   ADMIN_UPDATE_PRICE_DETAILS_FAILURE,
   ADMIN_UPDATE_PRICE_DETAILS_RESET,
+  ADMIN_DELETE_PRICE_DETAILS_RESET,
+  ADMIN_DELETE_PRICE_DETAILS_FAILURE,
+  ADMIN_DELETE_PRICE_DETAILS_SUCCESS,
+  ADMIN_DELETE_PRICE_DETAILS_REQUEST,
 } from '../constants/priceConstant';
 
 export const adminNewPriceReducer = (state = { price: {} }, action) => {
@@ -112,6 +116,7 @@ export const adminPriceDetailsReducer = (state = { price: {} }, action) => {
 export const adminPriceReducer = (state = {}, action) => {
   switch (action.type) {
     case ADMIN_UPDATE_PRICE_DETAILS_REQUEST:
+    case ADMIN_DELETE_PRICE_DETAILS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -122,7 +127,14 @@ export const adminPriceReducer = (state = {}, action) => {
         loading: false,
         isUpdated: action.payload,
       };
+    case ADMIN_DELETE_PRICE_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+      };
     case ADMIN_UPDATE_PRICE_DETAILS_FAILURE:
+    case ADMIN_DELETE_PRICE_DETAILS_FAILURE:
       return {
         ...state,
         loading: false,
@@ -132,6 +144,11 @@ export const adminPriceReducer = (state = {}, action) => {
       return {
         ...state,
         isUpdated: false,
+      };
+    case ADMIN_DELETE_PRICE_DETAILS_RESET:
+      return {
+        ...state,
+        isDeleted: false,
       };
     case CLEAR_ERRORS:
       return {
