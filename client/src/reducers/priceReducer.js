@@ -10,6 +10,10 @@ import {
   ADMIN_PRICE_DETAILS_SUCCESS,
   ADMIN_PRICE_DETAILS_FAILURE,
   ADMIN_PRICE_DETAILS_REQUEST,
+  ADMIN_UPDATE_PRICE_DETAILS_REQUEST,
+  ADMIN_UPDATE_PRICE_DETAILS_SUCCESS,
+  ADMIN_UPDATE_PRICE_DETAILS_FAILURE,
+  ADMIN_UPDATE_PRICE_DETAILS_RESET,
 } from '../constants/priceConstant';
 
 export const adminNewPriceReducer = (state = { price: {} }, action) => {
@@ -94,6 +98,40 @@ export const adminPriceDetailsReducer = (state = { price: {} }, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const adminPriceReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_UPDATE_PRICE_DETAILS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADMIN_UPDATE_PRICE_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
+    case ADMIN_UPDATE_PRICE_DETAILS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case ADMIN_UPDATE_PRICE_DETAILS_RESET:
+      return {
+        ...state,
+        isUpdated: false,
       };
     case CLEAR_ERRORS:
       return {
