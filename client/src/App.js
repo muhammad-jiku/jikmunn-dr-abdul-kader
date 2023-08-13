@@ -24,6 +24,7 @@ import {
   UpdateServicePage,
   NewPricePage,
   AllPricesPage,
+  UpdatePricePage,
   AllUsersPage,
   UpdateUserPage,
 } from './pages';
@@ -134,6 +135,18 @@ function App() {
                 user={user}
               >
                 <AllPricesPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path='admin/price/:id'
+            element={
+              <RequiredAdmin
+                loading={loading}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              >
+                <UpdatePricePage />
               </RequiredAdmin>
             }
           />
