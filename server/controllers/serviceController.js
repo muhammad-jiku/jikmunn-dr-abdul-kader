@@ -146,7 +146,7 @@ const updateAdminServiceDetails = AsyncError(async (req, res) => {
   }
 });
 
-const deleteAdminService = AsyncError(async (req, res) => {
+const deleteAdminServiceDetails = AsyncError(async (req, res) => {
   try {
     const { id } = await req.params;
     const service = await Service.findById({ _id: id });
@@ -180,5 +180,5 @@ module.exports = {
   getAdminAllService,
   getAdminServiceDetails,
   updateAdminServiceDetails,
-  deleteAdminService,
+  deleteAdminServiceDetails,
 };

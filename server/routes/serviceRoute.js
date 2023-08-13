@@ -4,6 +4,7 @@ const {
   getAdminAllService,
   getAdminServiceDetails,
   updateAdminServiceDetails,
+  deleteAdminServiceDetails,
 } = require('../controllers/serviceController');
 const {
   isAuthenticated,
@@ -23,6 +24,7 @@ serviceRoute
 serviceRoute
   .route('/admin/service/:id')
   .get(isAuthenticated, authorizeAdmin, getAdminServiceDetails)
-  .put(isAuthenticated, authorizeAdmin, updateAdminServiceDetails);
+  .put(isAuthenticated, authorizeAdmin, updateAdminServiceDetails)
+  .delete(isAuthenticated, authorizeAdmin, deleteAdminServiceDetails);
 
 module.exports = serviceRoute;
