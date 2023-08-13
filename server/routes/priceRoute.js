@@ -2,6 +2,7 @@ const express = require('express');
 const {
   createAdminPrice,
   getAdminAllPrice,
+  getAdminPriceDetails,
 } = require('../controllers/priceController');
 const {
   isAuthenticated,
@@ -18,5 +19,8 @@ priceRoute
 priceRoute
   .route('/admin/prices')
   .get(isAuthenticated, authorizeAdmin, getAdminAllPrice);
+priceRoute
+  .route('/admin/price/:id')
+  .get(isAuthenticated, authorizeAdmin, getAdminPriceDetails);
 
 module.exports = priceRoute;
