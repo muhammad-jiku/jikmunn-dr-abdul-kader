@@ -7,6 +7,9 @@ import {
   ADMIN_NEW_PRICE_FAILURE,
   ADMIN_NEW_PRICE_REQUEST,
   ADMIN_NEW_PRICE_SUCCESS,
+  ADMIN_PRICE_DETAILS_REQUEST,
+  ADMIN_PRICE_DETAILS_SUCCESS,
+  ADMIN_PRICE_DETAILS_FAILURE,
 } from '../constants/priceConstant';
 
 export const adminAddNewPrice = (priceData) => async (dispatch) => {
@@ -62,6 +65,33 @@ export const adminAllPrices = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_ALL_PRICES_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminPriceDetails = (id) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_PRICE_DETAILS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/admin/price/${id}`, config);
+
+    await dispatch({
+      type: ADMIN_PRICE_DETAILS_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_PRICE_DETAILS_FAILURE,
       payload: error.response.data.message,
     });
   }
