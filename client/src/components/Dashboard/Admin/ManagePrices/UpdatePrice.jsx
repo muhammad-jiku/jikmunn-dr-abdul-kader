@@ -5,14 +5,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   adminPriceDetails,
+  adminUpdatePriceDetails,
   clearErrors,
 } from '../../../../actions/priceActions';
+import { ADMIN_UPDATE_PRICE_DETAILS_RESET } from '../../../../constants/priceConstant';
 
 const UpdatePrice = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, error, price } = useSelector((state) => state?.priceDetails);
+  const {
+    loading: updateLoading,
+    error: updateError,
+    isUpdated,
+  } = useSelector((state) => state?.price);
 
   const [priceID, setPriceID] = useState(price ? price?.priceID : '');
   const [title, setTitle] = useState(price ? price?.title : '');
@@ -102,6 +109,7 @@ const UpdatePrice = () => {
       priceImgPreview?.length > 0 &&
       diagnosticLists?.length === 3
     ) {
+      await dispatch(adminUpdatePriceDetails(id, priceInfo));
     }
   };
 
@@ -117,13 +125,18 @@ const UpdatePrice = () => {
       priceImg?.length > 0 &&
       priceImgPreview?.length > 0 &&
       diagnosticLists?.length === 3 &&
-      isSubmitSuccessful
+      isSubmitSuccessful &&
+      isUpdated
     ) {
       reset();
       toast.success('Price Detail Updated Successfully!');
       navigate('/dashboard');
+      dispatch({
+        type: ADMIN_UPDATE_PRICE_DETAILS_RESET,
+      });
     }
   }, [
+    dispatch,
     reset,
     navigate,
     selectImg,
@@ -131,6 +144,7 @@ const UpdatePrice = () => {
     priceImgPreview,
     diagnosticLists,
     isSubmitSuccessful,
+    isUpdated,
   ]);
 
   useEffect(() => {
@@ -139,7 +153,13 @@ const UpdatePrice = () => {
       toast.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+
+    if (updateError) {
+      // console.log(updateError);
+      toast.error('Failed to update price details!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, updateError]);
 
   return (
     <div className='container mx-auto my-4 p-2 flex flex-col items-center'>

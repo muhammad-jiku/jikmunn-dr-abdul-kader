@@ -105,7 +105,9 @@ const updateAdminServiceDetails = AsyncError(async (req, res) => {
     };
 
     if (serviceImg !== '') {
-      const imageId = service?.serviceImg?.public_id;
+      const serviceData = await Service.findById({ _id: id });
+
+      const imageId = serviceData?.serviceImg?.public_id;
 
       imageId?.length > 0 && (await cloudinary.v2.uploader.destroy(imageId));
 

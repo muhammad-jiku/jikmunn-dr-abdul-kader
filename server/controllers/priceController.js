@@ -109,7 +109,9 @@ const updateAdminPriceDetails = AsyncError(async (req, res) => {
     };
 
     if (priceImg !== '') {
-      const imageId = priceData?.priceImg?.public_id;
+      const priceDataInfo = await Price.findById({ _id: id });
+
+      const imageId = priceDataInfo?.priceImg?.public_id;
 
       imageId?.length > 0 && (await cloudinary.v2.uploader.destroy(imageId));
 
