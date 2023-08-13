@@ -2,7 +2,7 @@ const AsyncError = require('../middlewares/errors/AsyncError');
 const Service = require('../models/Service');
 const cloudinary = require('cloudinary');
 
-const createService = AsyncError(async (req, res) => {
+const createAdminService = AsyncError(async (req, res) => {
   try {
     const { id } = await req.user;
     const { serviceID, title, desc, slots, serviceImg } = await req.body;
@@ -79,7 +79,7 @@ const getAdminServiceDetails = AsyncError(async (req, res) => {
   }
 });
 
-const adminUpdateServiceDetails = AsyncError(async (req, res) => {
+const updateAdminServiceDetails = AsyncError(async (req, res) => {
   try {
     const { id } = await req.params;
     const { serviceID, title, desc, slots, serviceImg } = await req.body;
@@ -146,8 +146,8 @@ const adminUpdateServiceDetails = AsyncError(async (req, res) => {
 });
 
 module.exports = {
-  createService,
+  createAdminService,
   getAdminAllService,
   getAdminServiceDetails,
-  adminUpdateServiceDetails,
+  updateAdminServiceDetails,
 };

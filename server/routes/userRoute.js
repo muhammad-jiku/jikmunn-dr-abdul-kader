@@ -5,8 +5,8 @@ const {
   updatePassword,
   getAdminAllUser,
   getAdminSingleUser,
-  adminUpdateUserRole,
-  adminRemoveUser,
+  updateAdminUserRole,
+  deleteAdminUser,
 } = require('../controllers/userController');
 const {
   isAuthenticated,
@@ -26,7 +26,7 @@ userRoute
 userRoute
   .route('/admin/user/:id')
   .get(isAuthenticated, authorizeAdmin, getAdminSingleUser)
-  .put(isAuthenticated, authorizeAdmin, adminUpdateUserRole)
-  .delete(isAuthenticated, authorizeAdmin, adminRemoveUser);
+  .put(isAuthenticated, authorizeAdmin, updateAdminUserRole)
+  .delete(isAuthenticated, authorizeAdmin, deleteAdminUser);
 
 module.exports = userRoute;

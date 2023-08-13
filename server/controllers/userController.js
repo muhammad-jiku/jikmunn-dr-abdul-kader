@@ -155,7 +155,7 @@ const getAdminSingleUser = AsyncError(async (req, res) => {
   }
 });
 
-const adminUpdateUserRole = AsyncError(async (req, res) => {
+const updateAdminUserRole = AsyncError(async (req, res) => {
   try {
     const { id } = await req.params;
     const { username, email, role } = await req.body;
@@ -191,7 +191,7 @@ const adminUpdateUserRole = AsyncError(async (req, res) => {
   }
 });
 
-const adminRemoveUser = AsyncError(async (req, res) => {
+const deleteAdminUser = AsyncError(async (req, res) => {
   try {
     const { id } = await req.params;
     const user = await User.findById({ _id: id });
@@ -223,6 +223,6 @@ module.exports = {
   updatePassword,
   getAdminAllUser,
   getAdminSingleUser,
-  adminUpdateUserRole,
-  adminRemoveUser,
+  updateAdminUserRole,
+  deleteAdminUser,
 };

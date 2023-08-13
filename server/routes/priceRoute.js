@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  createPrice,
+  createAdminPrice,
   getAdminAllPrice,
 } = require('../controllers/priceController');
 const {
@@ -14,7 +14,7 @@ const priceRoute = express.Router({
 
 priceRoute
   .route('/admin/create-price')
-  .post(isAuthenticated, authorizeAdmin, createPrice);
+  .post(isAuthenticated, authorizeAdmin, createAdminPrice);
 priceRoute
   .route('/admin/prices')
   .get(isAuthenticated, authorizeAdmin, getAdminAllPrice);

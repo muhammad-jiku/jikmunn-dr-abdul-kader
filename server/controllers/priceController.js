@@ -2,7 +2,7 @@ const AsyncError = require('../middlewares/errors/AsyncError');
 const cloudinary = require('cloudinary');
 const Price = require('../models/Price');
 
-const createPrice = AsyncError(async (req, res) => {
+const createAdminPrice = AsyncError(async (req, res) => {
   try {
     const { id } = await req.user;
     const { priceID, title, subTitle, price, diagnostics, priceImg } =
@@ -61,6 +61,6 @@ const getAdminAllPrice = AsyncError(async (req, res) => {
 });
 
 module.exports = {
-  createPrice,
+  createAdminPrice,
   getAdminAllPrice,
 };
