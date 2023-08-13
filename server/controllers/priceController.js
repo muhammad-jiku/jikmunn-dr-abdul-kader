@@ -1,6 +1,7 @@
 const AsyncError = require('../middlewares/errors/AsyncError');
 const cloudinary = require('cloudinary');
 const Price = require('../models/Price');
+const ErrorHandler = require('../middlewares/errors/ErrorHandler');
 
 const createAdminPrice = AsyncError(async (req, res) => {
   try {
@@ -60,7 +61,29 @@ const getAdminAllPrice = AsyncError(async (req, res) => {
   }
 });
 
+const getAdminPriceDetails = AsyncError(async (req, res) => {
+  try {
+    const { id } = req.params;
+    const price = await Price.findById({ _id: id });
+
+    if (!price) {
+      return new ErrorHandler('Price is not found', 404);
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: price,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createAdminPrice,
   getAdminAllPrice,
+  getAdminPriceDetails,
 };
