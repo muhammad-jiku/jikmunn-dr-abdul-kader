@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { ADMIN_DELETE_PRICE_DETAILS_RESET } from '../../../../constants/priceConstant';
+import { toast } from 'react-toastify';
+import {
+  adminDeletePriceDetails,
+  clearErrors,
+} from '../../../../actions/priceActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const PriceRow = ({ price }) => {
   const navigate = useNavigate();
-  const handleDeletePrice = () => {};
+  const dispatch = useDispatch();
+  const { loading, error, isDeleted } = useSelector((state) => state?.price);
+
+  const handleDeletePrice = async () => {
+    if (price?._id) {
+      await dispatch(adminDeletePriceDetails(price?._id));
+    }
+  };
+
+  useEffect(() => {
+    if (isDeleted) {
+      toast.success('Price detail deleted successfully!!');
+      navigate('/dashboard');
+      dispatch({
+        type: ADMIN_DELETE_PRICE_DETAILS_RESET,
+      });
+    }
+  }, [dispatch, navigate, isDeleted]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <tr>
