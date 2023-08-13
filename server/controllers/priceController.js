@@ -150,9 +150,39 @@ const updateAdminPriceDetails = AsyncError(async (req, res) => {
   }
 });
 
+const deleteAdminPriceDetails = AsyncError(async (req, res) => {
+  try {
+    const { id } = await req.params;
+    const price = await Price.findById({ _id: id });
+
+    if (!price) {
+      return new ErrorHandler(
+        `Price detail does not exist with Id: ${id}`,
+        400
+      );
+    } else {
+      const imageId = price?.priceImg?.public_id;
+      imageId ? await cloudinary.v2.uploader.destroy(imageId) : null;
+
+      await Price.deleteOne({ _id: id });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Price Deleted Successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createAdminPrice,
   getAdminAllPrice,
   getAdminPriceDetails,
   updateAdminPriceDetails,
+  deleteAdminPriceDetails,
 };
