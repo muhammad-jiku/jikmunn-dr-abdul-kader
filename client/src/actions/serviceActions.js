@@ -13,6 +13,9 @@ import {
   ADMIN_UPDATE_SERVICE_DETAILS_REQUEST,
   ADMIN_UPDATE_SERVICE_DETAILS_SUCCESS,
   ADMIN_UPDATE_SERVICE_DETAILS_FAILURE,
+  ADMIN_DELETE_SERVICE_DETAILS_REQUEST,
+  ADMIN_DELETE_SERVICE_DETAILS_SUCCESS,
+  ADMIN_DELETE_SERVICE_DETAILS_FAILURE,
 } from '../constants/serviceConstant';
 
 export const adminAddNewService = (serviceData) => async (dispatch) => {
@@ -100,10 +103,42 @@ export const adminServiceDetails = (id) => async (dispatch) => {
   }
 };
 
-export const adminUpdateService = (id, serviceData) => async (dispatch) => {
+export const adminUpdateServiceDetails =
+  (id, serviceData) => async (dispatch) => {
+    try {
+      await dispatch({
+        type: ADMIN_UPDATE_SERVICE_DETAILS_REQUEST,
+      });
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${localStorage?.getItem('token')}`,
+          'content-type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put(
+        `/api/v1/admin/service/${id}`,
+        serviceData,
+        config
+      );
+
+      await dispatch({
+        type: ADMIN_UPDATE_SERVICE_DETAILS_SUCCESS,
+        payload: data.success,
+      });
+    } catch (error) {
+      await dispatch({
+        type: ADMIN_UPDATE_SERVICE_DETAILS_FAILURE,
+        payload: error.response.data.message,
+      });
+    }
+  };
+
+export const adminDeleteServiceDetails = (id) => async (dispatch) => {
   try {
     await dispatch({
-      type: ADMIN_UPDATE_SERVICE_DETAILS_REQUEST,
+      type: ADMIN_DELETE_SERVICE_DETAILS_REQUEST,
     });
 
     const config = {
@@ -113,19 +148,15 @@ export const adminUpdateService = (id, serviceData) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/v1/admin/service/${id}`,
-      serviceData,
-      config
-    );
+    const { data } = await axios.delete(`/api/v1/admin/service/${id}`, config);
 
     await dispatch({
-      type: ADMIN_UPDATE_SERVICE_DETAILS_SUCCESS,
-      payload: data.success,
+      type: ADMIN_DELETE_SERVICE_DETAILS_SUCCESS,
+      payload: data?.success,
     });
   } catch (error) {
     await dispatch({
-      type: ADMIN_UPDATE_SERVICE_DETAILS_FAILURE,
+      type: ADMIN_DELETE_SERVICE_DETAILS_FAILURE,
       payload: error.response.data.message,
     });
   }

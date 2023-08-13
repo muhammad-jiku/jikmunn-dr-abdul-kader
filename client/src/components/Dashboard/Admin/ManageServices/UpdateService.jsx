@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
   adminServiceDetails,
-  adminUpdateService,
+  adminUpdateServiceDetails,
   clearErrors,
 } from '../../../../actions/serviceActions';
 import { ADMIN_UPDATE_SERVICE_DETAILS_RESET } from '../../../../constants/serviceConstant';
@@ -133,7 +133,7 @@ const UpdateService = () => {
       serviceImgPreview?.length > 0 &&
       slotTimes?.length > 0
     ) {
-      await dispatch(adminUpdateService(id, serviceInfo));
+      await dispatch(adminUpdateServiceDetails(id, serviceInfo));
     }
   };
 
