@@ -1,4 +1,5 @@
 const AsyncError = require('../middlewares/errors/AsyncError');
+const ErrorHandler = require('../middlewares/errors/ErrorHandler');
 const Service = require('../models/Service');
 const cloudinary = require('cloudinary');
 
@@ -145,9 +146,39 @@ const updateAdminServiceDetails = AsyncError(async (req, res) => {
   }
 });
 
+const deleteAdminService = AsyncError(async (req, res) => {
+  try {
+    const { id } = await req.params;
+    const service = await Service.findById({ _id: id });
+
+    if (!service) {
+      return new ErrorHandler(
+        `Service detail does not exist with Id: ${id}`,
+        400
+      );
+    } else {
+      const imageId = service?.serviceImg?.public_id;
+      imageId ? await cloudinary.v2.uploader.destroy(imageId) : null;
+
+      await Service.deleteOne({ _id: id });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Service Deleted Successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createAdminService,
   getAdminAllService,
   getAdminServiceDetails,
   updateAdminServiceDetails,
+  deleteAdminService,
 };
