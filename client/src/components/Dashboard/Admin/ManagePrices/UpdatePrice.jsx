@@ -130,7 +130,7 @@ const UpdatePrice = () => {
     ) {
       reset();
       toast.success('Price Detail Updated Successfully!');
-      navigate('/dashboard');
+      navigate('/dashboard/admin/prices');
       dispatch({
         type: ADMIN_UPDATE_PRICE_DETAILS_RESET,
       });
