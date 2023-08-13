@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import {
+  adminDeleteServiceDetails,
+  clearErrors,
+} from '../../../../actions/serviceActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { ADMIN_DELETE_SERVICE_DETAILS_RESET } from '../../../../constants/serviceConstant';
 
 const ServiceRow = ({ service }) => {
   const navigate = useNavigate();
-  const handleDeleteService = () => {};
+  const dispatch = useDispatch();
+  const { loading, error, isDeleted } = useSelector((state) => state?.service);
+
+  const handleDeleteService = async () => {
+    if (service?._id) {
+      await dispatch(adminDeleteServiceDetails(service?._id));
+    }
+  };
+
+  useEffect(() => {
+    if (isDeleted) {
+      toast.success('Service detail deleted successfully!!');
+      navigate('/dashboard');
+      dispatch({
+        type: ADMIN_DELETE_SERVICE_DETAILS_RESET,
+      });
+    }
+  }, [dispatch, navigate, isDeleted]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <tr>
