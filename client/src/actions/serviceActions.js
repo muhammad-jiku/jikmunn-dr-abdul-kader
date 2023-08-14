@@ -19,6 +19,9 @@ import {
   ALL_SERVICES_REQUEST,
   ALL_SERVICES_SUCCESS,
   ALL_SERVICES_FAILURE,
+  SERVICE_DETAILS_REQUEST,
+  SERVICE_DETAILS_SUCCESS,
+  SERVICE_DETAILS_FAILURE,
 } from '../constants/serviceConstant';
 
 export const adminAddNewService = (serviceData) => async (dispatch) => {
@@ -67,6 +70,26 @@ export const allServices = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ALL_SERVICES_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const serviceDetails = (title) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: SERVICE_DETAILS_REQUEST,
+    });
+
+    const { data } = await axios.get(`/api/v1/service/${title}`);
+
+    await dispatch({
+      type: SERVICE_DETAILS_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: SERVICE_DETAILS_FAILURE,
       payload: error.response.data.message,
     });
   }
