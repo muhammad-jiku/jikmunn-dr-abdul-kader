@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   createAdminPrice,
+  getAllPrices,
   getAdminAllPrice,
   getAdminPriceDetails,
   updateAdminPriceDetails,
@@ -18,6 +19,7 @@ const priceRoute = express.Router({
 priceRoute
   .route('/admin/create-price')
   .post(isAuthenticated, authorizeAdmin, createAdminPrice);
+priceRoute.route('/prices').get(getAllPrices);
 priceRoute
   .route('/admin/prices')
   .get(isAuthenticated, authorizeAdmin, getAdminAllPrice);
