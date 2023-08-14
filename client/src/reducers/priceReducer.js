@@ -18,6 +18,9 @@ import {
   ADMIN_DELETE_PRICE_DETAILS_FAILURE,
   ADMIN_DELETE_PRICE_DETAILS_SUCCESS,
   ADMIN_DELETE_PRICE_DETAILS_REQUEST,
+  ALL_PRICES_FAILURE,
+  ALL_PRICES_SUCCESS,
+  ALL_PRICES_REQUEST,
 } from '../constants/priceConstant';
 
 export const adminNewPriceReducer = (state = { price: {} }, action) => {
@@ -49,6 +52,38 @@ export const adminNewPriceReducer = (state = { price: {} }, action) => {
         ...state,
         error: null,
       };
+    default:
+      return state;
+  }
+};
+
+export const allPricesReducer = (state = { prices: [] }, action) => {
+  switch (action.type) {
+    case ALL_PRICES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ALL_PRICES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        prices: action.payload,
+      };
+
+    case ALL_PRICES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }
