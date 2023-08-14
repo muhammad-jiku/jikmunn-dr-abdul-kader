@@ -18,6 +18,9 @@ import {
   ADMIN_DELETE_SERVICE_DETAILS_SUCCESS,
   ADMIN_DELETE_SERVICE_DETAILS_FAILURE,
   ADMIN_DELETE_SERVICE_DETAILS_RESET,
+  ALL_SERVICES_FAILURE,
+  ALL_SERVICES_SUCCESS,
+  ALL_SERVICES_REQUEST,
 } from '../constants/serviceConstant';
 
 export const adminNewServiceReducer = (state = { service: {} }, action) => {
@@ -49,6 +52,38 @@ export const adminNewServiceReducer = (state = { service: {} }, action) => {
         ...state,
         error: null,
       };
+    default:
+      return state;
+  }
+};
+
+export const allServicesReducer = (state = { services: [] }, action) => {
+  switch (action.type) {
+    case ALL_SERVICES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ALL_SERVICES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        services: action.payload,
+      };
+
+    case ALL_SERVICES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
     default:
       return state;
   }
