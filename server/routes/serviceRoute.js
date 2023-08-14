@@ -2,6 +2,7 @@ const express = require('express');
 const {
   createAdminService,
   getAllServices,
+  getServiceDetails,
   getAdminAllService,
   getAdminServiceDetails,
   updateAdminServiceDetails,
@@ -20,6 +21,7 @@ serviceRoute
   .route('/admin/create-service')
   .post(isAuthenticated, authorizeAdmin, createAdminService);
 serviceRoute.route('/services').get(getAllServices);
+serviceRoute.route('/service/:title').get(getServiceDetails);
 serviceRoute
   .route('/admin/services')
   .get(isAuthenticated, authorizeAdmin, getAdminAllService);
