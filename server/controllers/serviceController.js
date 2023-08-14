@@ -43,6 +43,22 @@ const createAdminService = AsyncError(async (req, res) => {
   }
 });
 
+const getAllServices = AsyncError(async (req, res) => {
+  try {
+    const services = await Service.find({});
+
+    res.status(200).json({
+      success: true,
+      data: services,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal server error',
+    });
+  }
+});
+
 const getAdminAllService = AsyncError(async (req, res) => {
   try {
     const services = await Service.find({});
@@ -177,6 +193,7 @@ const deleteAdminServiceDetails = AsyncError(async (req, res) => {
 
 module.exports = {
   createAdminService,
+  getAllServices,
   getAdminAllService,
   getAdminServiceDetails,
   updateAdminServiceDetails,
