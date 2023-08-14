@@ -16,6 +16,9 @@ import {
   ADMIN_DELETE_PRICE_DETAILS_REQUEST,
   ADMIN_DELETE_PRICE_DETAILS_SUCCESS,
   ADMIN_DELETE_PRICE_DETAILS_FAILURE,
+  ALL_PRICES_FAILURE,
+  ALL_PRICES_SUCCESS,
+  ALL_PRICES_REQUEST,
 } from '../constants/priceConstant';
 
 export const adminAddNewPrice = (priceData) => async (dispatch) => {
@@ -44,6 +47,26 @@ export const adminAddNewPrice = (priceData) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_NEW_PRICE_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const allPrices = () => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ALL_PRICES_REQUEST,
+    });
+
+    const { data } = await axios.get(`/api/v1/prices`);
+
+    await dispatch({
+      type: ALL_PRICES_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ALL_PRICES_FAILURE,
       payload: error.response.data.message,
     });
   }
