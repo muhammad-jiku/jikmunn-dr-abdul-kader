@@ -1,47 +1,29 @@
-import React from 'react';
-import firstAppointmentImg from '../../assets/images/first-appointment.jpg';
-import followUpAppointmentImg from '../../assets/images/follow-up-appointment.jpg';
-import weAcceptImg from '../../assets/images/we-accept.jpg';
+import React, { useEffect } from 'react';
 import { CustomPriceCard } from '..';
+import { useDispatch, useSelector } from 'react-redux';
+import { allPrices, clearErrors } from '../../actions/priceActions';
+import { toast } from 'react-toastify';
 
 const PricesDetails = () => {
-  const prices = [
-    {
-      name: 'First Appointment',
-      description: [
-        'Medical History',
-        'Physical Exam',
-        'Diagnosis & Prescription',
-      ],
-      price: '150',
-      image: `${firstAppointmentImg}`,
-    },
-    {
-      name: 'Follow-up Appointment',
-      description: [
-        'Medical History',
-        'Physical Exam',
-        'Diagnosis & Prescription',
-      ],
-      price: '120',
-      image: `${followUpAppointmentImg}`,
-    },
-    {
-      name: 'We Accept',
-      description: [
-        'Medical History',
-        'Physical Exam',
-        'Diagnosis & Prescription',
-      ],
-      price: 'Insurance',
-      image: `${weAcceptImg}`,
-    },
-  ];
+  const dispatch = useDispatch();
+  const { loading, error, prices } = useSelector((state) => state?.prices);
+
+  useEffect(() => {
+    dispatch(allPrices());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 container mx-auto my-10'>
-      {prices.map((price, index) => (
-        <CustomPriceCard key={index} price={price} />
+      {prices.map((price, idx) => (
+        <CustomPriceCard key={idx} price={price} />
       ))}
     </div>
   );
