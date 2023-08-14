@@ -9,6 +9,7 @@ import {
 } from '../reducers/authReducer';
 import {
   adminNewServiceReducer,
+  allServicesReducer,
   allAdminServicesReducer,
   adminServiceDetailsReducer,
   adminServiceReducer,
@@ -29,6 +30,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   // service
   newService: adminNewServiceReducer,
+  services: allServicesReducer,
   allServices: allAdminServicesReducer,
   serviceDetails: adminServiceDetailsReducer,
   service: adminServiceReducer,
