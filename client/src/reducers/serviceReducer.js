@@ -21,6 +21,9 @@ import {
   ALL_SERVICES_FAILURE,
   ALL_SERVICES_SUCCESS,
   ALL_SERVICES_REQUEST,
+  SERVICE_DETAILS_REQUEST,
+  SERVICE_DETAILS_SUCCESS,
+  SERVICE_DETAILS_FAILURE,
 } from '../constants/serviceConstant';
 
 export const adminNewServiceReducer = (state = { service: {} }, action) => {
@@ -84,6 +87,33 @@ export const allServicesReducer = (state = { services: [] }, action) => {
         error: null,
       };
 
+    default:
+      return state;
+  }
+};
+
+export const serviceDetailsReducer = (state = { service: {} }, action) => {
+  switch (action.type) {
+    case SERVICE_DETAILS_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+    case SERVICE_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        service: action.payload,
+      };
+    case SERVICE_DETAILS_FAILURE:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }
