@@ -31,6 +31,7 @@ const AllUsers = () => {
           <thead>
             <tr>
               <th>No.</th>
+              <th>Image</th>
               <th>Email</th>
               <th>Role</th>
               <th>Actions</th>

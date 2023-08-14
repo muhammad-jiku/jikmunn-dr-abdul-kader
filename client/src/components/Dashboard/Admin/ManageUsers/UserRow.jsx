@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { adminDeleteUser, clearErrors } from '../../../../actions/authActions';
 import { ADMIN_DELETE_USER_RESET } from '../../../../constants/authConstant';
+import profileImg from '../../../../assets/images/default_profile_avatar.png';
 
 const UserRow = ({ user, idx }) => {
   const navigate = useNavigate();
@@ -37,7 +38,15 @@ const UserRow = ({ user, idx }) => {
 
   return (
     <tr>
-      <th>{idx + 1}</th>
+      <th>{idx + 1 >= 10 ? idx + 1 : '0' + (idx + 1)}</th>
+      <th>
+        <img
+          className='w-10 h-10 rounded-full'
+          src={user.avatar?.url?.length > 0 ? user?.avatar?.url : profileImg}
+          alt={user ? user?.username : 'user'}
+          loading='lazy'
+        />
+      </th>
       <th>{user?.email}</th>
       <th>{user?.role}</th>
       <th className='flex'>
