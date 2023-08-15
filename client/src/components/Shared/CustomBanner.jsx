@@ -13,9 +13,16 @@ const CustomBanner = ({ data }) => {
             {data?.heading}
           </h3>
           <hr className='w-1/3 lg:w-1/4 mb-2 border-2 border-slate-300' />
-          <h3 className='text-sm lg:text-lg text-black font-bold tracking-widest mt-6 flex items-center'>
-            <span className='mx-2'>Home</span> <AiOutlineArrowRight />
-            <span className='mx-2'>{data?.subHeading1}</span>
+          <h3 className='text-xs sm:text-sm lg:text-lg text-black font-bold tracking-widest mt-6 flex items-center'>
+            <span className='mx-2'>Home</span>{' '}
+            <AiOutlineArrowRight className='text-lg' />
+            <span className='mx-2'>{data?.subHeading1}</span>{' '}
+            {data?.subHeading2?.length > 0 ? (
+              <>
+                <AiOutlineArrowRight className='text-lg' />
+                <span className='mx-2'>{data?.subHeading2}</span>
+              </>
+            ) : null}
           </h3>
         </div>
       </div>
