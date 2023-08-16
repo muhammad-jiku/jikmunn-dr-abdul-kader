@@ -13,6 +13,7 @@ import {
   HomePage,
   AboutPage,
   ServicesPage,
+  ServicesDetailsInfoPage,
   PricesPage,
   ContactsPage,
   AuthPage,
@@ -50,7 +51,15 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
-        <Route path='/services' element={<ServicesPage />} />
+        <Route path='/services' element={<ServicesPage />} />{' '}
+        <Route
+          path='/services/:title'
+          element={
+            // <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+            <ServicesDetailsInfoPage />
+            // </RequiredAuth>
+          }
+        />
         <Route path='/prices' element={<PricesPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='/signin' element={<AuthPage />} />
