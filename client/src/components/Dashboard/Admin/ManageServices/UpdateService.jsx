@@ -154,7 +154,7 @@ const UpdateService = () => {
     ) {
       reset();
       toast.success('Service Detail Updated Successfully!');
-      navigate('/dashboard');
+      navigate('/dashboard/admin/services');
       dispatch({
         type: ADMIN_UPDATE_SERVICE_DETAILS_RESET,
       });

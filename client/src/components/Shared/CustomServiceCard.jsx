@@ -24,7 +24,7 @@ const CustomServiceCard = ({ service }) => {
         <hr className='w-1/2 mb-2 border-[1px] border-slate-300' />
         <div className='py-2 box-border'>
           <p className='text-gray text-justify my-2 text-sm md:text-lg'>
-            {service?.desc}
+            {service?.desc?.split('.')[0]}
           </p>
         </div>
         <button
