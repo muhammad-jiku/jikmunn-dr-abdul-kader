@@ -15,10 +15,13 @@ const Location = () => {
           </h3>
           <hr className='w-1/3 lg:w-1/4 mb-2 border-2 border-slate-300' />
           <h3 className='text-sm lg:text-lg text-black font-bold tracking-widest mt-4'>
-            Sunday - Thursday: 09.30 am - 10.00 pm
+            Sun - Thu: 04.00 pm - 08.00 pm
           </h3>
           <h3 className='text-sm lg:text-lg text-black font-bold tracking-widest my-2'>
-            Saturday: 06.00 pm - 10.00 pm
+            Saturday: 07.00 pm - 10.00 pm
+          </h3>
+          <h3 className='text-sm lg:text-lg text-black font-bold tracking-widest my-2'>
+            Friday: Closed
           </h3>
         </div>
       </div>

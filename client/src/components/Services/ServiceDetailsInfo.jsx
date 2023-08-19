@@ -76,7 +76,7 @@ const ServiceDetailsInfo = () => {
             Appointment time
           </h2>
           <h2 className='text-lg lg:text-xl font-semibold font-oswald text-gray tracking-widest my-2'>
-            Sun - Thu: 04.00 pm - 10.00 pm
+            Sun - Thu: 04.00 pm - 08.00 pm
           </h2>
           <h2 className='text-lg lg:text-xl font-semibold font-oswald text-gray tracking-widest my-2'>
             Saturday: 07.00 pm - 10.00 pm

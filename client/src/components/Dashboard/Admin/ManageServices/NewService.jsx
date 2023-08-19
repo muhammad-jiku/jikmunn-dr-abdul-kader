@@ -23,19 +23,19 @@ const NewService = () => {
   const [slotTimes, setSlotTimes] = useState([]);
 
   const slots = [
-    // morning
-    '09:30 AM - 10:00 AM',
-    '10:00 AM - 10:30 AM',
-    '10:30 AM - 11:00 AM',
-    '11:00 AM - 11:30 AM',
-    // noon
-    '11:30 AM - 12:00 PM',
-    '12:00 PM - 12:30 PM',
-    '12:30 PM - 01:00 PM',
-    '01:00 PM - 01:30 PM',
-    // afternoon
-    '03:00 PM - 03:30 PM',
-    '03:30 PM - 04:00 PM',
+    // // morning
+    // '09:30 AM - 10:00 AM',
+    // '10:00 AM - 10:30 AM',
+    // '10:30 AM - 11:00 AM',
+    // '11:00 AM - 11:30 AM',
+    // // noon
+    // '11:30 AM - 12:00 PM',
+    // '12:00 PM - 12:30 PM',
+    // '12:30 PM - 01:00 PM',
+    // '01:00 PM - 01:30 PM',
+    // // afternoon
+    // '03:00 PM - 03:30 PM',
+    // '03:30 PM - 04:00 PM',
     '04:00 PM - 04:30 PM',
     '04:30 PM - 05:00 PM',
     // evening
@@ -179,7 +179,7 @@ const NewService = () => {
               message: 'Invalid ID field',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Title */}
@@ -198,7 +198,7 @@ const NewService = () => {
               message: 'Title must be at least 5 characters',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Description */}
@@ -217,7 +217,7 @@ const NewService = () => {
               message: 'Description must be at least 10 characters',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Slots */}

@@ -157,7 +157,7 @@ const NewPrice = () => {
               message: 'Invalid Price ID field',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Title */}
@@ -176,7 +176,7 @@ const NewPrice = () => {
               message: 'Title must be at least 5 characters',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Subtitle */}
@@ -195,7 +195,7 @@ const NewPrice = () => {
               message: 'Sub-Title must be at least 5 characters',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Price */}
@@ -214,7 +214,7 @@ const NewPrice = () => {
               message: 'Invalid Price tag field',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Diagnostics */}

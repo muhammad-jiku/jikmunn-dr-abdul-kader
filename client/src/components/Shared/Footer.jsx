@@ -21,8 +21,8 @@ const Footer = () => {
     {
       name: 'Working Hours',
       description: [
-        'Sun - Thu: 8.00 am - 6.00 pm',
-        'Saturday: 10.00 am - 3.00 pm',
+        'Sun - Thu: 04.00 pm - 08.00 pm',
+        'Saturday: 07.00 pm - 10.00 pm',
         'Friday: Closed',
       ],
       image: `${workTimeImg}`,
@@ -73,7 +73,7 @@ const Footer = () => {
                 <div className='py-2 box-border'>
                   {footerInfo?.description?.map((info, i) => (
                     <p
-                      className='text-gray text-justify my-2 text-sm md:text-lg'
+                      className='text-gray text-justify my-2 text-sm md:text-md'
                       key={i}
                     >
                       <span>{info}</span>
@@ -82,7 +82,7 @@ const Footer = () => {
                 </div>{' '}
                 {footerInfo?.link && (
                   <p
-                    className='text-gray text-justify my-2 text-sm md:text-lg cursor-pointer flex justify-center items-center'
+                    className='text-gray text-justify my-2 text-sm md:text-md cursor-pointer flex justify-center items-center'
                     onClick={() => {
                       navigate(`/${footerInfo?.link}`);
                     }}

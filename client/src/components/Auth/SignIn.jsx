@@ -99,7 +99,7 @@ const SignIn = () => {
               message: 'Invalid Email',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
         {/* Password */}
         <div className='relative'>
@@ -120,7 +120,7 @@ const SignIn = () => {
                 message: 'Password field must contain at least six characters',
               },
             })}
-            className='input input-bordered border-main w-full my-2'
+            className='input input-bordered bg-white border-main w-full my-2'
           />
           <span
             className='absolute inset-y-0 right-0 flex items-center px-4 text-gray-600 cursor-pointer'
@@ -184,7 +184,7 @@ const SignIn = () => {
                   'Confirm Password field must contain at least six characters',
               },
             })}
-            className='input input-bordered border-main w-full my-2'
+            className='input input-bordered bg-white border-main w-full my-2'
           />
           <span
             className='absolute inset-y-0 right-0 flex items-center px-4 text-gray-600 cursor-pointer'

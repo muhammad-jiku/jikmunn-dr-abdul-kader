@@ -106,7 +106,7 @@ const UpdateUser = () => {
             //   },
           })}
           disabled
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Email */}
@@ -127,7 +127,7 @@ const UpdateUser = () => {
             // },
           })}
           disabled
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Role */}
@@ -135,7 +135,7 @@ const UpdateUser = () => {
           // label={'Country'}
           // value={user?.country}
           defaultValue={user?.role || userRole}
-          className='select border-main w-full my-2'
+          className='select bg-white border-main w-full my-2'
           {...register('role', {
             onChange: (e) => setUserRole(e.target.value),
             required: {
@@ -171,7 +171,7 @@ const UpdateUser = () => {
               <span>{errors?.username?.message}</span>
             )}
           </p>
-<p className='my-2 text-sm text-red-500 font-semibold'>
+          <p className='my-2 text-sm text-red-500 font-semibold'>
           {errors?.email?.type === 'required' && (
             <span>{errors?.email?.message}</span>
           )}

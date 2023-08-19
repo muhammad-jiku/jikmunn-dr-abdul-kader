@@ -146,7 +146,7 @@ const Profile = () => {
               message: 'Username must be at least three characters',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Email */}
@@ -167,7 +167,7 @@ const Profile = () => {
             // },
           })}
           disabled
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Phone */}
@@ -191,7 +191,7 @@ const Profile = () => {
               message: 'Invalid Phone number length',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Country */}
@@ -199,7 +199,7 @@ const Profile = () => {
           // label={'Country'}
           // value={user?.country}
           defaultValue={country}
-          className='select border-main w-full my-2'
+          className='select bg-white border-main w-full my-2'
           {...register('country', {
             onChange: (e) => setCountry(e.target.value),
             required: {
@@ -236,7 +236,7 @@ const Profile = () => {
             placeholder={'State'}
             // value={user?.state}
             defaultValue={state}
-            className='select border-main w-full my-2'
+            className='select bg-white border-main w-full my-2'
             {...register('state', {
               onChange: (e) => setState(e.target.value),
               required: {
@@ -290,7 +290,7 @@ const Profile = () => {
               message: 'City must be not exceed hundred characters',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Address */}
@@ -314,7 +314,7 @@ const Profile = () => {
               message: 'Address must be not exceed hundred characters',
             },
           })}
-          className='input input-bordered border-main w-full my-2'
+          className='input input-bordered bg-white border-main w-full my-2'
         />
 
         {/* Avatar */}
