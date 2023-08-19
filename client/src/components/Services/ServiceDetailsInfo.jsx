@@ -16,6 +16,11 @@ const ServiceDetailsInfo = () => {
   const { loading, error, service } = useSelector(
     (state) => state?.serviceDetailsInfo
   );
+  const {
+    isAuthenticated,
+    user,
+    error: userError,
+  } = useSelector((state) => state?.user);
 
   useEffect(() => {
     dispatch(serviceDetails(title));
@@ -27,7 +32,13 @@ const ServiceDetailsInfo = () => {
       toast.error('Something Went Wrong!');
       dispatch(clearErrors());
     }
-  }, [dispatch, error]);
+
+    if (userError) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, userError]);
 
   const bannerData = {
     heading: 'Our Services',
@@ -65,14 +76,18 @@ const ServiceDetailsInfo = () => {
             Appointment time
           </h2>
           <h2 className='text-lg lg:text-xl font-semibold font-oswald text-gray tracking-widest my-2'>
-            Sunday - Thursday: 09.30 am - 10.00 pm
+            Sun - Thu: 04.00 pm - 10.00 pm
           </h2>
           <h2 className='text-lg lg:text-xl font-semibold font-oswald text-gray tracking-widest my-2'>
-            Saturday: 06.00 pm - 10.00 pm
+            Saturday: 07.00 pm - 10.00 pm
+          </h2>
+          <h2 className='text-lg lg:text-xl font-semibold font-oswald text-gray tracking-widest my-2'>
+            Friday: Closed
           </h2>
           <button
             className='btn bg-main mt-4 text-white hover:bg-white hover:text-black hover:border-main mr-2 flex uppercase'
             onClick={() => setShowModal(true)}
+            disabled={!isAuthenticated || user?.role === 'Admin'}
           >
             book Appointment
           </button>
@@ -85,7 +100,7 @@ const ServiceDetailsInfo = () => {
         ) : null}
       </div>
       {/* Reviews */}
-      <ServiceReview />
+      {isAuthenticated && user?.role === 'User' && <ServiceReview />}
     </>
   );
 };
