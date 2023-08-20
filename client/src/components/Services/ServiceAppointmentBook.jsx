@@ -17,6 +17,7 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
     service?.slots?.length > 0 ? service?.slots?.[0] : ''
   );
   const [date, setDate] = useState(new Date());
+  const [confirmFirstMeeting, setConfirmFirstMeeting] = useState(null);
   // const formattedDate = format(date, 'PP');
   const formattedDate = date?.toDateString();
 
@@ -38,12 +39,14 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
     const appointmentData = {
       title,
       email: user?.email || email,
+      price: confirmFirstMeeting ? 150 : 120,
       date: formattedDate,
       slotTime,
     };
 
+    console.log(confirmFirstMeeting);
     console.log(appointmentData);
-    setShowModal(false);
+    // setShowModal(false);
   };
 
   useEffect(() => {
@@ -90,7 +93,6 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
 
   return (
     <>
-      {console.log(service)}
       <div className='flex justify-center items-center overflow-x-hidden overflow-y-auto fixed top-0 left-0 right-0 md:inset-0 h-[calc(100%-1rem)] max-h-full z-50 outline-none focus:outline-none backdrop-blur'>
         <div className='relative w-full max-w-md max-h-full my-6 mx-auto'>
           <div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none'>
@@ -119,7 +121,7 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
                 />
               </div>
               <form
-                className='p-1 md:p-4 w-full'
+                className='p-3 md:p-4 w-full'
                 onSubmit={handleSubmit(onSubmit)}
               >
                 {/* Title */}
@@ -203,6 +205,44 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
                   ))}
                 </select>
 
+                {/* Meeting Status */}
+                <p className='my-2 text-sm lg:text-lg'>
+                  Is this your first appointment with the doctor?
+                </p>
+                <div className='my-2 p-2 flex'>
+                  <label htmlFor='yes'>
+                    <input
+                      {...register('confirmFirstMeeting', {
+                        // onChange: (e) => setConfirmFirstMeeting(e.target.value),
+                        // onChange: (e) => setConfirmFirstMeeting(true),
+                      })}
+                      type='radio'
+                      // defaultValue={confirmFirstMeeting}
+                      value={confirmFirstMeeting}
+                      id='yes'
+                      // onChange={(e) => setConfirmFirstMeeting(e.target.value)}
+                      onChange={(e) => setConfirmFirstMeeting(true)}
+                    />
+                    <span className='ml-2'> Yes</span>
+                  </label>
+                  <label htmlFor='no'>
+                    <input
+                      {...register('confirmFirstMeeting', {
+                        // onChange: (e) => setConfirmFirstMeeting(e.target.value),
+                        // onChange: (e) => setConfirmFirstMeeting(false),
+                      })}
+                      type='radio'
+                      // defaultValue={confirmFirstMeeting}
+                      value={confirmFirstMeeting}
+                      id='no'
+                      // onChange={(e) => setConfirmFirstMeeting(e.target.value)}
+                      onChange={(e) => setConfirmFirstMeeting(false)}
+                      className='ml-6'
+                    />
+                    <span className='ml-2'> No</span>
+                  </label>
+                </div>
+
                 {/* Error messages */}
                 <p className='my-2 text-sm text-red-500 font-semibold'>
                   {errors?.title?.type === 'required' && (
@@ -227,6 +267,11 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
                 <p className='my-2 text-sm text-red-500 font-semibold'>
                   {errors?.slotTime?.type === 'required' && (
                     <span>{errors?.slotTime?.message}</span>
+                  )}
+                </p>
+                <p className='my-2 text-sm text-red-500 font-semibold'>
+                  {confirmFirstMeeting === null && (
+                    <span>Please confirm meeting status</span>
                   )}
                 </p>
                 <div className='form-control mt-2'>
