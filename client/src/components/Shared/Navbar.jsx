@@ -6,12 +6,14 @@ import logoImg from '../../assets/images/logo.png';
 import profileImg from '../../assets/images/default_profile_avatar.png';
 import { toast } from 'react-toastify';
 import { signOutUser } from '../../actions/authActions';
+import { FiMenu } from 'react-icons/fi';
+import { GrClose } from 'react-icons/gr';
 
 const Navbar = ({ isAuthenticated, user }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(user);
 
   const signOutHandler = () => {
     dispatch(signOutUser());
@@ -22,40 +24,58 @@ const Navbar = ({ isAuthenticated, user }) => {
   const menuItems = (
     <>
       <li>
-        <Link to={'/about'} className='hover:bg-white hover:text-main'>
+        <Link
+          to={'/about'}
+          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+        >
           About
         </Link>
       </li>
       <li>
-        <Link to={'/services'} className='hover:bg-white hover:text-main'>
+        <Link
+          to={'/services'}
+          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+        >
           Services
         </Link>
       </li>
       <li>
-        <Link to={'/prices'} className='hover:bg-white hover:text-main'>
+        <Link
+          to={'/prices'}
+          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+        >
           Prices
         </Link>
       </li>
       {/* <li>
-        <Link to={'/blogs'} className='hover:bg-white hover:text-main'>
+        <Link
+          to={'/blogs'}
+          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+        >
           Blogs
         </Link>
       </li> */}
       <li>
-        <Link to={'/contacts'} className='hover:bg-white hover:text-main'>
+        <Link
+          to={'/contacts'}
+          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+        >
           Contacts
         </Link>
       </li>
       {isAuthenticated && user ? (
         <button
-          className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main mr-2 flex uppercase'
+          className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main my-4 lg:my-0 mr-2 w-full lg:w-auto flex uppercase'
           onClick={signOutHandler}
         >
           sign out
         </button>
       ) : (
         <li>
-          <Link to={'/signin'} className='hover:bg-white hover:text-main'>
+          <Link
+            to={'/signin'}
+            className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+          >
             Sign in
           </Link>
         </li>
@@ -92,7 +112,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       <div className='navbar-end'>
         {isAuthenticated && user ? (
           <Link to='/dashboard'>
-            <div className='flex items-center my-4 space-x-3 cursor-pointer'>
+            <div className='flex items-center my-4 space-x-3 absolute right-20 lg:right-8 top-1 cursor-pointer'>
               <img
                 className='w-10 h-10 rounded-full'
                 src={
@@ -102,7 +122,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                 loading='lazy'
                 alt={user ? user?.username : 'user'}
               />
-              <div className='hidden sm:block space-y-1 font-medium'>
+              <div className='hidden md:block space-y-1 font-medium'>
                 <p className='text-xs'>
                   {user?.username}
                   <time className='block text-xs text-gray'>{user?.email}</time>
@@ -116,33 +136,22 @@ const Navbar = ({ isAuthenticated, user }) => {
           </button>
         )}
 
-        <div className='dropdown dropdown-bottom dropdown-end lg:hidden'>
-          <label tabIndex={-1}>
-            {/* <Hamburger
-                  hideOutline={false}
-                  size={20}
-                  distance='sm'
-                  // color='#4FD1C5'
-                  onToggle={(toggled) => {
-                    if (toggled) {
-                      setIsOpen(true);
-                    } else {
-                      setIsOpen(false);
-                    }
-                  }}
-                  tabIndex={-1}
-                /> */}
-          </label>
-
-          {isOpen && (
-            <ul
-              tabIndex={-1}
-              className='menu menu-md dropdown-content mt-3 ml-4 p-3 box-border shadow bg-main rounded-box w-screen h-screen z-50'
-            >
-              {menuItems}
-            </ul>
-          )}
+        <div
+          onClick={() => setIsOpen(!isOpen)}
+          className='text-3xl absolute right-8 top-6 cursor-pointer lg:hidden'
+        >
+          {isOpen ? <GrClose /> : <FiMenu />}
         </div>
+
+        {isOpen ? (
+          <ul
+            className={`absolute bg-main z-50 left-0 w-full h-full min-h-screen p-8 transition-all duration-500 ease-in ${
+              isOpen ? 'top-20 ' : 'top-[-490px]'
+            } lg:hidden`}
+          >
+            {menuItems}
+          </ul>
+        ) : null}
       </div>
     </div>
   );
