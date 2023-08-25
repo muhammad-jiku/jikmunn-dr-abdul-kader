@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { ADD_BOOKING_ITEM } from '../constants/bookingConstant';
+import {
+  ADD_BOOKING_ITEM,
+  REMOVE_BOOKING_ITEM,
+} from '../constants/bookingConstant';
 
 export const addBookingItems =
   (appointmentData) => async (dispatch, getState) => {
@@ -24,3 +27,15 @@ export const addBookingItems =
       JSON.stringify(getState().booking.bookingItems)
     );
   };
+
+export const removeBookingItems = (id) => async (dispatch, getState) => {
+  await dispatch({
+    type: REMOVE_BOOKING_ITEM,
+    payload: id,
+  });
+
+  localStorage.setItem(
+    'bookingItems',
+    JSON.stringify(getState().booking.bookingItems)
+  );
+};
