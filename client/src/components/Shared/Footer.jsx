@@ -43,13 +43,13 @@ const Footer = () => {
       className={`hero min-h-[600px] lg:min-h-screen bg-cover bg-no-repeat bg-opacity-80 w-full flex flex-col opacity-75`}
       style={{ backgroundImage: `url(${bgImg})` }}
     >
-      <div className='container mx-auto my-10 p-10 box-border flex flex-col items-center'>
+      <div className='container mx-auto my-10 p-6 box-border flex flex-col items-center'>
         <h2 className='text-lg lg:text-xl font-semibold font-oswald tracking-widest my-2'>
           Subscribe to My Newsletter
         </h2>
         <div className='join my-6'>
           <input
-            className='input input-bordered bg-white border-main join-item'
+            className='input input-bordered bg-white border-main join-item w-11/12 sm:w-full'
             placeholder='Email'
           />
           <button className='btn join-item bg-main text-white border-main hover:bg-white hover:text-main hover:border-main'>

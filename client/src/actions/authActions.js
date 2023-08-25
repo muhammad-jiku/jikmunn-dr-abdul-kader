@@ -332,6 +332,7 @@ export const signOutUser = () => async (dispatch) => {
       type: SIGNOUT_SUCCESS,
     });
     localStorage?.removeItem('token');
+    localStorage?.removeItem('bookingItems');
   } catch (error) {
     await dispatch({
       type: SIGNOUT_FAILURE,

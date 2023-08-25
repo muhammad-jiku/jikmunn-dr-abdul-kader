@@ -112,7 +112,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       <div className='navbar-end'>
         {isAuthenticated && user ? (
           <Link to='/dashboard'>
-            <div className='flex items-center my-4 space-x-3 absolute right-20 lg:right-8 top-1 cursor-pointer'>
+            <div className='flex items-center my-4 space-x-3 absolute right-[70px] lg:right-4 top-1 cursor-pointer'>
               <img
                 className='w-10 h-10 rounded-full'
                 src={

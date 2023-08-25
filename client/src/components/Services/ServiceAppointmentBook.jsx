@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import { addBookingItems } from '../../actions/bookingActions';
+import { toast } from 'react-toastify';
 // import { format } from 'date-fns';
 
 const ServiceAppointmentBook = ({ service, setShowModal }) => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.user);
 
   const [title, setTitle] = useState(service ? service?.title : '');
@@ -46,7 +49,11 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
 
     console.log(confirmFirstMeeting);
     console.log(appointmentData);
-    // setShowModal(false);
+    if (confirmFirstMeeting === true || confirmFirstMeeting === false) {
+      dispatch(addBookingItems(appointmentData));
+      toast.success(`You booked appointment for ${appointmentData?.title}!`);
+      setShowModal(false);
+    }
   };
 
   useEffect(() => {
