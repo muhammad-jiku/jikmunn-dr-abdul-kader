@@ -22,6 +22,7 @@ import {
   adminPriceDetailsReducer,
   adminPriceReducer,
 } from '../reducers/priceReducer';
+import { bookingReducer } from '../reducers/bookingReducer';
 
 const reducer = combineReducers({
   // user
@@ -42,9 +43,17 @@ const reducer = combineReducers({
   allPrices: allAdminPricesReducer,
   priceDetails: adminPriceDetailsReducer,
   price: adminPriceReducer,
+  // booking
+  booking: bookingReducer,
 });
 
-let initialState = {};
+let initialState = {
+  booking: {
+    bookingItems: localStorage.getItem('bookingItems')
+      ? JSON.parse(localStorage.getItem('bookingItems'))
+      : [],
+  },
+};
 
 const middleware = [thunk];
 
