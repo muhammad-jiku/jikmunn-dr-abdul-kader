@@ -39,7 +39,7 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
     const appointmentData = {
       title,
       email: user?.email || email,
-      price: confirmFirstMeeting ? 150 : 120,
+      fee: confirmFirstMeeting ? 150 : 120,
       date: formattedDate,
       slotTime,
     };
