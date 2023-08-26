@@ -26,7 +26,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       <li>
         <Link
           to={'/about'}
-          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
         >
           About
         </Link>
@@ -34,7 +34,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       <li>
         <Link
           to={'/services'}
-          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
         >
           Services
         </Link>
@@ -42,7 +42,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       <li>
         <Link
           to={'/prices'}
-          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
         >
           Prices
         </Link>
@@ -50,7 +50,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       {/* <li>
         <Link
           to={'/blogs'}
-          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+             className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
         >
           Blogs
         </Link>
@@ -58,23 +58,25 @@ const Navbar = ({ isAuthenticated, user }) => {
       <li>
         <Link
           to={'/contacts'}
-          className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
         >
           Contacts
         </Link>
       </li>
       {isAuthenticated && user ? (
-        <button
-          className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main my-4 lg:my-0 mr-2 w-full lg:w-auto flex uppercase'
-          onClick={signOutHandler}
-        >
-          sign out
-        </button>
+        <li>
+          <button
+            className='m-2 lg:m-1 my-4 lg:my-[-4px] p-2 text-main lg:text-white bg-white lg:bg-main hover:text-main hover:bg-white border-[1px] hover:border-main rounded w-full lg:w-auto uppercase'
+            onClick={signOutHandler}
+          >
+            Sign out
+          </button>
+        </li>
       ) : (
         <li>
           <Link
             to={'/signin'}
-            className='my-4 lg:my-0 text-white lg:text-black hover:text-gray'
+            className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
           >
             Sign in
           </Link>
@@ -99,7 +101,7 @@ const Navbar = ({ isAuthenticated, user }) => {
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal px-1'>
           <li>
-            <a className='hover:bg-white hover:text-main'>
+            <a className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'>
               <IoLocation className='mr-1' />
               <span className='text-sm'>
                 310 Razzak Complex, SSK Road, Feni
