@@ -26,6 +26,7 @@ export { default as ContactDetails } from './Contacts/ContactDetails';
 export { default as Auth } from './Auth/Auth';
 export { default as RequiredAuth } from './ProtectedRoute/RequiredAuth';
 export { default as RequiredAdmin } from './ProtectedRoute/RequiredAdmin';
+export { default as Bookings } from './Bookings/Bookings';
 export { default as Dashboard } from './Dashboard/Dashboard';
 export { default as Profile } from './Dashboard/Profile';
 export { default as UpdatePassword } from './Dashboard/UpdatePassword';
