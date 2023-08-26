@@ -17,6 +17,7 @@ import {
   PricesPage,
   ContactsPage,
   AuthPage,
+  BookingsPage,
   MyDashboardPage,
   MyProfilePage,
   UpdatePasswordPage,
@@ -63,6 +64,14 @@ function App() {
         <Route path='/prices' element={<PricesPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='/signin' element={<AuthPage />} />
+        <Route
+          path='/bookings'
+          element={
+            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <BookingsPage />
+            </RequiredAuth>
+          }
+        />
         <Route
           path='/dashboard'
           element={
