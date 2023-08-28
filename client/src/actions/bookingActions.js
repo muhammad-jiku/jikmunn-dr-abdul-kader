@@ -13,6 +13,7 @@ export const addBookingItems =
     await dispatch({
       type: ADD_BOOKING_ITEM,
       payload: {
+        title: appointmentData?.title,
         service: data?.data?._id,
         image: data?.data?.serviceImg?.url,
         email: appointmentData?.email,

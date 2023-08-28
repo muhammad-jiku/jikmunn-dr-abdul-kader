@@ -31,7 +31,7 @@ const Services = () => {
         ambulant clinic & emergency
       </h2>
       <hr className='w-1/3 lg:w-1/4 mb-2 border-2 border-slate-300' />
-      <div className='grid grid-cols-1 lg:grid-cols-3 gap-5 container mx-auto my-10'>
+      <div className='container mx-auto my-10 grid grid-cols-1 lg:grid-cols-3 gap-5'>
         {services.slice(0, 3).map((service, index) => (
           <CustomServiceCard key={index} service={service} />
         ))}
