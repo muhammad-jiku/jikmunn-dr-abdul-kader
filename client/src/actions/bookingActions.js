@@ -29,7 +29,7 @@ export const addBookingItems =
     );
   };
 
-export const removeBookingItems = (id) => async (dispatch, getState) => {
+export const removeBookingItem = (id) => async (dispatch, getState) => {
   await dispatch({
     type: REMOVE_BOOKING_ITEM,
     payload: id,

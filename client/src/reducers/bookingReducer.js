@@ -9,14 +9,16 @@ export const bookingReducer = (state = { bookingItems: [] }, action) => {
       const item = action.payload;
 
       const isItemExist = state.bookingItems.find(
-        (i) => i.service === item.service
+        (i) => i.service === item.service && i.date === item.date
       );
 
       if (isItemExist) {
         return {
           ...state,
           bookingItems: state.bookingItems.map((i) =>
-            i.service === isItemExist.service ? item : i
+            i.service === isItemExist.service && i.date === isItemExist.date
+              ? item
+              : i
           ),
         };
       } else {

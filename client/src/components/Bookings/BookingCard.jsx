@@ -30,15 +30,13 @@ const BookingCard = ({ item }) => {
             </h2>
           </div>
         </div>
-        <div className='p-2 box-border flex justify-between items-center'>
-          <div className='p-2 box-border flex justify-center items-center'>
-            <button
-              className='pt-0.5 px-2 ml-2 btn text-white bg-main hover:text-main hover:bg-white border-[1px] border-main hover:border-main'
-              onClick={() => deleteBookingItem(item?.service)}
-            >
-              Remove
-            </button>
-          </div>
+        <div className='p-6 flex justify-center items-center'>
+          <button
+            className='btn mx-2 px-3 py-0 text-white bg-main hover:text-main hover:bg-white border-[1px] border-main hover:border-main'
+            onClick={() => deleteBookingItem(item?.service)}
+          >
+            Remove
+          </button>
         </div>
       </div>
 
@@ -51,7 +49,7 @@ const BookingCard = ({ item }) => {
         <div className='my-4 flex flex-col items-start'>
           <Link
             to={`/services/${item?.title}`}
-            className='mt-2 mb-1 text-2xl text-main no-underline'
+            className='mt-2 mb-1 text-xl text-main no-underline'
           >
             {item?.title}
           </Link>

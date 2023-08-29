@@ -2,12 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import BookingCard from './BookingCard';
 import { FaArrowRightLong } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
 
 const Bookings = () => {
+  const navigate = useNavigate();
+
   const { bookingItems } = useSelector((state) => state.booking);
 
   const checkOutHandler = () => {
-    console.log('first');
+    navigate('/payment');
   };
 
   return (
@@ -28,7 +31,7 @@ const Bookings = () => {
               ))}
           </div>
 
-          <div className='my-2 p-2 w-full flex justify-between items-center'>
+          <div className='my-4 p-2 lg:p-4 w-full flex justify-between items-center'>
             <h2 className='text-sm lg:text-lg'>
               Gross Total:{' '}
               {` $${bookingItems.reduce((acc, item) => acc + item?.fee, 0)}`}
