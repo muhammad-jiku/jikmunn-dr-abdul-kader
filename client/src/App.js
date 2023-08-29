@@ -18,6 +18,7 @@ import {
   ContactsPage,
   AuthPage,
   BookingsPage,
+  PaymentPage,
   MyDashboardPage,
   MyProfilePage,
   UpdatePasswordPage,
@@ -69,6 +70,14 @@ function App() {
           element={
             <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
               <BookingsPage />
+            </RequiredAuth>
+          }
+        />
+        <Route
+          path='/payment'
+          element={
+            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <PaymentPage />
             </RequiredAuth>
           }
         />
