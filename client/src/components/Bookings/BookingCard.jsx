@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { removeBookingItem } from '../../actions/bookingActions';
 
 const BookingCard = ({ item }) => {
+  const dispatch = useDispatch();
+
   const deleteBookingItem = (id) => {
-    console.log(id);
+    dispatch(removeBookingItem(id));
   };
 
   return (
