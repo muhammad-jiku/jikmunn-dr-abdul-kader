@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.css';
 import {
@@ -32,6 +32,8 @@ import {
   UpdateUserPage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import { loadUser } from './actions/authActions';
 import { useSelector } from 'react-redux';
 import { appointmentStore } from './utils/store';
@@ -40,11 +42,25 @@ function App() {
   const { loading, isAuthenticated, user, error } = useSelector(
     (state) => state?.user
   );
+  const [stripeApiKey, setStripeApiKey] = useState('');
 
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
 
+  const getStripeApiKey = async () => {
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get('/api/v1/stripeapikey', config);
+    setStripeApiKey(data?.stripeApiKey);
+  };
+
   useEffect(() => {
     appointmentStore.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
@@ -73,14 +89,18 @@ function App() {
             </RequiredAuth>
           }
         />
-        <Route
-          path='/payment'
-          element={
-            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
-              <PaymentPage />
-            </RequiredAuth>
-          }
-        />
+        {stripeApiKey ? (
+          <Route
+            path='/process/payment'
+            element={
+              <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+                <Elements stripe={loadStripe(stripeApiKey)}>
+                  <PaymentPage />
+                </Elements>
+              </RequiredAuth>
+            }
+          />
+        ) : null}
         <Route
           path='/dashboard'
           element={
