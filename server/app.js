@@ -10,6 +10,7 @@ const authRoute = require('./routes/authRoute');
 const serviceRoute = require('./routes/serviceRoute');
 const userRoute = require('./routes/userRoute');
 const priceRoute = require('./routes/priceRoute');
+const paymentRoute = require('./routes/paymentRoute');
 
 // app initialize
 const app = express();
@@ -41,6 +42,7 @@ app.use('/api/v1', authRoute);
 app.use('/api/v1', userRoute);
 app.use('/api/v1', serviceRoute);
 app.use('/api/v1', priceRoute);
+app.use('/api/v1', paymentRoute);
 
 // Middleware for Errors
 app.use(ErrorChecker);
