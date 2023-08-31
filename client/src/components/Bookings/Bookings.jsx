@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import BookingCard from './BookingCard';
 import { FaArrowRightLong } from 'react-icons/fa6';
@@ -12,6 +12,20 @@ const Bookings = () => {
   const checkOutHandler = () => {
     navigate('/payment');
   };
+
+  const bookingTotalFees = bookingItems.reduce(
+    (acc, item) => acc + item?.fee,
+    0
+  );
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      'bookingTotalFees',
+      JSON.stringify({
+        totalFees: bookingTotalFees,
+      })
+    );
+  }, [bookingTotalFees]);
 
   return (
     <>
@@ -34,7 +48,8 @@ const Bookings = () => {
           <div className='my-4 p-2 lg:p-4 w-full flex justify-between items-center'>
             <h2 className='text-sm lg:text-lg'>
               Gross Total:{' '}
-              {` $${bookingItems.reduce((acc, item) => acc + item?.fee, 0)}`}
+              {/* {` $${bookingItems.reduce((acc, item) => acc + item?.fee, 0)}`} */}
+              ${bookingTotalFees}
             </h2>
 
             <h2
@@ -47,7 +62,9 @@ const Bookings = () => {
         </div>
       ) : (
         <div className='m-2 p-2 flex justify-center items-center min-h-screen font-bold'>
-          <h2 className='text-lg text-error'>No meeting booked yet!</h2>
+          <h2 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-lobster text-error'>
+            No meeting booked yet!
+          </h2>
         </div>
       )}
     </>

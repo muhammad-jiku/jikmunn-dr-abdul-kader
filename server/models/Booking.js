@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema(
   {
-    BookingItems: [
+    bookingItems: [
       {
         image: {
           type: String,
@@ -21,7 +21,7 @@ const bookingSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        time: {
+        meetingTime: {
           type: String,
           required: true,
         },
@@ -52,7 +52,7 @@ const bookingSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    BookingStatus: {
+    bookingStatus: {
       type: String,
       required: true,
       default: 'Processing',
