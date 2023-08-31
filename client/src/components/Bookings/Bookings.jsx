@@ -10,7 +10,7 @@ const Bookings = () => {
   const { bookingItems } = useSelector((state) => state.booking);
 
   const checkOutHandler = () => {
-    navigate('/process/payment');
+    navigate('/payment');
   };
 
   const bookingTotalFees = bookingItems.reduce(

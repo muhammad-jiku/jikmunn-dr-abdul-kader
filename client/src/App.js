@@ -91,7 +91,7 @@ function App() {
         />
         {stripeApiKey ? (
           <Route
-            path='/process/payment'
+            path='/payment'
             element={
               <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
                 <Elements stripe={loadStripe(stripeApiKey)}>
