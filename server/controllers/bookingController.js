@@ -66,8 +66,31 @@ const getAppointments = AsyncError(async (req, res) => {
   }
 });
 
+const getAdminAllAppointments = AsyncError(async (req, res) => {
+  try {
+    const allAppointments = await Booking.find({});
+    let totalFees = 0;
+
+    allAppointments.forEach((appointment) => {
+      totalFees += appointment.totalFees;
+    });
+
+    return res.status(200).json({
+      success: true,
+      totalFees,
+      data: allAppointments,
+    });
+  } catch (error) {
+    // console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createBooking,
   getBookingData,
   getAppointments,
+  getAdminAllAppointments,
 };
