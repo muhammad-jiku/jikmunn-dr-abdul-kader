@@ -49,7 +49,25 @@ const getBookingData = AsyncError(async (req, res, next) => {
   }
 });
 
+const getAppointments = AsyncError(async (req, res) => {
+  try {
+    const { id } = await req.user;
+    const appointments = await Booking.find({ user: id });
+
+    return res.status(200).json({
+      success: true,
+      data: appointments,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createBooking,
   getBookingData,
+  getAppointments,
 };
