@@ -18,6 +18,30 @@ const createBooking = AsyncError(async (req, res) => {
       data: booking,
     });
   } catch (error) {
+    // console.log(error);s
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
+const getBookingData = AsyncError(async (req, res, next) => {
+  try {
+    const { id } = await req.params;
+    const bookingData = await Booking.findById({ _id: id }).populate(
+      'user',
+      'username email'
+    );
+
+    if (!bookingData) {
+      return next(new ErrorHandler('No booking data found with this id', 404));
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: bookingData,
+    });
+  } catch (error) {
     // console.log(error);
     return res.status(500).json({
       message: 'Internal Server Error',
@@ -27,4 +51,5 @@ const createBooking = AsyncError(async (req, res) => {
 
 module.exports = {
   createBooking,
+  getBookingData,
 };
