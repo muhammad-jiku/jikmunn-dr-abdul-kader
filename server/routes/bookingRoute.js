@@ -18,15 +18,11 @@ const bookingRoute = express.Router({
 });
 
 bookingRoute.route('/booking/new').post(isAuthenticated, createBooking);
-
 bookingRoute.route('/booking/:id').get(isAuthenticated, getBookingData);
-
 bookingRoute.route('/bookings/me').get(isAuthenticated, getAppointments);
-
 bookingRoute
   .route('/admin/bookings')
   .get(isAuthenticated, authorizeAdmin, getAdminAllAppointments);
-
 bookingRoute
   .route('/admin/booking/:id')
   .put(isAuthenticated, authorizeAdmin, updateAdminAppointmentData)

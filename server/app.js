@@ -10,6 +10,7 @@ const authRoute = require('./routes/authRoute');
 const serviceRoute = require('./routes/serviceRoute');
 const userRoute = require('./routes/userRoute');
 const priceRoute = require('./routes/priceRoute');
+const bookingRoute = require('./routes/bookingRoute');
 const paymentRoute = require('./routes/paymentRoute');
 
 // app initialize
@@ -42,6 +43,7 @@ app.use('/api/v1', authRoute);
 app.use('/api/v1', userRoute);
 app.use('/api/v1', serviceRoute);
 app.use('/api/v1', priceRoute);
+app.use('/api/v1', bookingRoute);
 app.use('/api/v1', paymentRoute);
 
 // Middleware for Errors
