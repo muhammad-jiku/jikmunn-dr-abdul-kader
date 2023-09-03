@@ -88,9 +88,51 @@ const getAdminAllAppointments = AsyncError(async (req, res) => {
   }
 });
 
+const updateAdminAppointmentData = AsyncError(async (req, res, next) => {
+  try {
+    const { id } = await req.params;
+    const { status } = await req.body;
+    let appointment = await Booking.findById({ _id: id });
+
+    if (!appointment) {
+      return next(new ErrorHandler('No booking data found with this id', 404));
+    }
+
+    if (appointment.bookingStatus === 'Succeeded') {
+      return next(
+        new ErrorHandler('Meeting is already fixed with this id', 400)
+      );
+    }
+
+    if (status === 'Succeeded') {
+      appointment.bookingStatus = status;
+    } else {
+      appointment.bookingStatus = status;
+    }
+
+    const updatedAppointment = await appointment.save({
+      validateBeforeSave: false,
+    });
+
+    appointment = await Booking.findById({ _id: id });
+
+    return res.status(200).json({
+      success: true,
+      data: appointment,
+      updatedAppointment,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createBooking,
   getBookingData,
   getAppointments,
   getAdminAllAppointments,
+  updateAdminAppointmentData,
 };
