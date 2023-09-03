@@ -8,6 +8,14 @@ import {
   ADMIN_APPOINTMENT_DETAILS_FAILURE,
   ADMIN_APPOINTMENT_DETAILS_REQUEST,
   ADMIN_APPOINTMENT_DETAILS_SUCCESS,
+  ADMIN_DELETE_APPOINTMENT_FAILURE,
+  ADMIN_DELETE_APPOINTMENT_REQUEST,
+  ADMIN_DELETE_APPOINTMENT_RESET,
+  ADMIN_DELETE_APPOINTMENT_SUCCESS,
+  ADMIN_UPDATE_APPOINTMENT_FAILURE,
+  ADMIN_UPDATE_APPOINTMENT_REQUEST,
+  ADMIN_UPDATE_APPOINTMENT_RESET,
+  ADMIN_UPDATE_APPOINTMENT_SUCCESS,
   ALL_APPOINTMENTS_FAILURE,
   ALL_APPOINTMENTS_REQUEST,
   ALL_APPOINTMENTS_SUCCESS,
@@ -76,6 +84,38 @@ export const allAppointmentsReducer = (
   }
 };
 
+export const adminAppointmentDetailsReducer = (
+  state = { appointment: {} },
+  action
+) => {
+  switch (action.type) {
+    case ADMIN_APPOINTMENT_DETAILS_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case ADMIN_APPOINTMENT_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        appointment: action.payload,
+      };
+
+    case ADMIN_APPOINTMENT_DETAILS_FAILURE:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export const adminAllAppointmentsReducer = (
   state = { appointments: [] },
   action
@@ -108,26 +148,46 @@ export const adminAllAppointmentsReducer = (
   }
 };
 
-export const adminAppointmentDetailsReducer = (
-  state = { appointment: {} },
-  action
-) => {
+export const adminAppointmentReducer = (state = {}, action) => {
   switch (action.type) {
-    case ADMIN_APPOINTMENT_DETAILS_REQUEST:
+    case ADMIN_UPDATE_APPOINTMENT_REQUEST:
+    case ADMIN_DELETE_APPOINTMENT_REQUEST:
       return {
+        ...state,
         loading: true,
       };
 
-    case ADMIN_APPOINTMENT_DETAILS_SUCCESS:
+    case ADMIN_UPDATE_APPOINTMENT_SUCCESS:
       return {
+        ...state,
         loading: false,
-        appointment: action.payload,
+        isUpdated: action.payload,
       };
 
-    case ADMIN_APPOINTMENT_DETAILS_FAILURE:
+    case ADMIN_DELETE_APPOINTMENT_SUCCESS:
       return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+      };
+
+    case ADMIN_UPDATE_APPOINTMENT_FAILURE:
+    case ADMIN_DELETE_APPOINTMENT_FAILURE:
+      return {
+        ...state,
         loading: false,
         error: action.payload,
+      };
+    case ADMIN_UPDATE_APPOINTMENT_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+
+    case ADMIN_DELETE_APPOINTMENT_RESET:
+      return {
+        ...state,
+        isDeleted: false,
       };
     case CLEAR_ERRORS:
       return {
