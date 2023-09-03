@@ -77,13 +77,13 @@ const getAdminAllPrice = AsyncError(async (req, res) => {
   }
 });
 
-const getAdminPriceDetails = AsyncError(async (req, res) => {
+const getAdminPriceDetails = AsyncError(async (req, res, next) => {
   try {
     const { id } = req.params;
     const price = await Price.findById({ _id: id });
 
     if (!price) {
-      return new ErrorHandler('Price is not found', 404);
+      return next(new ErrorHandler('Price is not found', 404));
     }
 
     return res.status(200).json({
@@ -98,7 +98,7 @@ const getAdminPriceDetails = AsyncError(async (req, res) => {
   }
 });
 
-const updateAdminPriceDetails = AsyncError(async (req, res) => {
+const updateAdminPriceDetails = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.params;
     const { priceID, title, subTitle, price, diagnostics, priceImg } =
@@ -107,7 +107,7 @@ const updateAdminPriceDetails = AsyncError(async (req, res) => {
     let priceData = await Price.findById({ _id: id });
 
     if (!priceData) {
-      return new ErrorHandler('Price details is not found', 404);
+      return next(new ErrorHandler('Price details is not found', 404));
     }
 
     const updatedPriceInfo = {
@@ -166,15 +166,14 @@ const updateAdminPriceDetails = AsyncError(async (req, res) => {
   }
 });
 
-const deleteAdminPriceDetails = AsyncError(async (req, res) => {
+const deleteAdminPriceDetails = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.params;
     const price = await Price.findById({ _id: id });
 
     if (!price) {
-      return new ErrorHandler(
-        `Price detail does not exist with Id: ${id}`,
-        400
+      return next(
+        new ErrorHandler(`Price detail does not exist with Id: ${id}`, 400)
       );
     } else {
       const imageId = price?.priceImg?.public_id;

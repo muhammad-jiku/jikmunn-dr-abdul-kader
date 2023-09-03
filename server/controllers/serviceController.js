@@ -59,7 +59,7 @@ const getAllServices = AsyncError(async (req, res) => {
   }
 });
 
-const getServiceDetails = AsyncError(async (req, res) => {
+const getServiceDetails = AsyncError(async (req, res, next) => {
   try {
     const { title } = req.params;
     const service = await Service.findOne({
@@ -67,7 +67,7 @@ const getServiceDetails = AsyncError(async (req, res) => {
     });
 
     if (!service) {
-      return new ErrorHandler('Service details is not found', 404);
+      return next(new ErrorHandler('Service details is not found', 404));
     }
 
     return res.status(200).json({
@@ -98,13 +98,13 @@ const getAdminAllService = AsyncError(async (req, res) => {
   }
 });
 
-const getAdminServiceDetails = AsyncError(async (req, res) => {
+const getAdminServiceDetails = AsyncError(async (req, res, next) => {
   try {
     const { id } = req.params;
     const service = await Service.findById({ _id: id });
 
     if (!service) {
-      return new ErrorHandler('Service not found', 404);
+      return next(new ErrorHandler('Service not found', 404));
     }
 
     return res.status(200).json({
@@ -119,7 +119,7 @@ const getAdminServiceDetails = AsyncError(async (req, res) => {
   }
 });
 
-const updateAdminServiceDetails = AsyncError(async (req, res) => {
+const updateAdminServiceDetails = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.params;
     const { serviceID, title, desc, slots, serviceImg } = await req.body;
@@ -127,7 +127,7 @@ const updateAdminServiceDetails = AsyncError(async (req, res) => {
     let service = await Service.findById({ _id: id });
 
     if (!service) {
-      return new ErrorHandler('Service details is not found', 404);
+      return next(new ErrorHandler('Service details is not found', 404));
     }
 
     const updatedServiceInfo = {
@@ -185,15 +185,14 @@ const updateAdminServiceDetails = AsyncError(async (req, res) => {
   }
 });
 
-const deleteAdminServiceDetails = AsyncError(async (req, res) => {
+const deleteAdminServiceDetails = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.params;
     const service = await Service.findById({ _id: id });
 
     if (!service) {
-      return new ErrorHandler(
-        `Service detail does not exist with Id: ${id}`,
-        400
+      return next(
+        new ErrorHandler(`Service detail does not exist with Id: ${id}`, 400)
       );
     } else {
       const imageId = service?.serviceImg?.public_id;

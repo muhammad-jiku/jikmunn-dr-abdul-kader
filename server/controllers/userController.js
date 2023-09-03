@@ -85,7 +85,7 @@ const updateProfile = AsyncError(async (req, res) => {
   }
 });
 
-const updatePassword = AsyncError(async (req, res) => {
+const updatePassword = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.user;
     const { oldPassword, newPassword, passwordConfirm } = await req.body;
@@ -95,11 +95,11 @@ const updatePassword = AsyncError(async (req, res) => {
     const isPasswordMatched = await bcrypt.compare(oldPassword, user.password);
 
     if (!isPasswordMatched) {
-      return new ErrorHandler('Old password is incorrect', 400);
+      return next(new ErrorHandler('Old password is incorrect', 400));
     }
 
     if (newPassword !== passwordConfirm) {
-      return new ErrorHandler('Password does not match', 400);
+      return next(new ErrorHandler('Password does not match', 400));
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
@@ -134,13 +134,13 @@ const getAdminAllUser = AsyncError(async (req, res) => {
   }
 });
 
-const getAdminSingleUser = AsyncError(async (req, res) => {
+const getAdminSingleUser = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.params;
     const user = await User.findById({ _id: id });
 
     if (!user) {
-      return new ErrorHandler(`User does not exist with Id: ${id}`, 404);
+      return next(new ErrorHandler(`User does not exist with Id: ${id}`, 404));
     }
 
     return res.status(200).json({
@@ -191,13 +191,13 @@ const updateAdminUserRole = AsyncError(async (req, res) => {
   }
 });
 
-const deleteAdminUser = AsyncError(async (req, res) => {
+const deleteAdminUser = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.params;
     const user = await User.findById({ _id: id });
 
     if (!user) {
-      return new ErrorHandler(`User does not exist with Id: ${id}`, 400);
+      return next(new ErrorHandler(`User does not exist with Id: ${id}`, 400));
     } else {
       const imageId = user?.avatar?.public_id;
       imageId ? await cloudinary.v2.uploader.destroy(imageId) : null;
