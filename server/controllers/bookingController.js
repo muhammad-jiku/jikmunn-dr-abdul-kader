@@ -129,10 +129,34 @@ const updateAdminAppointmentData = AsyncError(async (req, res, next) => {
   }
 });
 
+const deleteAdminAppointment = AsyncError(async (req, res, next) => {
+  try {
+    const { id } = await req.params;
+    const appointment = await Booking.findById({ _id: id });
+
+    if (!appointment) {
+      return next(new ErrorHandler('No booking found with this id', 404));
+    } else {
+      await Booking.deleteOne({ _id: id });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'Appointment deleted successfully',
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 module.exports = {
   createBooking,
   getBookingData,
   getAppointments,
   getAdminAllAppointments,
   updateAdminAppointmentData,
+  deleteAdminAppointment,
 };
