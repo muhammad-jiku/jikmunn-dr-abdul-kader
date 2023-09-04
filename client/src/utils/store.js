@@ -23,6 +23,13 @@ import {
   adminPriceReducer,
 } from '../reducers/priceReducer';
 import { bookingReducer } from '../reducers/bookingReducer';
+import {
+  newAppointmentReducer,
+  allAppointmentsReducer,
+  appointmentDetailsReducer,
+  adminAllAppointmentsReducer,
+  adminAppointmentReducer,
+} from '../reducers/appointmentReducer';
 
 const reducer = combineReducers({
   // user
@@ -45,6 +52,12 @@ const reducer = combineReducers({
   price: adminPriceReducer,
   // booking
   booking: bookingReducer,
+  // appointment
+  newAppoinment: newAppointmentReducer,
+  appointments: allAppointmentsReducer,
+  appointmentDetails: appointmentDetailsReducer,
+  allAppointments: adminAllAppointmentsReducer,
+  appointment: adminAppointmentReducer,
 });
 
 let initialState = {
