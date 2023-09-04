@@ -3,15 +3,18 @@ import {
   ADD_APPOINTMENT_FAILURE,
   ADD_APPOINTMENT_REQUEST,
   ADD_APPOINTMENT_SUCCESS,
-  ADMIN_ALL_APPOINTMENTS_FAILURE,
-  ADMIN_ALL_APPOINTMENTS_REQUEST,
-  ADMIN_ALL_APPOINTMENTS_SUCCESS,
   ALL_APPOINTMENTS_FAILURE,
   ALL_APPOINTMENTS_REQUEST,
   ALL_APPOINTMENTS_SUCCESS,
   APPOINTMENT_DETAILS_FAILURE,
   APPOINTMENT_DETAILS_REQUEST,
   APPOINTMENT_DETAILS_SUCCESS,
+  ADMIN_ALL_APPOINTMENTS_FAILURE,
+  ADMIN_ALL_APPOINTMENTS_REQUEST,
+  ADMIN_ALL_APPOINTMENTS_SUCCESS,
+  ADMIN_UPDATE_APPOINTMENT_FAILURE,
+  ADMIN_UPDATE_APPOINTMENT_REQUEST,
+  ADMIN_UPDATE_APPOINTMENT_SUCCESS,
   CLEAR_ERRORS,
 } from '../constants/appointmentConstant';
 
@@ -122,6 +125,37 @@ export const adminAllappointments = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_ALL_APPOINTMENTS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminUpdateAppointment = (id, appointment) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_UPDATE_APPOINTMENT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/admin/booking/${id}`,
+      appointment,
+      config
+    );
+
+    await dispatch({
+      type: ADMIN_UPDATE_APPOINTMENT_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_UPDATE_APPOINTMENT_FAILURE,
       payload: error.response.data.message,
     });
   }
