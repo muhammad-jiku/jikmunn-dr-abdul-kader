@@ -6,6 +6,9 @@ import {
   ALL_APPOINTMENTS_FAILURE,
   ALL_APPOINTMENTS_REQUEST,
   ALL_APPOINTMENTS_SUCCESS,
+  APPOINTMENT_DETAILS_FAILURE,
+  APPOINTMENT_DETAILS_REQUEST,
+  APPOINTMENT_DETAILS_SUCCESS,
 } from '../constants/appointmentConstant';
 
 export const addAppointment = (appointment) => async (dispatch) => {
@@ -61,6 +64,33 @@ export const allAppointments = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ALL_APPOINTMENTS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const appointmentDetails = (id) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: APPOINTMENT_DETAILS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/booking/${id}`, config);
+
+    await dispatch({
+      type: APPOINTMENT_DETAILS_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: APPOINTMENT_DETAILS_FAILURE,
       payload: error.response.data.message,
     });
   }
