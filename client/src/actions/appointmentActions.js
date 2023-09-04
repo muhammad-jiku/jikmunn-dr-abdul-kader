@@ -3,6 +3,9 @@ import {
   ADD_APPOINTMENT_FAILURE,
   ADD_APPOINTMENT_REQUEST,
   ADD_APPOINTMENT_SUCCESS,
+  ADMIN_ALL_APPOINTMENTS_FAILURE,
+  ADMIN_ALL_APPOINTMENTS_REQUEST,
+  ADMIN_ALL_APPOINTMENTS_SUCCESS,
   ALL_APPOINTMENTS_FAILURE,
   ALL_APPOINTMENTS_REQUEST,
   ALL_APPOINTMENTS_SUCCESS,
@@ -92,6 +95,33 @@ export const appointmentDetails = (id) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: APPOINTMENT_DETAILS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminAllappointments = () => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_ALL_APPOINTMENTS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get('/api/v1/admin/bookings', config);
+
+    await dispatch({
+      type: ADMIN_ALL_APPOINTMENTS_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_ALL_APPOINTMENTS_FAILURE,
       payload: error.response.data.message,
     });
   }
