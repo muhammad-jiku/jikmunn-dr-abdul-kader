@@ -19,6 +19,7 @@ import {
   AuthPage,
   BookingsPage,
   PaymentPage,
+  SuccessPage,
   MyDashboardPage,
   MyProfilePage,
   UpdatePasswordPage,
@@ -101,6 +102,14 @@ function App() {
             }
           />
         ) : null}
+        <Route
+          path='/success'
+          element={
+            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <SuccessPage />
+            </RequiredAuth>
+          }
+        />
         <Route
           path='/dashboard'
           element={
