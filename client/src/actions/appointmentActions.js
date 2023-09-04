@@ -9,6 +9,7 @@ import {
   APPOINTMENT_DETAILS_FAILURE,
   APPOINTMENT_DETAILS_REQUEST,
   APPOINTMENT_DETAILS_SUCCESS,
+  CLEAR_ERRORS,
 } from '../constants/appointmentConstant';
 
 export const addAppointment = (appointment) => async (dispatch) => {
@@ -94,4 +95,10 @@ export const appointmentDetails = (id) => async (dispatch) => {
       payload: error.response.data.message,
     });
   }
+};
+
+export const clearErrors = () => async (dispatch) => {
+  await dispatch({
+    type: CLEAR_ERRORS,
+  });
 };
