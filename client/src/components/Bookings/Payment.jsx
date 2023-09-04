@@ -12,10 +12,14 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import {
+  addNewAppointment,
+  clearErrors,
+} from '../../actions/appointmentActions';
 
 const Payment = () => {
-  // // const navigate = useNavigate();
-  // // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -24,7 +28,9 @@ const Payment = () => {
   const feesInfo = JSON.parse(sessionStorage.getItem('bookingTotalFees'));
 
   const { user } = useSelector((state) => state?.user);
-  // // const { error } = useSelector((state) => state?.newBooking);
+  const { loading, error, success } = useSelector(
+    (state) => state?.newAppoinment
+  );
   const { bookingItems } = useSelector((state) => state?.booking);
 
   const paymentData = {
@@ -39,7 +45,7 @@ const Payment = () => {
 
   const {
     // register,
-    // formState: { errors, isSubmitSuccessful },
+    formState: { isSubmitSuccessful },
     reset,
     handleSubmit,
   } = useForm({
@@ -65,7 +71,7 @@ const Payment = () => {
         config
       );
 
-      const client_secret = data.client_secret;
+      const client_secret = await data?.client_secret;
 
       if (!stripe || !elements) return;
 
@@ -117,10 +123,10 @@ const Payment = () => {
             status: result?.paymentIntent?.status,
           };
 
-          // // dispatch(addNewBooking(bookingInfo));
-          reset();
-          toast.success('Payment Successfull!');
-          // // navigate('/success');
+          await dispatch(addNewAppointment(bookingInfo));
+          // reset();
+          // toast.success('Payment Successfull!');
+          // navigate('/success');
         } else {
           toast.error("There's some issue while processing payment!");
         }
@@ -135,13 +141,22 @@ const Payment = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (error) {
-  //     // console.log(error);
-  //     toast.error('Something Went Wrong!');
-  //     // dispatch(clearErrors());
-  //   }
-  // }, [dispatch, error]);
+  useEffect(() => {
+    if (isSubmitSuccessful && success) {
+      reset();
+      toast.success('Payment Successfull!');
+      navigate('/success');
+      localStorage?.removeItem('bookingItems');
+    }
+  }, [dispatch, isSubmitSuccessful, success, reset, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <div className='container mx-auto my-4 lg:my-10 p-2 min-h-[80vh] sm:min-h-screen'>

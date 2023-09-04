@@ -33,7 +33,8 @@ export const newAppointmentReducer = (state = {}, action) => {
     case ADD_APPOINTMENT_SUCCESS:
       return {
         loading: false,
-        appointment: action.payload,
+        success: action.payload.success,
+        appointment: action.payload.data,
       };
 
     case ADD_APPOINTMENT_FAILURE:

@@ -21,7 +21,7 @@ import {
   CLEAR_ERRORS,
 } from '../constants/appointmentConstant';
 
-export const addAppointment = (appointment) => async (dispatch) => {
+export const addNewAppointment = (appointment) => async (dispatch) => {
   try {
     await dispatch({
       type: ADD_APPOINTMENT_REQUEST,
@@ -42,7 +42,7 @@ export const addAppointment = (appointment) => async (dispatch) => {
 
     await dispatch({
       type: ADD_APPOINTMENT_SUCCESS,
-      payload: data?.data,
+      payload: data,
     });
   } catch (error) {
     await dispatch({
