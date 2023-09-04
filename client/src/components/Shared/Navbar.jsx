@@ -15,6 +15,8 @@ const Navbar = ({ isAuthenticated, user }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const bookingItems = JSON.parse(localStorage.getItem('bookingItems'));
+
   const signOutHandler = () => {
     dispatch(signOutUser());
     toast.success('Sign Out Successfully!! 👍');
@@ -63,6 +65,17 @@ const Navbar = ({ isAuthenticated, user }) => {
           Contacts
         </Link>
       </li>
+      {bookingItems && (
+        <li>
+          <Link
+            to={'/bookings'}
+            className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          >
+            My {bookingItems?.length > 1 ? 'Bookings' : 'Booking'} (
+            {bookingItems?.length})
+          </Link>
+        </li>
+      )}
       {isAuthenticated && user ? (
         <li>
           <button
