@@ -15,6 +15,9 @@ import {
   ADMIN_UPDATE_APPOINTMENT_FAILURE,
   ADMIN_UPDATE_APPOINTMENT_REQUEST,
   ADMIN_UPDATE_APPOINTMENT_SUCCESS,
+  ADMIN_DELETE_APPOINTMENT_REQUEST,
+  ADMIN_DELETE_APPOINTMENT_SUCCESS,
+  ADMIN_DELETE_APPOINTMENT_FAILURE,
   CLEAR_ERRORS,
 } from '../constants/appointmentConstant';
 
@@ -156,6 +159,32 @@ export const adminUpdateAppointment = (id, appointment) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_UPDATE_APPOINTMENT_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminDeleteAppointment = (id) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_DELETE_APPOINTMENT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+    const { data } = await axios.delete(`/api/v1/admin/booking/${id}`, config);
+
+    await dispatch({
+      type: ADMIN_DELETE_APPOINTMENT_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_DELETE_APPOINTMENT_FAILURE,
       payload: error.response.data.message,
     });
   }
