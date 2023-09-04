@@ -42,7 +42,7 @@ const PriceRow = ({ price }) => {
     <tr>
       <th>{price?.priceID}</th>
       <th>{price?.title}</th>
-      <th>{price?.price}</th>
+      <th>${price?.price}</th>
       <th>{String(price?.createdAt).substr(0, 10)}</th>
       <th className='flex'>
         <button

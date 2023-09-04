@@ -5,7 +5,8 @@ import { toast } from 'react-toastify';
 import {
   allAppointments,
   clearErrors,
-} from '../../../../actions/appointmentActions';
+} from '../../../actions/appointmentActions';
+import AppointmentRow from './AppointmentRow';
 
 const AllAppointments = () => {
   const navigate = useNavigate();
@@ -38,13 +39,21 @@ const AllAppointments = () => {
           <thead>
             <tr>
               <th>No.</th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Created At</th>
-              <th>Actions</th>
+              <th>Status</th>
+              <th>Amount</th>
+              <th>Action</th>
             </tr>
           </thead>
-          <tbody>{console.log(appointments)}</tbody>
+          <tbody>
+            {appointments?.map((appointment, idx) => (
+              <AppointmentRow
+                key={idx}
+                idx={idx}
+                appointment={appointment}
+                error={error}
+              />
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

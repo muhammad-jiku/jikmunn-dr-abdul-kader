@@ -32,7 +32,7 @@ export { default as Success } from './Bookings/Success';
 export { default as Dashboard } from './Dashboard/Dashboard';
 export { default as Profile } from './Dashboard/Profile';
 export { default as UpdatePassword } from './Dashboard/UpdatePassword';
-export { default as AllAppointments } from './Dashboard/User/ManageAppointments/AllAppointments';
+export { default as AllAppointments } from './Dashboard/User/AllAppointments';
 export { default as NewService } from './Dashboard/Admin/ManageServices/NewService';
 export { default as AllServices } from './Dashboard/Admin/ManageServices/AllServices';
 export { default as UpdateService } from './Dashboard/Admin/ManageServices/UpdateService';
