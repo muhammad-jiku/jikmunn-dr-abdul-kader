@@ -42,3 +42,4 @@ export { default as UpdatePrice } from './Dashboard/Admin/ManagePrices/UpdatePri
 export { default as AllUsers } from './Dashboard/Admin/ManageUsers/AllUsers';
 export { default as UpdateUser } from './Dashboard/Admin/ManageUsers/UpdateUser';
 export { default as AllAppointments } from './Dashboard/Admin/ManageAppointments/AllAppointments';
+export { default as UpdateAppointment } from './Dashboard/Admin/ManageAppointments/UpdateAppointment';
