@@ -8,6 +8,7 @@ import { MdOutlinePayment, MdOutlineVideocam } from 'react-icons/md';
 const AppointmentRow = ({ idx, appointment, error }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
@@ -28,21 +29,19 @@ const AppointmentRow = ({ idx, appointment, error }) => {
 
   return (
     <tr>
-      {/* {console.log(appointment)} */}
-      {console.log(appointment?.bookingStatus)}
       <th>{idx + 1 >= 10 ? idx + 1 : '0' + (idx + 1)}</th>
       <th>{appointment?.bookingStatus}</th>
       <th>${appointment?.totalFees}</th>
       <th className='flex'>
-        {appointment?.paymentInfo?.id &&
-          appointment?.paymentInfo?.id?.length === 0 && (
-            <button
-              className='m-2 lg:m-1 my-4 lg:my-[-4px] p-2 flex justify-center items-center text-xs text-white bg-main hover:text-main hover:bg-white border-[1px] hover:border-main rounded w-auto uppercase'
-              onClick={() => navigate(`/payment`)}
-            >
-              <MdOutlinePayment className='text-lg mr-1' /> Pay
-            </button>
-          )}
+        {(!appointment?.paymentInfo?.id ||
+          appointment?.paymentInfo?.id?.length === 0) && (
+          <button
+            className='m-2 lg:m-1 my-4 lg:my-[-4px] p-2 flex justify-center items-center text-xs text-white bg-main hover:text-main hover:bg-white border-[1px] hover:border-main rounded w-auto uppercase'
+            onClick={() => navigate(`/payment`)}
+          >
+            <MdOutlinePayment className='text-lg mr-1' /> Pay
+          </button>
+        )}
         {/* {appointment?.bookingStatus === 'Succeeded' && ( */}
         <button
           className='btn m-2 lg:m-1 my-4 lg:my-[-4px] p-2 text-xs text-white bg-main hover:text-main hover:bg-white border-[1px] hover:border-main rounded w-auto uppercase'

@@ -6,12 +6,12 @@ import {
   ALL_APPOINTMENTS_FAILURE,
   ALL_APPOINTMENTS_REQUEST,
   ALL_APPOINTMENTS_SUCCESS,
-  APPOINTMENT_DETAILS_FAILURE,
-  APPOINTMENT_DETAILS_REQUEST,
-  APPOINTMENT_DETAILS_SUCCESS,
   ADMIN_ALL_APPOINTMENTS_FAILURE,
   ADMIN_ALL_APPOINTMENTS_REQUEST,
   ADMIN_ALL_APPOINTMENTS_SUCCESS,
+  ADMIN_APPOINTMENT_DETAILS_FAILURE,
+  ADMIN_APPOINTMENT_DETAILS_REQUEST,
+  ADMIN_APPOINTMENT_DETAILS_SUCCESS,
   ADMIN_UPDATE_APPOINTMENT_FAILURE,
   ADMIN_UPDATE_APPOINTMENT_REQUEST,
   ADMIN_UPDATE_APPOINTMENT_SUCCESS,
@@ -79,33 +79,6 @@ export const allAppointments = () => async (dispatch) => {
   }
 };
 
-export const appointmentDetails = (id) => async (dispatch) => {
-  try {
-    await dispatch({
-      type: APPOINTMENT_DETAILS_REQUEST,
-    });
-
-    const config = {
-      headers: {
-        authorization: `Bearer ${localStorage?.getItem('token')}`,
-        'content-type': 'application/json',
-      },
-    };
-
-    const { data } = await axios.get(`/api/v1/booking/${id}`, config);
-
-    await dispatch({
-      type: APPOINTMENT_DETAILS_SUCCESS,
-      payload: data?.data,
-    });
-  } catch (error) {
-    await dispatch({
-      type: APPOINTMENT_DETAILS_FAILURE,
-      payload: error.response.data.message,
-    });
-  }
-};
-
 export const adminAllappointments = () => async (dispatch) => {
   try {
     await dispatch({
@@ -128,6 +101,33 @@ export const adminAllappointments = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADMIN_ALL_APPOINTMENTS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminAppointmentDetails = (id) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_APPOINTMENT_DETAILS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.get(`/api/v1/admin/booking/${id}`, config);
+
+    await dispatch({
+      type: ADMIN_APPOINTMENT_DETAILS_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_APPOINTMENT_DETAILS_FAILURE,
       payload: error.response.data.message,
     });
   }

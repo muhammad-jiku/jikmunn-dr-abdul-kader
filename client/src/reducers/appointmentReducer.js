@@ -5,12 +5,12 @@ import {
   ALL_APPOINTMENTS_FAILURE,
   ALL_APPOINTMENTS_REQUEST,
   ALL_APPOINTMENTS_SUCCESS,
-  APPOINTMENT_DETAILS_FAILURE,
-  APPOINTMENT_DETAILS_REQUEST,
-  APPOINTMENT_DETAILS_SUCCESS,
   ADMIN_ALL_APPOINTMENTS_FAILURE,
   ADMIN_ALL_APPOINTMENTS_REQUEST,
   ADMIN_ALL_APPOINTMENTS_SUCCESS,
+  ADMIN_APPOINTMENT_DETAILS_FAILURE,
+  ADMIN_APPOINTMENT_DETAILS_REQUEST,
+  ADMIN_APPOINTMENT_DETAILS_SUCCESS,
   ADMIN_DELETE_APPOINTMENT_FAILURE,
   ADMIN_DELETE_APPOINTMENT_REQUEST,
   ADMIN_DELETE_APPOINTMENT_RESET,
@@ -85,38 +85,6 @@ export const allAppointmentsReducer = (
   }
 };
 
-export const appointmentDetailsReducer = (
-  state = { appointment: {} },
-  action
-) => {
-  switch (action.type) {
-    case APPOINTMENT_DETAILS_REQUEST:
-      return {
-        loading: true,
-      };
-
-    case APPOINTMENT_DETAILS_SUCCESS:
-      return {
-        loading: false,
-        appointment: action.payload,
-      };
-
-    case APPOINTMENT_DETAILS_FAILURE:
-      return {
-        loading: false,
-        error: action.payload,
-      };
-    case CLEAR_ERRORS:
-      return {
-        ...state,
-        error: null,
-      };
-
-    default:
-      return state;
-  }
-};
-
 export const adminAllAppointmentsReducer = (
   state = { appointments: [] },
   action
@@ -134,6 +102,38 @@ export const adminAllAppointmentsReducer = (
       };
 
     case ADMIN_ALL_APPOINTMENTS_FAILURE:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const adminAppointmentDetailsReducer = (
+  state = { appointment: {} },
+  action
+) => {
+  switch (action.type) {
+    case ADMIN_APPOINTMENT_DETAILS_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case ADMIN_APPOINTMENT_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        appointment: action.payload,
+      };
+
+    case ADMIN_APPOINTMENT_DETAILS_FAILURE:
       return {
         loading: false,
         error: action.payload,

@@ -26,8 +26,8 @@ import { bookingReducer } from '../reducers/bookingReducer';
 import {
   newAppointmentReducer,
   allAppointmentsReducer,
-  appointmentDetailsReducer,
   adminAllAppointmentsReducer,
+  adminAppointmentDetailsReducer,
   adminAppointmentReducer,
 } from '../reducers/appointmentReducer';
 
@@ -55,8 +55,8 @@ const reducer = combineReducers({
   // appointment
   newAppoinment: newAppointmentReducer,
   appointments: allAppointmentsReducer,
-  appointmentDetails: appointmentDetailsReducer,
   allAppointments: adminAllAppointmentsReducer,
+  appointmentDetails: adminAppointmentDetailsReducer,
   appointment: adminAppointmentReducer,
 });
 

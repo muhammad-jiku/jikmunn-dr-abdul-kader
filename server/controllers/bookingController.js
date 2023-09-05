@@ -25,30 +25,6 @@ const createBooking = AsyncError(async (req, res) => {
   }
 });
 
-const getBookingData = AsyncError(async (req, res, next) => {
-  try {
-    const { id } = await req.params;
-    const bookingData = await Booking.findById({ _id: id }).populate(
-      'user',
-      'username email'
-    );
-
-    if (!bookingData) {
-      return next(new ErrorHandler('No booking data found with this id', 404));
-    }
-
-    return res.status(200).json({
-      success: true,
-      data: bookingData,
-    });
-  } catch (error) {
-    // console.log(error);
-    return res.status(500).json({
-      message: 'Internal Server Error',
-    });
-  }
-});
-
 const getAppointments = AsyncError(async (req, res) => {
   try {
     const { id } = await req.user;
@@ -79,6 +55,30 @@ const getAdminAllAppointments = AsyncError(async (req, res) => {
       success: true,
       totalFees,
       data: allAppointments,
+    });
+  } catch (error) {
+    // console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
+const getAdminBookingData = AsyncError(async (req, res, next) => {
+  try {
+    const { id } = await req.params;
+    const bookingData = await Booking.findById({ _id: id }).populate(
+      'user',
+      'username email'
+    );
+
+    if (!bookingData) {
+      return next(new ErrorHandler('No booking data found with this id', 404));
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: bookingData,
     });
   } catch (error) {
     // console.log(error);
@@ -154,9 +154,9 @@ const deleteAdminAppointment = AsyncError(async (req, res, next) => {
 
 module.exports = {
   createBooking,
-  getBookingData,
   getAppointments,
   getAdminAllAppointments,
+  getAdminBookingData,
   updateAdminAppointmentData,
   deleteAdminAppointment,
 };
