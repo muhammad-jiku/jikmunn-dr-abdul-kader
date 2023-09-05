@@ -6,6 +6,7 @@ import {
   clearErrors,
 } from '../../../../actions/appointmentActions';
 import { toast } from 'react-toastify';
+import AppointmentRow from './AppointmentRow';
 
 const AllAppointments = () => {
   const navigate = useNavigate();
@@ -45,7 +46,15 @@ const AllAppointments = () => {
                   <th>Action</th>
                 </tr>
               </thead>
-              <tbody>{console.log(appointments)}</tbody>
+              <tbody>
+                {appointments?.map((appointment, idx) => (
+                  <AppointmentRow
+                    key={idx}
+                    appointment={appointment}
+                    idx={idx}
+                  />
+                ))}
+              </tbody>
             </table>
           </div>
         </div>
