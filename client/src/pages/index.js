@@ -20,3 +20,4 @@ export { default as AllPricesPage } from './DashboardPages/Admin/Prices/AllPrice
 export { default as UpdatePricePage } from './DashboardPages/Admin/Prices/UpdatePricePage';
 export { default as AllUsersPage } from './DashboardPages/Admin/Users/AllUsersPage';
 export { default as UpdateUserPage } from './DashboardPages/Admin/Users/UpdateUserPage';
+export { default as AllAppointmentsPage } from './DashboardPages/Admin/Appointments/AllAppointmentsPage';
