@@ -25,14 +25,16 @@ const Sidebar = () => {
               My Profile
             </Link>
           </li>
-          <li>
-            <Link
-              to={'/dashboard/me/appointments'}
-              className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
-            >
-              My Appointments
-            </Link>
-          </li>
+          {user?.role === 'User' && (
+            <li>
+              <Link
+                to={'/dashboard/me/appointments'}
+                className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
+              >
+                My Appointments
+              </Link>
+            </li>
+          )}
           {!user?.googleId && (
             <li>
               <Link
