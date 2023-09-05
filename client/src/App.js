@@ -33,6 +33,7 @@ import {
   AllUsersPage,
   UpdateUserPage,
   AllAppointmentsPage,
+  UpdateAppointmentPage,
 } from './pages';
 import { ToastContainer } from 'react-toastify';
 import { Elements } from '@stripe/react-stripe-js';
@@ -249,6 +250,18 @@ function App() {
                 user={user}
               >
                 <AllAppointmentsPage />
+              </RequiredAdmin>
+            }
+          />
+          <Route
+            path='admin/appointment/:id'
+            element={
+              <RequiredAdmin
+                loading={loading}
+                isAuthenticated={isAuthenticated}
+                user={user}
+              >
+                <UpdateAppointmentPage />
               </RequiredAdmin>
             }
           />

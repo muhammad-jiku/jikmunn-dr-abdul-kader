@@ -21,3 +21,4 @@ export { default as UpdatePricePage } from './DashboardPages/Admin/Prices/Update
 export { default as AllUsersPage } from './DashboardPages/Admin/Users/AllUsersPage';
 export { default as UpdateUserPage } from './DashboardPages/Admin/Users/UpdateUserPage';
 export { default as AllAppointmentsPage } from './DashboardPages/Admin/Appointments/AllAppointmentsPage';
+export { default as UpdateAppointmentPage } from './DashboardPages/Admin/Appointments/UpdateAppointmentPage';
