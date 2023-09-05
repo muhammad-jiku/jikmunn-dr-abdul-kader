@@ -8,7 +8,7 @@ import {
 } from '../../../actions/appointmentActions';
 import AppointmentRow from './AppointmentRow';
 
-const AllAppointments = () => {
+const Appointments = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -70,4 +70,4 @@ const AllAppointments = () => {
   );
 };
 
-export default AllAppointments;
+export default Appointments;

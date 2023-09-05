@@ -1,10 +1,10 @@
 import React from 'react';
-import { AllAppointments } from '../../../components';
+import { Appointments } from '../../../components';
 
 const AllAppointmentsPage = () => {
   return (
     <>
-      <AllAppointments />
+      <Appointments />
     </>
   );
 };
