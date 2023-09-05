@@ -23,7 +23,7 @@ import {
   MyDashboardPage,
   MyProfilePage,
   UpdatePasswordPage,
-  AllAppointmentsPage,
+  AppointmentsPage,
   NewServicePage,
   AllServicesPage,
   UpdateServicePage,
@@ -139,7 +139,7 @@ function App() {
             path='me/appointments'
             element={
               <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
-                <AllAppointmentsPage />
+                <AppointmentsPage />
               </RequiredAuth>
             }
           />

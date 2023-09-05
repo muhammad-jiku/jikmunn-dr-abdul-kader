@@ -1,7 +1,7 @@
 import React from 'react';
 import { Appointments } from '../../../components';
 
-const AllAppointmentsPage = () => {
+const AppointmentsPage = () => {
   return (
     <>
       <Appointments />
@@ -9,4 +9,4 @@ const AllAppointmentsPage = () => {
   );
 };
 
-export default AllAppointmentsPage;
+export default AppointmentsPage;
