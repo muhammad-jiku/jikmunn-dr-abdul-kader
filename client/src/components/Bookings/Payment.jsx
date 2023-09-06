@@ -143,10 +143,10 @@ const Payment = () => {
 
   useEffect(() => {
     if (isSubmitSuccessful && success) {
+      localStorage?.removeItem('bookingItems');
       reset();
       toast.success('Payment Successfull!');
       navigate('/success');
-      localStorage?.removeItem('bookingItems');
     }
   }, [dispatch, isSubmitSuccessful, success, reset, navigate]);
 
