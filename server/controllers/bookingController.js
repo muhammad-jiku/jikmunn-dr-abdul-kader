@@ -91,7 +91,7 @@ const getAdminBookingData = AsyncError(async (req, res, next) => {
 const updateAdminAppointmentData = AsyncError(async (req, res, next) => {
   try {
     const { id } = await req.params;
-    const { status } = await req.body;
+    const { bookingStatus } = await req.body;
     let appointment = await Booking.findById({ _id: id });
 
     if (!appointment) {
@@ -104,10 +104,10 @@ const updateAdminAppointmentData = AsyncError(async (req, res, next) => {
       );
     }
 
-    if (status === 'Succeeded') {
-      appointment.bookingStatus = status;
+    if (bookingStatus === 'Succeeded') {
+      appointment.bookingStatus = bookingStatus;
     } else {
-      appointment.bookingStatus = status;
+      appointment.bookingStatus = bookingStatus;
     }
 
     const updatedAppointment = await appointment.save({
