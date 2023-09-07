@@ -75,7 +75,7 @@ export const allTestimonialsReducer = (
   }
 };
 
-export const adminTestimonial = (state = {}, action) => {
+export const adminTestimonialReducer = (state = {}, action) => {
   switch (action.type) {
     case ADMIN_DELETE_TESTIMONIAL_REQUEST:
       return {

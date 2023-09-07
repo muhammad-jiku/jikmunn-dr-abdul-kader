@@ -16,6 +16,11 @@ import {
   adminServiceReducer,
 } from '../reducers/serviceReducer';
 import {
+  adminTestimonialReducer,
+  allTestimonialsReducer,
+  newTestimonialReducer,
+} from '../reducers/testimonialReducer';
+import {
   adminNewPriceReducer,
   allPricesReducer,
   allAdminPricesReducer,
@@ -44,6 +49,10 @@ const reducer = combineReducers({
   serviceDetailsInfo: serviceDetailsReducer,
   serviceDetails: adminServiceDetailsReducer,
   service: adminServiceReducer,
+  // testimonial
+  newTestimonial: newTestimonialReducer,
+  allTestimonials: allTestimonialsReducer,
+  testimonial: adminTestimonialReducer,
   // price
   newPrice: adminNewPriceReducer,
   prices: allPricesReducer,
