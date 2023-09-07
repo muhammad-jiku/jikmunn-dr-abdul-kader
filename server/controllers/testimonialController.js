@@ -1,6 +1,47 @@
 const AsyncError = require('../middlewares/errors/AsyncError');
 const Testimonial = require('../models/Testimonial');
 
+const createTestimonial = AsyncError(async (req, res) => {
+  try {
+    const { id, username, email, avatar } = await req.user;
+    const { testimonial } = await req.body;
+
+    const testimonialInfo = {
+      username,
+      email,
+      image: avatar?.url,
+      testimonial,
+    };
+
+    const opts = {
+      runValidators: true,
+      new: true,
+    };
+
+    let testimonialDetails = await Testimonial.findByIdAndUpdate(
+      { user: id },
+      {
+        $set: testimonialInfo,
+      },
+      {
+        opts,
+      }
+    ).exec();
+
+    testimonialDetails = await Testimonial.findById({ user: id });
+
+    return res.status(200).json({
+      success: true,
+      data: testimonialDetails,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+    });
+  }
+});
+
 const getAllTestimonials = AsyncError(async (req, res) => {
   try {
     const testimonials = await Testimonial.find({});
@@ -43,6 +84,7 @@ const deleteAdminTestimonial = AsyncError(async (req, res, next) => {
 });
 
 module.exports = {
+  createTestimonial,
   getAllTestimonials,
   deleteAdminTestimonial,
 };
