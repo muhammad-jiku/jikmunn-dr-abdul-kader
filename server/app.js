@@ -8,6 +8,7 @@ const session = require('express-session');
 const ErrorChecker = require('./middlewares/errors/ErrorChecker');
 const authRoute = require('./routes/authRoute');
 const serviceRoute = require('./routes/serviceRoute');
+const testimonialRoute = require('./routes/testimonialRoute');
 const userRoute = require('./routes/userRoute');
 const priceRoute = require('./routes/priceRoute');
 const bookingRoute = require('./routes/bookingRoute');
@@ -42,6 +43,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1', authRoute);
 app.use('/api/v1', userRoute);
 app.use('/api/v1', serviceRoute);
+app.use('/api/v1', testimonialRoute);
 app.use('/api/v1', priceRoute);
 app.use('/api/v1', bookingRoute);
 app.use('/api/v1', paymentRoute);
