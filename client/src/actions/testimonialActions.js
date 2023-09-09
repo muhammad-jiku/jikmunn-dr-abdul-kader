@@ -3,6 +3,9 @@ import {
   ADD_TESTIMONIAL_FAILURE,
   ADD_TESTIMONIAL_REQUEST,
   ADD_TESTIMONIAL_SUCCESS,
+  ALL_TESTIMONIALS_FAILURE,
+  ALL_TESTIMONIALS_REQUEST,
+  ALL_TESTIMONIALS_SUCCESS,
 } from '../constants/testimonialConstant';
 
 export const addNewTestimonial = (testimonialInfo) => async (dispatch) => {
@@ -31,6 +34,26 @@ export const addNewTestimonial = (testimonialInfo) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ADD_TESTIMONIAL_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const allTestimonials = () => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ALL_TESTIMONIALS_REQUEST,
+    });
+
+    const { data } = await axios.get('/api/v1/testimonials');
+
+    await dispatch({
+      type: ALL_TESTIMONIALS_SUCCESS,
+      payload: data?.data,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ALL_TESTIMONIALS_FAILURE,
       payload: error.response.data.message,
     });
   }
