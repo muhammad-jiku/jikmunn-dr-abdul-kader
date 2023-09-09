@@ -9,6 +9,7 @@ import {
   ADMIN_DELETE_TESTIMONIAL_FAILURE,
   ADMIN_DELETE_TESTIMONIAL_REQUEST,
   ADMIN_DELETE_TESTIMONIAL_SUCCESS,
+  CLEAR_ERRORS,
 } from '../constants/testimonialConstant';
 
 export const addNewTestimonial = (testimonialInfo) => async (dispatch) => {
@@ -89,4 +90,10 @@ export const adminDeleteTestimonial = (id) => async (dispatch) => {
       payload: error.response.data.message,
     });
   }
+};
+
+export const clearErrors = () => async (dispatch) => {
+  await dispatch({
+    type: CLEAR_ERRORS,
+  });
 };
