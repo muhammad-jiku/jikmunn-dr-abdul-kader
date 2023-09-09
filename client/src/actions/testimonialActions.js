@@ -6,6 +6,9 @@ import {
   ALL_TESTIMONIALS_FAILURE,
   ALL_TESTIMONIALS_REQUEST,
   ALL_TESTIMONIALS_SUCCESS,
+  ADMIN_DELETE_TESTIMONIAL_FAILURE,
+  ADMIN_DELETE_TESTIMONIAL_REQUEST,
+  ADMIN_DELETE_TESTIMONIAL_SUCCESS,
 } from '../constants/testimonialConstant';
 
 export const addNewTestimonial = (testimonialInfo) => async (dispatch) => {
@@ -54,6 +57,35 @@ export const allTestimonials = () => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: ALL_TESTIMONIALS_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const adminDeleteTestimonial = (id) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: ADMIN_DELETE_TESTIMONIAL_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        authorization: `Bearer ${localStorage?.getItem('token')}`,
+        'content-type': 'application/json',
+      },
+    };
+    const { data } = await axios.delete(
+      `/api/v1/admin/testimonial/${id}`,
+      config
+    );
+
+    await dispatch({
+      type: ADMIN_DELETE_TESTIMONIAL_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: ADMIN_DELETE_TESTIMONIAL_FAILURE,
       payload: error.response.data.message,
     });
   }
