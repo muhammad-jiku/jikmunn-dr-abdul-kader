@@ -13,9 +13,7 @@ const testimonialRoute = express.Router({
   caseSensitive: true,
 });
 
-testimonialRoute
-  .route('/create-testimonial')
-  .put(isAuthenticated, createTestimonial);
+testimonialRoute.route('/testimonial').put(isAuthenticated, createTestimonial);
 testimonialRoute.route('/testimonials').get(getAllTestimonials);
 testimonialRoute
   .route('/admin/testimonial/:id')
