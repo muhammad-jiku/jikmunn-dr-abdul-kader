@@ -48,7 +48,7 @@ export const newTestimonialReducer = (state = { testimonial: {} }, action) => {
 };
 
 export const allTestimonialsReducer = (
-  state = { testimoninals: [] },
+  state = { testimonials: [] },
   action
 ) => {
   switch (action.type) {
@@ -60,7 +60,7 @@ export const allTestimonialsReducer = (
     case ALL_TESTIMONIALS_SUCCESS:
       return {
         loading: false,
-        testimoninals: action.payload,
+        testimonials: action.payload,
       };
 
     case ALL_TESTIMONIALS_FAILURE:

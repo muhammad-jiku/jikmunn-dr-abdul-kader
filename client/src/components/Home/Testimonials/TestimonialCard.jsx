@@ -1,29 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Parallax, Pagination, Navigation } from 'swiper/modules';
+import { useDispatch, useSelector } from 'react-redux';
+import profileImg from '../../../assets/images/default_profile_avatar.png';
+import {
+  allTestimonials,
+  clearErrors,
+} from '../../../actions/testimonialActions';
+import { toast } from 'react-toastify';
 // import '../../../styles/testimonial.css';
 
 const TestimonialCard = () => {
-  const data = [
-    {
-      name: 'Ekram',
-      review:
-        'Fancy is bleak spoken back hopes unbroken sat a. Word oh chamber the press vainly, and no burden radiant i this, door vainly nearly back of nothing, my its nightly dream heaven whom the my or we, nothing disaster streaming so there, thy he grim broken bird a the the violet, bird not angels i whom quaff what something soul shall. Devil this shore unbroken nevermore hath chamber he was, that into lonely its footfalls placid my at. Tell the then smiling decorum soul. Evilprophet he door my radiant. Angels unbrokenquit not out into, was again throws the so the but clasp burning. More i and lining on a radiant croaking chamber, one that feather when and i quoth thrilled i, master meant and lining raven with this theeby soul, these spoken but still floor distinctly lamplight home let. What the lie my bird my, and his whether and devil.',
-    },
-    {
-      name: 'Rashed',
-      review:
-        'Fancy is bleak spoken back hopes unbroken sat a. Word oh chamber the press vainly, and no burden radiant i this, door vainly nearly back of nothing, my its nightly dream heaven whom the my or we, nothing disaster streaming so there, thy he grim broken bird a the the violet, bird not angels i whom quaff what something soul shall. Devil this shore unbroken nevermore hath chamber he was, that into lonely its footfalls placid my at. Tell the then smiling decorum soul. Evilprophet he door my radiant. Angels unbrokenquit not out into, was again throws the so the but clasp burning. More i and lining on a radiant croaking chamber, one that feather when and i quoth thrilled i, master meant and lining raven with this theeby soul, these spoken but still floor distinctly lamplight home let. What the lie my bird my, and his whether and devil.',
-    },
-    {
-      name: 'Iqbal',
-      review:
-        'Fancy is bleak spoken back hopes unbroken sat a. Word oh chamber the press vainly, and no burden radiant i this, door vainly nearly back of nothing, my its nightly dream heaven whom the my or we, nothing disaster streaming so there, thy he grim broken bird a the the violet, bird not angels i whom quaff what something soul shall. Devil this shore unbroken nevermore hath chamber he was, that into lonely its footfalls placid my at. Tell the then smiling decorum soul. Evilprophet he door my radiant. Angels unbrokenquit not out into, was again throws the so the but clasp burning. More i and lining on a radiant croaking chamber, one that feather when and i quoth thrilled i, master meant and lining raven with this theeby soul, these spoken but still floor distinctly lamplight home let. What the lie my bird my, and his whether and devil.',
-    },
-  ];
+  const dispatch = useDispatch();
+  const { loading, error, testimonials } = useSelector(
+    (state) => state?.allTestimonials
+  );
+
+  useEffect(() => {
+    dispatch(allTestimonials());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Something Went Wrong!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <div className='p-4'>
@@ -45,11 +51,28 @@ const TestimonialCard = () => {
         modules={[Autoplay, Parallax, Pagination, Navigation]}
       >
         <div slot='container-start' data-swiper-parallax='-23%'></div>
-        {data?.map((testimonial, i) => (
+        {testimonials?.map((t, i) => (
           <SwiperSlide key={i}>
             <div className='p-4' data-swiper-parallax='-100'>
-              <p className='text-black text-sm'>{testimonial?.review}</p>
-              <p className='text-xl my-4'>{testimonial?.name}</p>
+              <p className='text-black text-sm text-justify'>
+                {t?.testimonial}
+              </p>
+              <div className='flex items-center my-4 space-x-3 cursor-pointer'>
+                <img
+                  className='w-10 h-10 rounded-full'
+                  src={t?.image?.length > 0 ? t?.image : profileImg}
+                  loading='lazy'
+                  alt={t ? t?.username : 'user'}
+                />
+                <div className='block space-y-1 font-medium'>
+                  <p className='text-xs'>
+                    {t?.username}
+                    <time className='block text-xs text-gray'>
+                      {String(t?.createdAt).substr(0, 10)}
+                    </time>
+                  </p>
+                </div>
+              </div>
             </div>
           </SwiperSlide>
         ))}
