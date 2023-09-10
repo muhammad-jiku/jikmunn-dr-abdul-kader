@@ -22,3 +22,4 @@ export { default as AllUsersPage } from './DashboardPages/Admin/Users/AllUsersPa
 export { default as UpdateUserPage } from './DashboardPages/Admin/Users/UpdateUserPage';
 export { default as AllAppointmentsPage } from './DashboardPages/Admin/Appointments/AllAppointmentsPage';
 export { default as UpdateAppointmentPage } from './DashboardPages/Admin/Appointments/UpdateAppointmentPage';
+export { default as AllTestimonialsPage } from './DashboardPages/Admin/Testimonials/AllTestimonialsPage';
