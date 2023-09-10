@@ -267,7 +267,7 @@ function App() {
             }
           />
           <Route
-            path='admin/reviews'
+            path='admin/testimonials'
             element={
               <RequiredAdmin
                 loading={loading}

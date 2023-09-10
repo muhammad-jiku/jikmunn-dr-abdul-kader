@@ -8,7 +8,7 @@ import {
 } from '../../actions/testimonialActions';
 import { ADD_TESTIMONIAL_RESET } from '../../constants/testimonialConstant';
 
-const ServiceReview = () => {
+const ServiceTestimonial = () => {
   const dispatch = useDispatch();
   const { error, success } = useSelector((state) => state?.newTestimonial);
   const [review, setReview] = useState('');
@@ -110,4 +110,4 @@ const ServiceReview = () => {
   );
 };
 
-export default ServiceReview;
+export default ServiceTestimonial;

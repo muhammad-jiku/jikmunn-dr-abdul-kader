@@ -6,7 +6,7 @@ import { clearErrors, serviceDetails } from '../../actions/serviceActions';
 import bgImg from '../../assets/images/bg2.jpg';
 import { useParams } from 'react-router-dom';
 import ServiceAppointmentBook from './ServiceAppointmentBook';
-import ServiceReview from './ServiceReview';
+import ServiceTestimonial from './ServiceTestimonial';
 
 const ServiceDetailsInfo = () => {
   const [showModal, setShowModal] = useState(false);
@@ -99,8 +99,8 @@ const ServiceDetailsInfo = () => {
           />
         ) : null}
       </div>
-      {/* Reviews */}
-      {isAuthenticated && user?.role === 'User' && <ServiceReview />}
+      {/* Testimonials */}
+      {isAuthenticated && user?.role === 'User' && <ServiceTestimonial />}
     </>
   );
 };

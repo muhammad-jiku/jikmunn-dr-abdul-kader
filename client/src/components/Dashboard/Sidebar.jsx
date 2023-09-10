@@ -103,10 +103,10 @@ const Sidebar = () => {
 
               <li>
                 <Link
-                  to={'/dashboard/admin/reviews'}
+                  to={'/dashboard/admin/testimonials'}
                   className='block px-3 py-2 text-gray hover:bg-blue-100 hover:text-main rounded-md'
                 >
-                  All Reviews
+                  All Testimonials
                 </Link>
               </li>
               <hr className='my-2 border-2 border-slate-300' />
