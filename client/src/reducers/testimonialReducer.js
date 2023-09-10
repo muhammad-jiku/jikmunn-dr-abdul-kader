@@ -2,6 +2,7 @@ import {
   ADD_TESTIMONIAL_FAILURE,
   ADD_TESTIMONIAL_REQUEST,
   ADD_TESTIMONIAL_SUCCESS,
+  ADD_TESTIMONIAL_RESET,
   ALL_TESTIMONIALS_FAILURE,
   ALL_TESTIMONIALS_REQUEST,
   ALL_TESTIMONIALS_SUCCESS,
@@ -12,32 +13,35 @@ import {
   CLEAR_ERRORS,
 } from '../constants/testimonialConstant';
 
-export const newTestimonialReducer = (state = {}, action) => {
+export const newTestimonialReducer = (state = { testimonial: {} }, action) => {
   switch (action.type) {
     case ADD_TESTIMONIAL_REQUEST:
       return {
-        loading: true,
         ...state,
+        loading: true,
       };
-
     case ADD_TESTIMONIAL_SUCCESS:
       return {
         loading: false,
         success: action.payload.success,
-        testimoninal: action.payload.data,
+        testimonial: action.payload.data,
       };
-
     case ADD_TESTIMONIAL_FAILURE:
       return {
+        ...state,
         loading: false,
         error: action.payload,
+      };
+    case ADD_TESTIMONIAL_RESET:
+      return {
+        ...state,
+        success: false,
       };
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
-
     default:
       return state;
   }

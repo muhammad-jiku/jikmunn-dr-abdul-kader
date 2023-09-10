@@ -11,6 +11,7 @@ const createTestimonial = AsyncError(async (req, res) => {
       email,
       image: avatar?.url,
       testimonial,
+      user: id,
     };
 
     const opts = {
@@ -18,8 +19,10 @@ const createTestimonial = AsyncError(async (req, res) => {
       new: true,
     };
 
-    let testimonialDetails = await Testimonial.findByIdAndUpdate(
-      { user: id },
+    await Testimonial.create(testimonialInfo);
+
+    let testimonialDetails = await Testimonial.findOneAndUpdate(
+      { email: email },
       {
         $set: testimonialInfo,
       },
@@ -28,7 +31,9 @@ const createTestimonial = AsyncError(async (req, res) => {
       }
     ).exec();
 
-    testimonialDetails = await Testimonial.findById({ user: id });
+    testimonialDetails = await Testimonial.findOne({
+      email: email,
+    });
 
     return res.status(200).json({
       success: true,
