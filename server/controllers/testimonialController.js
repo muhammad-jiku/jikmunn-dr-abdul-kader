@@ -6,6 +6,8 @@ const createTestimonial = AsyncError(async (req, res) => {
     const { id, username, email, avatar } = await req.user;
     const { testimonial } = await req.body;
 
+    const isTestimonialExists = await Testimonial.findOne({ email });
+
     const testimonialInfo = {
       username,
       email,
@@ -14,31 +16,42 @@ const createTestimonial = AsyncError(async (req, res) => {
       user: id,
     };
 
-    const opts = {
-      runValidators: true,
-      new: true,
-    };
+    if (isTestimonialExists) {
+      const opts = {
+        runValidators: true,
+        new: true,
+      };
 
-    await Testimonial.create(testimonialInfo);
+      let testimonialDetails = await Testimonial.findOneAndUpdate(
+        { email },
+        {
+          $set: testimonialInfo,
+        },
+        {
+          opts,
+        }
+      ).exec();
 
-    let testimonialDetails = await Testimonial.findOneAndUpdate(
-      { email: email },
-      {
-        $set: testimonialInfo,
-      },
-      {
-        opts,
-      }
-    ).exec();
+      testimonialDetails = await Testimonial.findOne({
+        email,
+      });
 
-    testimonialDetails = await Testimonial.findOne({
-      email: email,
-    });
+      return res.status(200).json({
+        success: true,
+        data: testimonialDetails,
+      });
+    } else {
+      let testimonialDetails = await Testimonial.create(testimonialInfo);
 
-    return res.status(200).json({
-      success: true,
-      data: testimonialDetails,
-    });
+      testimonialDetails = await Testimonial.findOne({
+        email,
+      });
+
+      return res.status(201).json({
+        success: true,
+        data: testimonialDetails,
+      });
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({
