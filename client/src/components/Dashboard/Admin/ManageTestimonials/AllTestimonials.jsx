@@ -5,6 +5,7 @@ import {
   allTestimonials,
   clearErrors,
 } from '../../../../actions/testimonialActions';
+import TestimonialRow from './TestimonialRow';
 
 const AllTestimonials = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ const AllTestimonials = () => {
               </thead>
               <tbody>
                 {testimonials?.map((testimonial, idx) => (
-                  <>{console.log(testimonial)}</>
+                  <>
+                    <TestimonialRow testimonial={testimonial} idx={idx} />
+                  </>
                 ))}
               </tbody>
             </table>
