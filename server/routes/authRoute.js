@@ -4,6 +4,8 @@ const {
   signIn,
   googleSignIn,
   signOut,
+  forgotPassword,
+  resetPassword,
 } = require('../controllers/authController');
 
 const authRoute = express.Router({
@@ -14,5 +16,7 @@ authRoute.route('/auth/signup').post(signUp);
 authRoute.route('/auth/signin').post(signIn);
 authRoute.route('/auth/google').post(googleSignIn);
 authRoute.route('/auth/signout').post(signOut);
+authRoute.route('/auth/forget-password').post(forgotPassword);
+authRoute.route('/auth/reset-password/:token').put(resetPassword);
 
 module.exports = authRoute;
