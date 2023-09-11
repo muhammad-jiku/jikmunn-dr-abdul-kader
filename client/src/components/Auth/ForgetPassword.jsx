@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrors, forgetUserPassword } from '../../actions/authActions';
+import { toast } from 'react-toastify';
 
 const ForgetPassword = () => {
+  const dispatch = useDispatch();
+  const { loading, error, message } = useSelector((state) => state?.password);
+
   const [email, setEmail] = useState('');
 
   const {
     register,
+    getValues,
     formState: { errors, isSubmitSuccessful },
     reset,
     handleSubmit,
@@ -15,8 +22,35 @@ const ForgetPassword = () => {
 
   const onSubmit = async (data, e) => {
     await e.preventDefault();
-    console.log(data);
+    const emailData = {
+      email,
+    };
+
+    if (email?.length > 0) {
+      await dispatch(forgetUserPassword(emailData));
+    }
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful && message) {
+      // console.log(message);
+      toast.success(message);
+      setTimeout(() => {
+        reset({
+          ...getValues(),
+          review: '',
+        });
+      }, 2500);
+    }
+  }, [isSubmitSuccessful, message, reset, getValues]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Invalid Email!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <div className='container mx-auto my-4 lg:my-10 p-2 min-h-[80vh] sm:min-h-screen flex flex-col items-center justify-center'>

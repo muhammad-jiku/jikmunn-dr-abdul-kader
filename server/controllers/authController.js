@@ -6,6 +6,7 @@ const AsyncError = require('../middlewares/errors/AsyncError');
 const { v4: uuidv4 } = require('uuid');
 const { OAuth2Client } = require('google-auth-library');
 const ErrorHandler = require('../middlewares/errors/ErrorHandler');
+const sendEmail = require('../utils/sendEmail');
 
 const oAuth2Client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
@@ -179,17 +180,17 @@ const forgotPassword = AsyncError(async (req, res, next) => {
 
   try {
     await sendEmail({
-      email: user.email,
+      email: user?.email,
       subject: `Dr. Abdul kader website's password recovery`,
       message,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
-      message: `Email sent to ${user.email} successfully`,
+      message: `Email sent to ${user?.email} successfully`,
     });
   } catch (error) {
-    // console.log(error)
+    console.log(error);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
@@ -197,11 +198,11 @@ const forgotPassword = AsyncError(async (req, res, next) => {
       validateBeforeSave: false,
     });
 
-    res.status(500).json({
+    return res.status(500).json({
       message: 'Something went wrong',
     });
 
-    return next(new ErrorHandler(error.message, 500));
+    //  next(new ErrorHandler(error.message, 500));
   }
 });
 
