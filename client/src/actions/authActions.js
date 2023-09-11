@@ -22,6 +22,9 @@ import {
   LOAD_USER_FAILURE,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
+  RESET_PASSWORD_FAILURE,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
   SIGNIN_AUTH_FAILURE,
   SIGNIN_AUTH_REQUEST,
   SIGNIN_AUTH_SUCCESS,
@@ -149,6 +152,36 @@ export const forgetUserPassword = (emailData) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: FORGET_PASSWORD_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const resetUserPassword = (token, passwords) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: RESET_PASSWORD_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/v1/auth/reset-password/${token}`,
+      passwords,
+      config
+    );
+
+    await dispatch({
+      type: RESET_PASSWORD_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    await dispatch({
+      type: RESET_PASSWORD_FAILURE,
       payload: error.response.data.message,
     });
   }
