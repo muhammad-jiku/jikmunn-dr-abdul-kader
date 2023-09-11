@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-const Payment = () => {
+const ForgetPassword = () => {
+  const [email, setEmail] = useState('');
+
   const {
-    // register,
-    formState: { isSubmitSuccessful },
+    register,
+    formState: { errors, isSubmitSuccessful },
     reset,
     handleSubmit,
   } = useForm({
@@ -29,9 +31,26 @@ const Payment = () => {
         <form className='p-1 md:p-4 w-full' onSubmit={handleSubmit(onSubmit)}>
           {/* Email */}
           <input
+            type='email'
             placeholder='Email'
-            className='my-2 input input-bordered bg-white border-main text-xl w-full'
+            defaultValue={email}
+            // onChange={(e) => setPassword(e.target.value)}
+            {...register('email', {
+              onChange: (e) => setEmail(e.target.value),
+              required: {
+                value: true,
+                message: 'Please fill up the email field',
+              },
+            })}
+            className='input input-bordered bg-white border-main w-full my-2'
           />
+
+          {/* Error messages */}
+          <p className='my-2 text-sm text-red-500 font-semibold'>
+            {errors?.email?.type === 'required' && (
+              <span>{errors?.email?.message}</span>
+            )}
+          </p>
 
           <div className='form-control mt-2'>
             <input
@@ -46,4 +65,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default ForgetPassword;
