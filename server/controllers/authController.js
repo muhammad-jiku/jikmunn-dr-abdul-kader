@@ -200,10 +200,63 @@ const forgotPassword = AsyncError(async (req, res, next) => {
   }
 });
 
+const resetPassword = AsyncError(async (req, res, next) => {
+  try {
+    const { token } = await req.params;
+    const { newPassword, passwordConfirm } = await req.body;
+
+    // Creating Token Hash
+    const resetPasswordToken = crypto
+      .createHash('sha256')
+      .update(token)
+      .digest('hex');
+
+    const user = await User.findOne({
+      resetPasswordToken,
+      resetPasswordExpire: {
+        $gt: Date.now(),
+      },
+    });
+
+    if (!user) {
+      return next(
+        new ErrorHandler(
+          'Reset Password Token is invalid or has been expired',
+          400
+        )
+      );
+    }
+
+    if (newPassword !== passwordConfirm) {
+      return next(new ErrorHandler('Password does not password', 400));
+    }
+
+    user.password = newPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save();
+
+    const resetPassToken = await generateToken(user);
+
+    return res.status(200).json({
+      success: true,
+      data: user,
+      resetPassToken,
+    });
+  } catch (error) {
+    // console.log(error)
+    return res.status(500).json({
+      message: 'Something went wrong',
+    });
+  }
+});
+
 module.exports = {
   signUp,
   signIn,
   googleSignIn,
   signOut,
   forgotPassword,
+  resetPassword,
 };
