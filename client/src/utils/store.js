@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {
   authReducer,
+  passwordReducer,
   profileReducer,
   allUsersReducer,
   userDetailsReducer,
@@ -39,6 +40,7 @@ import {
 const reducer = combineReducers({
   // user
   user: authReducer,
+  password: passwordReducer,
   profile: profileReducer,
   allUsers: allUsersReducer,
   userDetails: userDetailsReducer,
