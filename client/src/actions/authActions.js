@@ -13,6 +13,9 @@ import {
   ADMIN_USER_DETAILS_REQUEST,
   ADMIN_USER_DETAILS_SUCCESS,
   CLEAR_ERRORS,
+  FORGET_PASSWORD_FAILURE,
+  FORGET_PASSWORD_REQUEST,
+  FORGET_PASSWORD_SUCCESS,
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
   GOOGLE_AUTH_SUCCESS,
@@ -116,6 +119,36 @@ export const googleSignInUser = (userDataCode) => async (dispatch) => {
   } catch (error) {
     await dispatch({
       type: GOOGLE_AUTH_FAILURE,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const forgetUserPassword = (emailData) => async (dispatch) => {
+  try {
+    await dispatch({
+      type: FORGET_PASSWORD_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.post(
+      `/api/v1/auth/forget-password`,
+      emailData,
+      config
+    );
+
+    await dispatch({
+      type: FORGET_PASSWORD_SUCCESS,
+      payload: data.message,
+    });
+  } catch (error) {
+    await dispatch({
+      type: FORGET_PASSWORD_FAILURE,
       payload: error.response.data.message,
     });
   }
