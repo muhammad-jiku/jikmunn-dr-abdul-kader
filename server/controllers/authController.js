@@ -237,7 +237,8 @@ const resetPassword = AsyncError(async (req, res, next) => {
       return next(new ErrorHandler('Password does not password', 400));
     }
 
-    user.password = newPassword;
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 

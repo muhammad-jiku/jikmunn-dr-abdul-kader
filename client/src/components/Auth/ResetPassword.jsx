@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { resetUserPassword, clearErrors } from '../../actions/authActions';
+import { toast } from 'react-toastify';
 
 const ResetPassword = () => {
+  const { token } = useParams();
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { loading, error, success } = useSelector((state) => state?.password);
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -23,8 +33,36 @@ const ResetPassword = () => {
 
   const onSubmit = async (data, e) => {
     await e.preventDefault();
-    console.log(data);
+
+    const passwordsInfo = {
+      newPassword,
+      passwordConfirm: confirmPassword,
+    };
+
+    // console.log(token, passwordsInfo);
+    if (newPassword === confirmPassword) {
+      await dispatch(resetUserPassword(token, passwordsInfo));
+    }
   };
+
+  useEffect(() => {
+    if (isSubmitSuccessful && success) {
+      reset();
+      toast.success('Password reset successfully!');
+      navigate('/signin');
+    }
+
+    if (success) {
+    }
+  }, [isSubmitSuccessful, success, reset, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error);
+      toast.error('Invalid Password!');
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error]);
 
   return (
     <div className='container mx-auto my-4 lg:my-10 p-2 min-h-[80vh] sm:min-h-screen flex flex-col items-center justify-center'>
