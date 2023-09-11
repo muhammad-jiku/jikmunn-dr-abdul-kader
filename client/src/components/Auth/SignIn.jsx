@@ -28,6 +28,8 @@ const SignIn = () => {
   const handleClickShowConfirmPassword = () =>
     setShowConfirmPassword((show) => !show);
 
+  const handleForgetPassword = () => navigate('/forget-password');
+
   const {
     register,
     formState: { errors, isSubmitSuccessful },
@@ -267,7 +269,7 @@ const SignIn = () => {
         </p>
         <p
           className='text-gray text-sm text-center font-bold cursor-pointer'
-          // onClick={handlePasswordReset}
+          onClick={handleForgetPassword}
         >
           Forget password?
         </p>

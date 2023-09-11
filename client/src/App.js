@@ -76,7 +76,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
-        <Route path='/services' element={<ServicesPage />} />{' '}
+        <Route path='/services' element={<ServicesPage />} />
         <Route
           path='/services/:title'
           element={
@@ -89,7 +89,7 @@ function App() {
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='/signin' element={<AuthPage />} />
         <Route path='/forget-password' element={<ForgetPasswordPage />} />
-        <Route path='/reset-password' element={<ResetPasswordPage />} />
+        <Route path='/reset-password/:token' element={<ResetPasswordPage />} />
         <Route
           path='/bookings'
           element={
