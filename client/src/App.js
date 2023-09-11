@@ -17,6 +17,7 @@ import {
   PricesPage,
   ContactsPage,
   AuthPage,
+  ForgetPasswordPage,
   BookingsPage,
   PaymentPage,
   SuccessPage,
@@ -86,6 +87,7 @@ function App() {
         <Route path='/prices' element={<PricesPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='/signin' element={<AuthPage />} />
+        <Route path='/forget-password' element={<ForgetPasswordPage />} />
         <Route
           path='/bookings'
           element={
