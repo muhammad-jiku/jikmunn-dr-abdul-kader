@@ -14,12 +14,18 @@ import {
   ADMIN_USER_DETAILS_REQUEST,
   ADMIN_USER_DETAILS_SUCCESS,
   CLEAR_ERRORS,
+  FORGET_PASSWORD_FAILURE,
+  FORGET_PASSWORD_REQUEST,
+  FORGET_PASSWORD_SUCCESS,
   GOOGLE_AUTH_FAILURE,
   GOOGLE_AUTH_REQUEST,
   GOOGLE_AUTH_SUCCESS,
   LOAD_USER_FAILURE,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
+  RESET_PASSWORD_FAILURE,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
   SIGNIN_AUTH_FAILURE,
   SIGNIN_AUTH_REQUEST,
   SIGNIN_AUTH_SUCCESS,
@@ -90,6 +96,45 @@ export const authReducer = (state = { user: {} }, action) => {
         error: action.payload,
       };
     case SIGNOUT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const passwordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case FORGET_PASSWORD_REQUEST:
+    case RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case FORGET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        message: action.payload,
+      };
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: action.payload,
+      };
+    case FORGET_PASSWORD_FAILURE:
+    case RESET_PASSWORD_FAILURE:
       return {
         ...state,
         loading: false,
