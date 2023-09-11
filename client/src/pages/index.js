@@ -6,6 +6,7 @@ export { default as PricesPage } from './PricesPage/PricesPage';
 export { default as ContactsPage } from './ContactsPage/ContactsPage';
 export { default as AuthPage } from './AuthPage/AuthPage';
 export { default as ForgetPasswordPage } from './AuthPage/ForgetPasswordPage';
+export { default as ResetPasswordPage } from './AuthPage/ResetPasswordPage';
 export { default as BookingsPage } from './BookingsPage/BookingsPage';
 export { default as PaymentPage } from './BookingsPage/PaymentPage';
 export { default as SuccessPage } from './BookingsPage/SuccessPage';

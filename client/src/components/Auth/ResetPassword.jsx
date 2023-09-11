@@ -185,7 +185,7 @@ const ResetPassword = () => {
             <input
               type='submit'
               className='btn bg-main text-white hover:bg-white hover:text-main hover:border-main uppercase'
-              value='Send'
+              value='reset'
             />
           </div>
         </form>

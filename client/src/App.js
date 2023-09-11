@@ -18,6 +18,7 @@ import {
   ContactsPage,
   AuthPage,
   ForgetPasswordPage,
+  ResetPasswordPage,
   BookingsPage,
   PaymentPage,
   SuccessPage,
@@ -88,6 +89,7 @@ function App() {
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='/signin' element={<AuthPage />} />
         <Route path='/forget-password' element={<ForgetPasswordPage />} />
+        <Route path='/reset-password' element={<ResetPasswordPage />} />
         <Route
           path='/bookings'
           element={
