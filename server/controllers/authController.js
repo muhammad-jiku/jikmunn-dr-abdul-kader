@@ -1,9 +1,11 @@
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { generateToken } = require('../utils/generateToken');
 const AsyncError = require('../middlewares/errors/AsyncError');
 const { v4: uuidv4 } = require('uuid');
 const { OAuth2Client } = require('google-auth-library');
+const ErrorHandler = require('../middlewares/errors/ErrorHandler');
 
 const oAuth2Client = new OAuth2Client(
   process.env.GOOGLE_CLIENT_ID,
@@ -143,9 +145,65 @@ const signOut = AsyncError(async (req, res) => {
   });
 });
 
+const forgotPassword = AsyncError(async (req, res, next) => {
+  // res.header('Access-Control-Allow-Origin', '*');
+  const { email } = await req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return next(new ErrorHandler('User not found', 404));
+  }
+
+  // Get Reset Password Token
+  const resetToken = crypto.randomBytes(64).toString('hex');
+
+  // Hashing and adding resetPasswordToken to userSchema
+  user.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  user.resetPasswordExpire = Date.now() + 24 * 60 * 60 * 1000;
+
+  await user.save({
+    validateBeforeSave: false,
+  });
+
+  // const resetPasswordUrl = `${req.protocol}://${req.get(
+  //   'host'
+  // )}/api/v1/password/reset/${resetToken}`;
+
+  const resetPasswordUrl = `${process.env.CLIENT_URI}/reset-password/${resetToken}`;
+
+  const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: `Dr. Abdul kader website's password recovery`,
+      message,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save({
+      validateBeforeSave: false,
+    });
+
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
+
 module.exports = {
   signUp,
   signIn,
   googleSignIn,
   signOut,
+  forgotPassword,
 };
