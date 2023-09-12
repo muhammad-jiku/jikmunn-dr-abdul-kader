@@ -23,6 +23,7 @@ const Navbar = ({ isAuthenticated, user }) => {
     dispatch(signOutUser());
     toast.success('Sign Out Successfully!! 👍');
     navigate('/');
+    setIsOpen(false);
   };
 
   const menuItems = (
@@ -31,6 +32,9 @@ const Navbar = ({ isAuthenticated, user }) => {
         <Link
           to={'/about'}
           className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          onClick={() => {
+            setIsOpen(false);
+          }}
         >
           About
         </Link>
@@ -39,6 +43,9 @@ const Navbar = ({ isAuthenticated, user }) => {
         <Link
           to={'/services'}
           className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          onClick={() => {
+            setIsOpen(false);
+          }}
         >
           Services
         </Link>
@@ -47,6 +54,9 @@ const Navbar = ({ isAuthenticated, user }) => {
         <Link
           to={'/prices'}
           className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          onClick={() => {
+            setIsOpen(false);
+          }}
         >
           Prices
         </Link>
@@ -54,7 +64,10 @@ const Navbar = ({ isAuthenticated, user }) => {
       {/* <li>
         <Link
           to={'/blogs'}
-             className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          onClick={() => {
+            setIsOpen(false);
+          }}
         >
           Blogs
         </Link>
@@ -63,6 +76,9 @@ const Navbar = ({ isAuthenticated, user }) => {
         <Link
           to={'/contacts'}
           className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          onClick={() => {
+            setIsOpen(false);
+          }}
         >
           Contacts
         </Link>
@@ -72,6 +88,9 @@ const Navbar = ({ isAuthenticated, user }) => {
           <Link
             to={'/bookings'}
             className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+            onClick={() => {
+              setIsOpen(false);
+            }}
           >
             My {bookingItems?.length > 1 ? 'Bookings' : 'Booking'} (
             {bookingItems?.length})
@@ -92,6 +111,9 @@ const Navbar = ({ isAuthenticated, user }) => {
           <Link
             to={'/signin'}
             className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+            onClick={() => {
+              setIsOpen(false);
+            }}
           >
             Sign in
           </Link>

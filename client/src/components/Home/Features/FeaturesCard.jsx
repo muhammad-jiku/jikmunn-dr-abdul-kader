@@ -1,8 +1,11 @@
 import React from 'react';
-// external import
+// external imports
 import { BsArrowRight } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 const FeaturesCard = ({ feature }) => {
+  const navigate = useNavigate();
+
   return (
     <div className='m-4 p-10 bg-white drop-shadow-2xl'>
       <div className='flex flex-col items-center'>
@@ -20,7 +23,12 @@ const FeaturesCard = ({ feature }) => {
             {feature?.description}
           </p>
         </div>
-        <button className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main my-2'>
+        <button
+          className='btn bg-main text-white hover:bg-white hover:text-black hover:border-main my-2'
+          onClick={() => {
+            navigate('/services');
+          }}
+        >
           Learn More <BsArrowRight className='ml-1 font-bold' />
         </button>
       </div>

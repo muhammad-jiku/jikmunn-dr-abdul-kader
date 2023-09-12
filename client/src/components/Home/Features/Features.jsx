@@ -10,7 +10,7 @@ const Features = () => {
     {
       name: 'Medical Treatment',
       description:
-        'Management and care of a patient to combat disease or disorder.',
+        'Management and care of a patient to combat disorder or diseases.',
       image: `${medicalTreatmentImg}`,
     },
     {

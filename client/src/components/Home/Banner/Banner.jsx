@@ -22,8 +22,8 @@ const Banner = () => {
           <div className='px-1 sm:px-8'>
             <h1 className='text-md text-justify'>
               One of the most esssential qualities of professional doctor is his
-              humanity. At our clinic, we take great care of your health, mental
-              and physical.
+              humanity. At our clinic, we take great care of your physical, and
+              mental health.
             </h1>
           </div>
         </div>
