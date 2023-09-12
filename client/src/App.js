@@ -44,6 +44,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { loadUser } from './actions/authActions';
 import { useSelector } from 'react-redux';
 import { appointmentStore } from './utils/store';
+import { handleDisableRightClick } from './utils/disableRightClick';
 
 function App() {
   const { loading, isAuthenticated, user, error } = useSelector(
@@ -68,6 +69,11 @@ function App() {
   useEffect(() => {
     appointmentStore.dispatch(loadUser());
     getStripeApiKey();
+
+    //  disable right click
+    document.addEventListener('contextmenu', handleDisableRightClick);
+    //  enable right click
+    // document.removeEventListener('contextmenu', handleDisableRightClick);
   }, []);
 
   return (
