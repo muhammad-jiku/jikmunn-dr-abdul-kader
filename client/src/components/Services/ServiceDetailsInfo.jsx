@@ -7,6 +7,7 @@ import bgImg from '../../assets/images/bg2.jpg';
 import { useParams } from 'react-router-dom';
 import ServiceAppointmentBook from './ServiceAppointmentBook';
 import ServiceTestimonial from './ServiceTestimonial';
+import { MetaDataTitle } from '../../utils';
 
 const ServiceDetailsInfo = () => {
   const [showModal, setShowModal] = useState(false);
@@ -49,6 +50,7 @@ const ServiceDetailsInfo = () => {
 
   return (
     <>
+      <MetaDataTitle title={`${service?.title} - Dr. Abdul Kader`} />
       <CustomBanner data={bannerData} />
       {console.log(service)}
 

@@ -10,10 +10,12 @@ import {
   Partners,
   Location,
 } from '../../components';
+import { MetaDataTitle } from '../../utils';
 
 const HomePage = () => {
   return (
     <>
+      <MetaDataTitle title='Home - Dr. Abdul Kader' />
       <Banner />
       <Features />
       <About />

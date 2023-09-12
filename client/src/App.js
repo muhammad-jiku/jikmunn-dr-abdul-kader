@@ -70,9 +70,10 @@ function App() {
     appointmentStore.dispatch(loadUser());
     getStripeApiKey();
 
-    //  disable right click
+    // disable right click
     document.addEventListener('contextmenu', handleDisableRightClick);
-    //  enable right click
+
+    // enable right click
     // document.removeEventListener('contextmenu', handleDisableRightClick);
   }, []);
 

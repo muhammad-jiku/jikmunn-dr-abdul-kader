@@ -1,6 +1,7 @@
 import React from 'react';
 import bgImg from '../../assets/images/bg3.jpg';
 import { CustomBanner, ContactDetails } from '../../components';
+import { MetaDataTitle } from '../../utils';
 
 const ContactsPage = () => {
   const bannerData = {
@@ -12,6 +13,7 @@ const ContactsPage = () => {
 
   return (
     <>
+      <MetaDataTitle title='Contact - Dr. Abdul Kader' />
       <CustomBanner data={bannerData} />
       <ContactDetails />
     </>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Bookings } from '../../components';
+import { MetaDataTitle } from '../../utils';
 
 const BookingsPage = () => {
   return (
     <>
+      <MetaDataTitle title='My Bookings - Dr. Abdul Kader' />
       <Bookings />
     </>
   );

@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { appointmentStore } from './utils/store';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { HelmetProvider } from 'react-helmet-async';
 
 const googleClientID = `${process.env.REACT_APP_GOOGLE_CLIENT_ID}`;
 
@@ -16,7 +17,9 @@ root.render(
     <BrowserRouter>
       <Provider store={appointmentStore}>
         <GoogleOAuthProvider clientId={googleClientID}>
-          <App />
+          <HelmetProvider>
+            <App />
+          </HelmetProvider>
         </GoogleOAuthProvider>
       </Provider>
     </BrowserRouter>
