@@ -145,7 +145,9 @@ const Payment = () => {
     if (isSubmitSuccessful && success) {
       localStorage?.removeItem('bookingItems');
       reset();
-      toast.success('Payment Successfull!');
+      toast.success(
+        'Payment successfully done! Please go to your dashboard to join the meeting!'
+      );
       navigate('/success');
     }
   }, [dispatch, isSubmitSuccessful, success, reset, navigate]);
