@@ -1,4 +1,10 @@
+// external import
 const express = require('express');
+// internal imports
+const {
+  isAuthenticated,
+  authorizeAdmin,
+} = require('../middlewares/auth/AuthHandler');
 const {
   createAdminPrice,
   getAllPrices,
@@ -7,10 +13,6 @@ const {
   updateAdminPriceDetails,
   deleteAdminPriceDetails,
 } = require('../controllers/priceController');
-const {
-  isAuthenticated,
-  authorizeAdmin,
-} = require('../middlewares/auth/AuthHandler');
 
 const priceRoute = express.Router({
   caseSensitive: true,
@@ -29,4 +31,5 @@ priceRoute
   .put(isAuthenticated, authorizeAdmin, updateAdminPriceDetails)
   .delete(isAuthenticated, authorizeAdmin, deleteAdminPriceDetails);
 
+// exporting module
 module.exports = priceRoute;

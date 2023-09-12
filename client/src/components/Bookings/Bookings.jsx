@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+// external imports
 import { useSelector } from 'react-redux';
-import BookingCard from './BookingCard';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
+// internal import
+import BookingCard from './BookingCard';
 
 const Bookings = () => {
   const navigate = useNavigate();

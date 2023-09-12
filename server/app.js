@@ -1,3 +1,4 @@
+// external imports
 require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
@@ -5,7 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
 const session = require('express-session');
-const ErrorChecker = require('./middlewares/errors/ErrorChecker');
+// internal imports
 const authRoute = require('./routes/authRoute');
 const serviceRoute = require('./routes/serviceRoute');
 const testimonialRoute = require('./routes/testimonialRoute');
@@ -13,6 +14,7 @@ const userRoute = require('./routes/userRoute');
 const priceRoute = require('./routes/priceRoute');
 const bookingRoute = require('./routes/bookingRoute');
 const paymentRoute = require('./routes/paymentRoute');
+const ErrorChecker = require('./middlewares/errors/ErrorChecker');
 
 // app initialize
 const app = express();

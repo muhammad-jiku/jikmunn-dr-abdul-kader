@@ -1,5 +1,7 @@
 import React from 'react';
+// external import
 import { IoCall } from 'react-icons/io5';
+// internal import
 import appointmentImg from '../../../assets/images/appointment.jpg';
 
 const Appointment = () => {

@@ -1,3 +1,4 @@
+// exporting components
 export { default as Navbar } from './Shared/Navbar';
 export { default as Footer } from './Shared/Footer';
 export { default as NotFound } from './Shared/NotFound';

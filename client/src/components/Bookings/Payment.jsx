@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+// external imports
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,6 +13,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+// internal import
 import {
   addNewAppointment,
   clearErrors,

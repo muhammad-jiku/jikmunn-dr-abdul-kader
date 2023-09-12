@@ -1,4 +1,6 @@
+// external import
 const express = require('express');
+// internal import
 const {
   signUp,
   signIn,
@@ -19,4 +21,5 @@ authRoute.route('/auth/signout').post(signOut);
 authRoute.route('/auth/forget-password').post(forgotPassword);
 authRoute.route('/auth/reset-password/:token').put(resetPassword);
 
+// exporting module
 module.exports = authRoute;

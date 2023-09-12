@@ -1,4 +1,10 @@
+// external import
 const express = require('express');
+// internal imports
+const {
+  isAuthenticated,
+  authorizeAdmin,
+} = require('../middlewares/auth/AuthHandler');
 const {
   createAdminService,
   getAllServices,
@@ -8,10 +14,6 @@ const {
   updateAdminServiceDetails,
   deleteAdminServiceDetails,
 } = require('../controllers/serviceController');
-const {
-  isAuthenticated,
-  authorizeAdmin,
-} = require('../middlewares/auth/AuthHandler');
 
 const serviceRoute = express.Router({
   caseSensitive: true,
@@ -31,4 +33,5 @@ serviceRoute
   .put(isAuthenticated, authorizeAdmin, updateAdminServiceDetails)
   .delete(isAuthenticated, authorizeAdmin, deleteAdminServiceDetails);
 
+// exporting module
 module.exports = serviceRoute;

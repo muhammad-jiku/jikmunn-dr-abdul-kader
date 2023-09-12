@@ -1,6 +1,7 @@
 import React from 'react';
-import { ForgetPassword } from '../../components';
+// internal imports
 import { MetaDataTitle } from '../../utils';
+import { ForgetPassword } from '../../components';
 
 const ForgetPasswordPage = () => {
   return (

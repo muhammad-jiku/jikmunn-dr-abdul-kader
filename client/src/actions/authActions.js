@@ -1,4 +1,6 @@
+// external import
 import axios from 'axios';
+// internal imports
 import {
   ADMIN_ALL_USERS_FAILURE,
   ADMIN_ALL_USERS_REQUEST,
@@ -12,7 +14,6 @@ import {
   ADMIN_USER_DETAILS_FAILURE,
   ADMIN_USER_DETAILS_REQUEST,
   ADMIN_USER_DETAILS_SUCCESS,
-  CLEAR_ERRORS,
   FORGET_PASSWORD_FAILURE,
   FORGET_PASSWORD_REQUEST,
   FORGET_PASSWORD_SUCCESS,
@@ -40,6 +41,7 @@ import {
   UPDATE_PROFILE_FAILURE,
   UPDATE_PROFILE_REQUEST,
   UPDATE_PROFILE_SUCCESS,
+  CLEAR_ERRORS,
 } from '../constants/authConstant';
 
 export const signUpUser = (userData) => async (dispatch) => {

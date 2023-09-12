@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
+// external imports
 import { FcGoogle } from 'react-icons/fc';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, googleSignInUser } from '../../actions/authActions';
 import {
   // GoogleLogin,
   useGoogleLogin,
 } from '@react-oauth/google';
 import { toast } from 'react-toastify';
 // import jwtDecode from 'jwt-decode';
+// internal import
+import { googleSignInUser, clearErrors } from '../../actions/authActions';
 
 const SocialSignIn = () => {
   const location = useLocation();

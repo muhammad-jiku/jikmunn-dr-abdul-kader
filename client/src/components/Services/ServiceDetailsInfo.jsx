@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { CustomBanner } from '..';
+// external imports
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, serviceDetails } from '../../actions/serviceActions';
-import bgImg from '../../assets/images/bg2.jpg';
 import { useParams } from 'react-router-dom';
-import ServiceAppointmentBook from './ServiceAppointmentBook';
-import ServiceTestimonial from './ServiceTestimonial';
+// internal imports
+import { CustomBanner } from '..';
 import { MetaDataTitle } from '../../utils';
+import bgImg from '../../assets/images/bg2.jpg';
+import ServiceTestimonial from './ServiceTestimonial';
+import ServiceAppointmentBook from './ServiceAppointmentBook';
+import { clearErrors, serviceDetails } from '../../actions/serviceActions';
 
 const ServiceDetailsInfo = () => {
   const [showModal, setShowModal] = useState(false);

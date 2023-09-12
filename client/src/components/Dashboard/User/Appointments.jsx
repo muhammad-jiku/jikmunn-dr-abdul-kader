@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+// external imports
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+// internal imports
 import {
   allAppointments,
   clearErrors,

@@ -1,4 +1,5 @@
 import React from 'react';
+// internal import
 import { UpdateUser } from '../../../../components';
 
 const UpdateUserPage = () => {

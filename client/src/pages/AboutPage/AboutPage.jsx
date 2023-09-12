@@ -1,12 +1,13 @@
 import React from 'react';
+// internal imports
 import {
   CustomBanner,
   AboutDetails,
   AboutTimeline,
   AboutCertificates,
 } from '../../components';
-import bgImg from '../../assets/images/bg1.jpeg';
 import { MetaDataTitle } from '../../utils';
+import bgImg from '../../assets/images/bg1.jpeg';
 
 const AboutPage = () => {
   const bannerData = {

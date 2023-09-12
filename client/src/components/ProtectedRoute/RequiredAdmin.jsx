@@ -1,6 +1,8 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+// internal import
 import { Loader } from '..';
+// external import
+import { Navigate, useLocation } from 'react-router-dom';
 
 const RequiredAdmin = ({ loading, isAuthenticated, user, children }) => {
   const location = useLocation();

@@ -1,3 +1,4 @@
+// external import
 const mongoose = require('mongoose');
 
 const testimonialSchema = new mongoose.Schema(
@@ -33,4 +34,5 @@ const Testimonial =
   mongoose.model.Testimonials ||
   new mongoose.model('Testimonial', testimonialSchema);
 
+// exporting module
 module.exports = Testimonial;

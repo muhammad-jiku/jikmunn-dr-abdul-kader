@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+// external import
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { adminAllUsers, clearErrors } from '../../../../actions/authActions';
+// internal imports
 import UserRow from './UserRow';
+import { adminAllUsers, clearErrors } from '../../../../actions/authActions';
 
 const AllUsers = () => {
   const dispatch = useDispatch();

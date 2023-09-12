@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+// external imports
 import { IoLocation, IoCall } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import logoImg from '../../assets/images/logo.png';
-import profileImg from '../../assets/images/default_profile_avatar.png';
 import { toast } from 'react-toastify';
-import { signOutUser } from '../../actions/authActions';
 import { FiMenu } from 'react-icons/fi';
 import { GrClose } from 'react-icons/gr';
+// internal imports
+import logoImg from '../../assets/images/logo.png';
+import { signOutUser } from '../../actions/authActions';
+import profileImg from '../../assets/images/default_profile_avatar.png';
 
 const Navbar = ({ isAuthenticated, user }) => {
   const [isOpen, setIsOpen] = useState(false);

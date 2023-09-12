@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+// internal imports
 import {
   adminAppointmentDetails,
   adminUpdateAppointment,

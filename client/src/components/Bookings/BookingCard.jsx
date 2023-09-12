@@ -1,6 +1,8 @@
 import React from 'react';
+// external imports
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+// internal import
 import { removeBookingItem } from '../../actions/bookingActions';
 
 const BookingCard = ({ item }) => {

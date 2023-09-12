@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
+// external imports
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { ADMIN_DELETE_PRICE_DETAILS_RESET } from '../../../../constants/priceConstant';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+// internal imports
 import {
   adminDeletePriceDetails,
   clearErrors,
 } from '../../../../actions/priceActions';
-import { useDispatch, useSelector } from 'react-redux';
+import { ADMIN_DELETE_PRICE_DETAILS_RESET } from '../../../../constants/priceConstant';
 
 const PriceRow = ({ price }) => {
   const navigate = useNavigate();

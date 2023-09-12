@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
+// external imports
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+// internal imports
+import TestimonialRow from './TestimonialRow';
 import {
   allTestimonials,
   clearErrors,
 } from '../../../../actions/testimonialActions';
-import TestimonialRow from './TestimonialRow';
 
 const AllTestimonials = () => {
   const dispatch = useDispatch();

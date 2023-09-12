@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { resetUserPassword, clearErrors } from '../../actions/authActions';
 import { toast } from 'react-toastify';
+// internal import
+import { resetUserPassword, clearErrors } from '../../actions/authActions';
 
 const ResetPassword = () => {
   const { token } = useParams();

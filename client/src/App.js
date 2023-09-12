@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import axios from 'axios';
+import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+// internal imports
 import './App.css';
 import {
   Navbar,
@@ -8,7 +15,6 @@ import {
   RequiredAuth,
   RequiredAdmin,
 } from './components';
-import { Route, Routes } from 'react-router-dom';
 import {
   HomePage,
   AboutPage,
@@ -38,11 +44,7 @@ import {
   UpdateAppointmentPage,
   AllTestimonialsPage,
 } from './pages';
-import { ToastContainer } from 'react-toastify';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import { loadUser } from './actions/authActions';
-import { useSelector } from 'react-redux';
 import { appointmentStore } from './utils/store';
 import { handleDisableRightClick } from './utils/disableRightClick';
 

@@ -1,6 +1,7 @@
 import React from 'react';
+// internal imports
+import { SocialIcons } from '..';
 import myImg from '../../assets/images/me.png';
-import { SocialIcons } from '../';
 
 const AboutDetails = () => {
   return (

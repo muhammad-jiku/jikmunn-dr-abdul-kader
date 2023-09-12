@@ -1,8 +1,9 @@
 import React from 'react';
+// internal imports
+import FeaturesCard from './FeaturesCard';
 import medicalTreatmentImg from '../../../assets/images/treatment.png';
 import emergencyHelpImg from '../../../assets/images/emergency.png';
 import regularExaminationImg from '../../../assets/images/examination.png';
-import FeaturesCard from './FeaturesCard';
 
 const Features = () => {
   const data = [

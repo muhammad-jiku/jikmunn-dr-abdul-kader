@@ -1,7 +1,8 @@
 import React from 'react';
+// internal imports
 import bgImg from '../../assets/images/bg1.jpeg';
-import { CustomBanner, PricesDetails } from '../../components';
 import { MetaDataTitle } from '../../utils';
+import { CustomBanner, PricesDetails } from '../../components';
 
 const PricesPage = () => {
   const bannerData = {

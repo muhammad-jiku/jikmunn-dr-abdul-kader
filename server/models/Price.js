@@ -1,3 +1,4 @@
+// external import
 const mongoose = require('mongoose');
 
 const priceSchema = new mongoose.Schema(
@@ -43,4 +44,5 @@ const priceSchema = new mongoose.Schema(
 
 const Price = mongoose.model.Prices || new mongoose.model('Price', priceSchema);
 
+// exporting module
 module.exports = Price;

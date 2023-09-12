@@ -1,5 +1,6 @@
-const AsyncError = require('../middlewares/errors/AsyncError');
+// internal imports
 const Booking = require('../models/Booking');
+const AsyncError = require('../middlewares/errors/AsyncError');
 
 const createBooking = AsyncError(async (req, res) => {
   try {
@@ -18,9 +19,9 @@ const createBooking = AsyncError(async (req, res) => {
       data: booking,
     });
   } catch (error) {
-    // console.log(error);s
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -35,9 +36,9 @@ const getAppointments = AsyncError(async (req, res) => {
       data: appointments,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -59,7 +60,7 @@ const getAdminAllAppointments = AsyncError(async (req, res) => {
   } catch (error) {
     // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -83,7 +84,7 @@ const getAdminBookingData = AsyncError(async (req, res, next) => {
   } catch (error) {
     // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -122,9 +123,9 @@ const updateAdminAppointmentData = AsyncError(async (req, res, next) => {
       updatedAppointment,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -145,13 +146,14 @@ const deleteAdminAppointment = AsyncError(async (req, res, next) => {
       message: 'Appointment deleted successfully',
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
 
+// exporting modules
 module.exports = {
   createBooking,
   getAppointments,

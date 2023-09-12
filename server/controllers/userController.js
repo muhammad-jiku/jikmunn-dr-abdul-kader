@@ -1,7 +1,9 @@
-const AsyncError = require('../middlewares/errors/AsyncError');
-const User = require('../models/User');
-const cloudinary = require('cloudinary');
+// external imports
 const bcrypt = require('bcryptjs');
+const cloudinary = require('cloudinary');
+// internal imports
+const User = require('../models/User');
+const AsyncError = require('../middlewares/errors/AsyncError');
 const ErrorHandler = require('../middlewares/errors/ErrorHandler');
 
 const getUserDetails = AsyncError(async (req, res) => {
@@ -78,7 +80,7 @@ const updateProfile = AsyncError(async (req, res) => {
       data: user,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -111,7 +113,7 @@ const updatePassword = AsyncError(async (req, res, next) => {
       data: user,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -127,7 +129,7 @@ const getAdminAllUser = AsyncError(async (req, res) => {
       data: users,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -148,9 +150,9 @@ const getAdminSingleUser = AsyncError(async (req, res, next) => {
       data: user,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -184,9 +186,9 @@ const updateAdminUserRole = AsyncError(async (req, res) => {
       data: user,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -207,16 +209,17 @@ const deleteAdminUser = AsyncError(async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: 'User Deleted Successfully',
+      message: 'User deleted successfully',
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
 
+// exporting modules
 module.exports = {
   getUserDetails,
   updateProfile,

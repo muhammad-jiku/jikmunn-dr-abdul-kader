@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { CustomServiceCard } from '..';
+// external imports
 import { useDispatch, useSelector } from 'react-redux';
-import { allServices, clearErrors } from '../../actions/serviceActions';
 import { toast } from 'react-toastify';
+// internal imports
+import { CustomServiceCard } from '..';
+import { allServices, clearErrors } from '../../actions/serviceActions';
 
 const ServicesDetails = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,9 @@
+// external import
+const cloudinary = require('cloudinary');
+// internal imports
+const Service = require('../models/Service');
 const AsyncError = require('../middlewares/errors/AsyncError');
 const ErrorHandler = require('../middlewares/errors/ErrorHandler');
-const Service = require('../models/Service');
-const cloudinary = require('cloudinary');
 
 const createAdminService = AsyncError(async (req, res) => {
   try {
@@ -36,7 +38,7 @@ const createAdminService = AsyncError(async (req, res) => {
       message: 'Service created successfully!',
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -52,7 +54,7 @@ const getAllServices = AsyncError(async (req, res) => {
       data: services,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -75,9 +77,9 @@ const getServiceDetails = AsyncError(async (req, res, next) => {
       data: service,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -91,7 +93,7 @@ const getAdminAllService = AsyncError(async (req, res) => {
       data: services,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -112,9 +114,9 @@ const getAdminServiceDetails = AsyncError(async (req, res, next) => {
       data: service,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -177,10 +179,9 @@ const updateAdminServiceDetails = AsyncError(async (req, res, next) => {
       data: service,
     });
   } catch (error) {
-    console.log(error);
-
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -203,16 +204,17 @@ const deleteAdminServiceDetails = AsyncError(async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: 'Service Deleted Successfully',
+      message: 'Service deleted successfully',
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
 
+// exporting modules
 module.exports = {
   createAdminService,
   getAllServices,

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+// internal imports
 import {
   adminUpdateUser,
   adminUserDetails,
   clearErrors,
 } from '../../../../actions/authActions';
-import { toast } from 'react-toastify';
 import { ADMIN_UPDATE_USER_ROLE_RESET } from '../../../../constants/authConstant';
 import { MetaDataTitle } from '../../../../utils';
 

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+// internal imports
 import { clearErrors } from '../../../actions/appointmentActions';
 import { MdOutlinePayment, MdOutlineVideocam } from 'react-icons/md';
 

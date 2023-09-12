@@ -1,5 +1,7 @@
 import React from 'react';
+// external import
 import { useNavigate } from 'react-router-dom';
+// internal import
 import NotFoundImg from '../../assets/gifs/NotFound.gif';
 
 const NotFound = () => {

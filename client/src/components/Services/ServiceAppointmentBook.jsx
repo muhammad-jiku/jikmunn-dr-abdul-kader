@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { addBookingItems } from '../../actions/bookingActions';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 // import { format } from 'date-fns';
+// internal import
+import { addBookingItems } from '../../actions/bookingActions';
 
 const ServiceAppointmentBook = ({ service, setShowModal }) => {
   const navigate = useNavigate();

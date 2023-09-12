@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
+// external imports
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Autoplay, Parallax, Pagination, Navigation } from 'swiper/modules';
-import { useDispatch, useSelector } from 'react-redux';
-import profileImg from '../../../assets/images/default_profile_avatar.png';
+// internal imports
 import {
   allTestimonials,
   clearErrors,
 } from '../../../actions/testimonialActions';
-import { toast } from 'react-toastify';
+import profileImg from '../../../assets/images/default_profile_avatar.png';
 // import '../../../styles/testimonial.css';
 
 const TestimonialCard = () => {

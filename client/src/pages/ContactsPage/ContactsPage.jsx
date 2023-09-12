@@ -1,7 +1,8 @@
 import React from 'react';
+// internal imports
+import { MetaDataTitle } from '../../utils';
 import bgImg from '../../assets/images/bg3.jpg';
 import { CustomBanner, ContactDetails } from '../../components';
-import { MetaDataTitle } from '../../utils';
 
 const ContactsPage = () => {
   const bannerData = {

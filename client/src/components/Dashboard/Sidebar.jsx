@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
+// external imports
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+// internal import
 import { clearErrors } from '../../actions/authActions';
 
 const Sidebar = () => {

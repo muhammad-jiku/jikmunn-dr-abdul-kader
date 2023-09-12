@@ -1,3 +1,4 @@
+// internal imports
 import {
   ADD_BOOKING_ITEM,
   REMOVE_BOOKING_ITEM,

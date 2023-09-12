@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+// external imports
 import { BsArrowRight } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { CustomServiceCard } from '../../';
 import { useDispatch, useSelector } from 'react-redux';
-import { allServices, clearErrors } from '../../../actions/serviceActions';
 import { toast } from 'react-toastify';
+// internal imports
+import { CustomServiceCard } from '../..';
+import { allServices, clearErrors } from '../../../actions/serviceActions';
 
 const Services = () => {
   const dispatch = useDispatch();

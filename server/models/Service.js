@@ -1,3 +1,4 @@
+// external import
 const mongoose = require('mongoose');
 
 const serviceSchema = new mongoose.Schema(
@@ -39,4 +40,5 @@ const serviceSchema = new mongoose.Schema(
 const Service =
   mongoose.model.Services || new mongoose.model('Service', serviceSchema);
 
+// exporting module
 module.exports = Service;

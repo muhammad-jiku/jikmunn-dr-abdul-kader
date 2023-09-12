@@ -1,4 +1,5 @@
 import React from 'react';
+// external imports
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -9,6 +10,7 @@ import {
   MdOutlineSchool,
   MdOutlineStarBorderPurple500,
 } from 'react-icons/md';
+// internal import
 import styles from '../../styles/timeline.module.css';
 
 const AboutTimeline = () => {

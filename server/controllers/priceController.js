@@ -1,6 +1,8 @@
-const AsyncError = require('../middlewares/errors/AsyncError');
+// external import
 const cloudinary = require('cloudinary');
+// internal imports
 const Price = require('../models/Price');
+const AsyncError = require('../middlewares/errors/AsyncError');
 const ErrorHandler = require('../middlewares/errors/ErrorHandler');
 
 const createAdminPrice = AsyncError(async (req, res) => {
@@ -38,7 +40,7 @@ const createAdminPrice = AsyncError(async (req, res) => {
       message: 'Price tag created successfully!',
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -54,7 +56,7 @@ const getAllPrices = AsyncError(async (req, res) => {
       data: prices,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -70,7 +72,7 @@ const getAdminAllPrice = AsyncError(async (req, res) => {
       data: prices,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       message: 'Internal server error',
     });
@@ -91,9 +93,9 @@ const getAdminPriceDetails = AsyncError(async (req, res, next) => {
       data: price,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -158,10 +160,9 @@ const updateAdminPriceDetails = AsyncError(async (req, res, next) => {
       data: priceData,
     });
   } catch (error) {
-    console.log(error);
-
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -184,16 +185,17 @@ const deleteAdminPriceDetails = AsyncError(async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: 'Price Deleted Successfully',
+      message: 'Price deleted successfully',
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
 
+// exporting modules
 module.exports = {
   createAdminPrice,
   getAllPrices,

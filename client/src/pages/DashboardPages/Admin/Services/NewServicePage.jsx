@@ -1,6 +1,7 @@
 import React from 'react';
-import { NewService } from '../../../../components';
+// internal imports
 import { MetaDataTitle } from '../../../../utils';
+import { NewService } from '../../../../components';
 
 const NewServicePage = () => {
   return (

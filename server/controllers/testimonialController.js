@@ -1,5 +1,6 @@
-const AsyncError = require('../middlewares/errors/AsyncError');
+// internal imports
 const Testimonial = require('../models/Testimonial');
+const AsyncError = require('../middlewares/errors/AsyncError');
 
 const createTestimonial = AsyncError(async (req, res) => {
   try {
@@ -53,9 +54,9 @@ const createTestimonial = AsyncError(async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -71,7 +72,7 @@ const getAllTestimonials = AsyncError(async (req, res) => {
   } catch (error) {
     // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
@@ -83,7 +84,7 @@ const deleteAdminTestimonial = AsyncError(async (req, res, next) => {
 
     if (!testimonial) {
       return next(
-        new ErrorHandler(`Testimonial does not exist with Id: ${id}`, 400)
+        new ErrorHandler(`Testimonial does not exist with this id: ${id}`, 400)
       );
     } else {
       await Testimonial.deleteOne({ _id: id });
@@ -91,16 +92,17 @@ const deleteAdminTestimonial = AsyncError(async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: 'Testimonial Deleted Successfully',
+      message: 'Testimonial deleted successfully',
     });
   } catch (error) {
     // console.log(error);
     return res.status(500).json({
-      message: 'Internal Server Error',
+      message: 'Internal server error',
     });
   }
 });
 
+// exporting modules
 module.exports = {
   createTestimonial,
   getAllTestimonials,

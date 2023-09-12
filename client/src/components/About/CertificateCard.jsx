@@ -1,10 +1,12 @@
 import React from 'react';
+// internal imports
 import mbbsImg from '../../assets/images/certificate_of_MBBS.jpg';
 import internImg from '../../assets/images/certificate_of_internship.jpg';
 import bmdcImg from '../../assets/images/certificate_of_BMDC.jpg';
 import ultraImg from '../../assets/images/certificate_of_ultrasonography.jpg';
 import diabetologyImg from '../../assets/images/certificate_of_diabetology.jpg';
 import bcsImg from '../../assets/images/certificate_of_BCS.jpg';
+// external imports
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';

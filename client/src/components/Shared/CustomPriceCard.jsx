@@ -1,4 +1,5 @@
 import React from 'react';
+// external imports
 import { TiTick } from 'react-icons/ti';
 import { BsArrowRight } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';

@@ -1,6 +1,7 @@
 import React from 'react';
-import { AllAppointments } from '../../../../components';
+// internal imports
 import { MetaDataTitle } from '../../../../utils';
+import { AllAppointments } from '../../../../components';
 
 const AllAppointmentsPage = () => {
   return (

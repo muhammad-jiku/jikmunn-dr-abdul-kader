@@ -1,6 +1,7 @@
 import React from 'react';
-import { AllServices } from '../../../../components';
+// internal imports
 import { MetaDataTitle } from '../../../../utils';
+import { AllServices } from '../../../../components';
 
 const AllServicesPage = () => {
   return (

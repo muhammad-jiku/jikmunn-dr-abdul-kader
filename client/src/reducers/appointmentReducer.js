@@ -1,3 +1,4 @@
+// internal imports
 import {
   ADD_APPOINTMENT_FAILURE,
   ADD_APPOINTMENT_REQUEST,

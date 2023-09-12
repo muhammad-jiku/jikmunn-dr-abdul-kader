@@ -1,4 +1,5 @@
 import React from 'react';
+// internal import
 import PartnerCard from './PartnerCard';
 
 const Partners = () => {

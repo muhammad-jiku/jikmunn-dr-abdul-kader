@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { ADMIN_NEW_PRICE_RESET } from '../../../../constants/priceConstant';
+// internal imports
 import {
   adminAddNewPrice,
   clearErrors,
 } from '../../../../actions/priceActions';
+import { ADMIN_NEW_PRICE_RESET } from '../../../../constants/priceConstant';
 
 const NewPrice = () => {
   const navigate = useNavigate();

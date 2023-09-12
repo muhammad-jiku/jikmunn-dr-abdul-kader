@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+// external imports
 import { BsArrowRight } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { CustomPriceCard } from '../../';
 import { useDispatch, useSelector } from 'react-redux';
-import { allPrices, clearErrors } from '../../../actions/priceActions';
 import { toast } from 'react-toastify';
-
+// internal imports
+import { CustomPriceCard } from '../..';
+import { allPrices, clearErrors } from '../../../actions/priceActions';
 const Prices = () => {
   const dispatch = useDispatch();
   const { loading, error, prices } = useSelector((state) => state?.prices);

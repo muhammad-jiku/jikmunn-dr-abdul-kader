@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useForm } from 'react-hook-form';
 import { Country, State } from 'country-state-city';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import profileImg from '../../assets/images/default_profile_avatar.png';
+// internal imports
 import {
-  clearErrors,
   loadUser,
   updateUserProfile,
+  clearErrors,
 } from '../../actions/authActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import profileImg from '../../assets/images/default_profile_avatar.png';
 import { UPDATE_PROFILE_RESET } from '../../constants/authConstant';
 
 const Profile = () => {

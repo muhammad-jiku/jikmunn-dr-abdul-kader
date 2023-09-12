@@ -1,3 +1,4 @@
+// external import
 const jwt = require('jsonwebtoken');
 
 const generateToken = (user) => {
@@ -12,6 +13,7 @@ const generateToken = (user) => {
   );
 };
 
+// exporting module
 module.exports = {
   generateToken,
 };

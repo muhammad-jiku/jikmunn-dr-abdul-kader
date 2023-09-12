@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+// external imports
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+// internal imports
+import AppointmentRow from './AppointmentRow';
 import {
   adminAllappointments,
   clearErrors,
 } from '../../../../actions/appointmentActions';
-import { toast } from 'react-toastify';
-import AppointmentRow from './AppointmentRow';
 
 const AllAppointments = () => {
   const navigate = useNavigate();

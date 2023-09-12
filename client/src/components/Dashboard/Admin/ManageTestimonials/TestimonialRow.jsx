@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+// external imports
 import { AiFillDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+// internal imports
 import {
   adminDeleteTestimonial,
   clearErrors,

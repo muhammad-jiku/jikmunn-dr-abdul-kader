@@ -1,3 +1,4 @@
+// external imports
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
@@ -80,4 +81,5 @@ const userSchema = new mongoose.Schema(
 
 const User = mongoose.model.Users || new mongoose.model('User', userSchema);
 
+// exporting module
 module.exports = User;

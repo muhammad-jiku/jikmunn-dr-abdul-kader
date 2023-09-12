@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+// external imports
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+// internal imports
 import { adminDeleteUser, clearErrors } from '../../../../actions/authActions';
 import { ADMIN_DELETE_USER_RESET } from '../../../../constants/authConstant';
 import profileImg from '../../../../assets/images/default_profile_avatar.png';

@@ -1,6 +1,7 @@
 import React from 'react';
-import { UpdatePassword } from '../../components';
+// internal imports
 import { MetaDataTitle } from '../../utils';
+import { UpdatePassword } from '../../components';
 
 const UpdatePasswordPage = () => {
   return (

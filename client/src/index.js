@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+// external imports
 import { Provider } from 'react-redux';
-import { appointmentStore } from './utils/store';
+import { BrowserRouter } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { HelmetProvider } from 'react-helmet-async';
+// internal imports
+import './index.css';
+import App from './App';
+import { appointmentStore } from './utils/store';
 
 const googleClientID = `${process.env.REACT_APP_GOOGLE_CLIENT_ID}`;
 

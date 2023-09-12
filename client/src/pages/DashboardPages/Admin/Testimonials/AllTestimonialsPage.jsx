@@ -1,6 +1,7 @@
 import React from 'react';
-import { AllTestimonials } from '../../../../components';
+// internal imports
 import { MetaDataTitle } from '../../../../utils';
+import { AllTestimonials } from '../../../../components';
 
 const AllTestimonialsPage = () => {
   return (

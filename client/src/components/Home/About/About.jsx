@@ -1,7 +1,9 @@
 import React from 'react';
-import { GiStethoscope } from 'react-icons/gi';
-import activeFamilyImg from '../../../assets/images/activeFamilyMirror.jpg';
+// external imports
 import CountUp from 'react-countup';
+import { GiStethoscope } from 'react-icons/gi';
+// internal import
+import activeFamilyImg from '../../../assets/images/activeFamilyMirror.jpg';
 
 const About = () => {
   return (

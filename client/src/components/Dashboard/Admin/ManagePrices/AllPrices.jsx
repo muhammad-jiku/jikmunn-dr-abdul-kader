@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+// external imports
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { adminAllPrices, clearErrors } from '../../../../actions/priceActions';
+// internal imports
 import PriceRow from './PriceRow';
+import { adminAllPrices, clearErrors } from '../../../../actions/priceActions';
 
 const AllServices = () => {
   const navigate = useNavigate();

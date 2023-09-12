@@ -1,13 +1,15 @@
 import React from 'react';
+// external imports
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+// internal imports
 import dentalImg from '../../../assets/images/dental-icon.png';
 import labImg from '../../../assets/images/white-microscope-icon.png';
 import healthyImg from '../../../assets/images/white-healthy-icon.png';
 import researchImg from '../../../assets/images/white-research-icon.png';
 import umbrellaImg from '../../../assets/images/white-umbrella-icon.png';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
 // import '../../../styles/testimonial.css';
 
 const PartnerCard = () => {

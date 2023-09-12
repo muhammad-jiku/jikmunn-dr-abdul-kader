@@ -1,4 +1,5 @@
 import React from 'react';
+// internal imports
 import { Auth } from '../../components';
 import { MetaDataTitle } from '../../utils';
 

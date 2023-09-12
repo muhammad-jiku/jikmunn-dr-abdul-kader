@@ -1,4 +1,5 @@
 import React from 'react';
+// external import
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
 const CustomBanner = ({ data }) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+// internal imports
 import { NewPrice } from '../../../../components';
 import { MetaDataTitle } from '../../../../utils';
 

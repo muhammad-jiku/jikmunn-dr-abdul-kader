@@ -1,9 +1,10 @@
 import React from 'react';
+// internal imports
+import { CustomLocation } from '..';
+import ContactCard from './ContactCard';
 import addressImg from '../../assets/images/address-icon.png';
 import emailImg from '../../assets/images/email-icon.png';
 import mobileImg from '../../assets/images/mobile-icon.png';
-import ContactCard from './ContactCard';
-import { CustomLocation } from '..';
 
 const ContactDetails = () => {
   const data = [

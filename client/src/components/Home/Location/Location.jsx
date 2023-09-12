@@ -1,5 +1,6 @@
 import React from 'react';
-import { CustomLocation } from '../../';
+// internal import
+import { CustomLocation } from '../..';
 
 const Location = () => {
   return (

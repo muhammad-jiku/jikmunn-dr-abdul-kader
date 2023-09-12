@@ -1,4 +1,5 @@
 import React from 'react';
+// internal import
 import bgImg1 from '../../../assets/images/bg1.jpeg';
 
 const Banner = () => {

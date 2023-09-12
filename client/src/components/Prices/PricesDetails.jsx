@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { CustomPriceCard } from '..';
-import { useDispatch, useSelector } from 'react-redux';
-import { allPrices, clearErrors } from '../../actions/priceActions';
+// external imports
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+// internal imports
+import { CustomPriceCard } from '..';
+import { allPrices, clearErrors } from '../../actions/priceActions';
 
 const PricesDetails = () => {
   const dispatch = useDispatch();

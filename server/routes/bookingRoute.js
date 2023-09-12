@@ -1,5 +1,6 @@
-//  external import
+// external import
 const express = require('express');
+// internal imports
 const {
   isAuthenticated,
   authorizeAdmin,
@@ -28,5 +29,5 @@ bookingRoute
   .put(isAuthenticated, authorizeAdmin, updateAdminAppointmentData)
   .delete(isAuthenticated, authorizeAdmin, deleteAdminAppointment);
 
-//
+// exporting module
 module.exports = bookingRoute;

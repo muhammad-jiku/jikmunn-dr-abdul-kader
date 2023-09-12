@@ -1,4 +1,5 @@
 import React from 'react';
+// external import
 import { BsArrowRight } from 'react-icons/bs';
 
 const ContactCard = ({ contact }) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+// external imports
 import { BsArrowRight } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 

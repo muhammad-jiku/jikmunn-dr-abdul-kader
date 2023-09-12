@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import SocialSignIn from './SocialSignIn';
+// external imports
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, signInUser } from '../../actions/authActions';
 import { toast } from 'react-toastify';
+// internal imports
+import SocialSignIn from './SocialSignIn';
+import { signInUser, clearErrors } from '../../actions/authActions';
 
 const SignIn = () => {
   const location = useLocation();

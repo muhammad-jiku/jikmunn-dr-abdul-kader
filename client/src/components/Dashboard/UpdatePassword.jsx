@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { clearErrors, updateUserPassword } from '../../actions/authActions';
+// internal imports
+import { updateUserPassword, clearErrors } from '../../actions/authActions';
 import { UPDATE_PASSWORD_RESET } from '../../constants/authConstant';
 
 const UpdatePassword = () => {

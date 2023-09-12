@@ -1,3 +1,4 @@
+// external import
 const mongoose = require('mongoose');
 
 const uri = `${process.env.DB_URI}`;

@@ -1,4 +1,6 @@
+// external import
 const express = require('express');
+// internal imports
 const {
   isAuthenticated,
   authorizeAdmin,
@@ -19,4 +21,5 @@ testimonialRoute
   .route('/admin/testimonial/:id')
   .delete(isAuthenticated, authorizeAdmin, deleteAdminTestimonial);
 
+// exporting module
 module.exports = testimonialRoute;

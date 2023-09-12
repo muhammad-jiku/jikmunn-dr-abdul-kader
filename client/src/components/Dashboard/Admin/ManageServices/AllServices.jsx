@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+// external imports
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+// internal imports
+import ServiceRow from './ServiceRow';
 import {
   adminAllServices,
   clearErrors,
 } from '../../../../actions/serviceActions';
-import { toast } from 'react-toastify';
-import ServiceRow from './ServiceRow';
 
 const AllServices = () => {
   const navigate = useNavigate();

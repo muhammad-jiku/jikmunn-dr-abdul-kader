@@ -1,6 +1,8 @@
+// external import
+const cloudinary = require('cloudinary');
+// internal imports
 const app = require('./app');
 const connectToDB = require('./utils/connectToDB');
-const cloudinary = require('cloudinary');
 
 // port
 const port = process.env.PORT || 5000;

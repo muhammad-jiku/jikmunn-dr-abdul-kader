@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+// external imports
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, forgetUserPassword } from '../../actions/authActions';
 import { toast } from 'react-toastify';
+// internal import
+import { clearErrors, forgetUserPassword } from '../../actions/authActions';
 
 const ForgetPassword = () => {
   const dispatch = useDispatch();

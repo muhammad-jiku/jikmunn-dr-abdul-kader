@@ -1,10 +1,12 @@
+// external imports
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
+const { OAuth2Client } = require('google-auth-library');
+// internal imports
 const User = require('../models/User');
 const { generateToken } = require('../utils/generateToken');
 const AsyncError = require('../middlewares/errors/AsyncError');
-const { v4: uuidv4 } = require('uuid');
-const { OAuth2Client } = require('google-auth-library');
 const ErrorHandler = require('../middlewares/errors/ErrorHandler');
 const sendEmail = require('../utils/sendEmail');
 
@@ -58,7 +60,7 @@ const signIn = AsyncError(async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        message: 'Invalid User',
+        message: 'Invalid user',
       });
     }
 
@@ -142,7 +144,7 @@ const signOut = AsyncError(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    message: 'Signed Out Successfully!',
+    message: 'Signed out successfully!',
   });
 });
 
@@ -187,10 +189,10 @@ const forgotPassword = AsyncError(async (req, res, next) => {
 
     return res.status(200).json({
       success: true,
-      message: `Email sent to ${user?.email} successfully`,
+      message: `Email sent to ${user?.email} successfully!`,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
 
@@ -199,7 +201,7 @@ const forgotPassword = AsyncError(async (req, res, next) => {
     });
 
     return res.status(500).json({
-      message: 'Something went wrong',
+      message: 'Internal server error',
     });
 
     //  next(new ErrorHandler(error.message, 500));
@@ -254,11 +256,12 @@ const resetPassword = AsyncError(async (req, res, next) => {
   } catch (error) {
     // console.log(error)
     return res.status(500).json({
-      message: 'Something went wrong',
+      message: 'Internal server error',
     });
   }
 });
 
+// exporting modules
 module.exports = {
   signUp,
   signIn,

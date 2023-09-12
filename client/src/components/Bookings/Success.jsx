@@ -1,4 +1,5 @@
 import React from 'react';
+// external imports
 import { FiCheckCircle } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 

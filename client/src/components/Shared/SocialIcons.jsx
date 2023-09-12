@@ -1,4 +1,5 @@
 import React from 'react';
+// external imports
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 const SocialIcons = () => {

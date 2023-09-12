@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+// external imports
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+// internal imports
 import {
   adminDeleteServiceDetails,
   clearErrors,
 } from '../../../../actions/serviceActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 import { ADMIN_DELETE_SERVICE_DETAILS_RESET } from '../../../../constants/serviceConstant';
 
 const ServiceRow = ({ service }) => {

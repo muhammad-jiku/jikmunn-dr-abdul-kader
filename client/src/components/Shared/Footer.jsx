@@ -1,10 +1,12 @@
 import React from 'react';
+// external imports
 import { BsArrowRight } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
+// internal imports
 import bgImg from '../../assets/images/bg3.jpg';
 import aboutmeImg from '../../assets/images/about-me-icon.png';
 import workTimeImg from '../../assets/images/work-time-icon.png';
 import contactImg from '../../assets/images/contact-icon.png';
-import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();

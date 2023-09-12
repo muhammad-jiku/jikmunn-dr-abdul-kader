@@ -1,10 +1,12 @@
 import React from 'react';
+// external import
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
+// internal imports
+import TestimonialCard from './TestimonialCard';
+import bpCheckingImg from '../../../assets/images/bpCheckinggg.jpg';
 // import bpCheckingImg from '../../../assets/images/bpChecking.jpg';
 // import bpCheckingImg from '../../../assets/images/bpCheckingg.jpeg';
-import bpCheckingImg from '../../../assets/images/bpCheckinggg.jpg';
 // import bpCheckingImg from '../../../assets/images/bpCheckingBlur.jpg';
-import TestimonialCard from './TestimonialCard';
 
 const Testimonials = () => {
   return (
