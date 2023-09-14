@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // external imports
 import { IoLocation, IoCall } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { FiMenu } from 'react-icons/fi';
 import { GrClose } from 'react-icons/gr';
@@ -11,11 +11,12 @@ import logoImg from '../../assets/images/logo.png';
 import { signOutUser } from '../../actions/authActions';
 import profileImg from '../../assets/images/default_profile_avatar.png';
 
-const Navbar = ({ isAuthenticated, user }) => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isAuthenticated, user } = useSelector((state) => state?.user);
 
   const bookingItems = JSON.parse(localStorage.getItem('bookingItems'));
 

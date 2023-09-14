@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 // external imports
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -49,9 +48,6 @@ import { appointmentStore } from './utils/store';
 import { handleDisableRightClick } from './utils/disableRightClick';
 
 function App() {
-  const { loading, isAuthenticated, user, error } = useSelector(
-    (state) => state?.user
-  );
   const [stripeApiKey, setStripeApiKey] = useState('');
 
   axios.defaults.baseURL = process.env.REACT_APP_SERVER_DOMAIN;
@@ -73,7 +69,7 @@ function App() {
     getStripeApiKey();
 
     // disable right click
-    // document.addEventListener('contextmenu', handleDisableRightClick);
+    document.addEventListener('contextmenu', handleDisableRightClick);
 
     // enable right click
     // document.removeEventListener('contextmenu', handleDisableRightClick);
@@ -81,7 +77,7 @@ function App() {
 
   return (
     <div className='App'>
-      <Navbar isAuthenticated={isAuthenticated} user={user} />
+      <Navbar />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
@@ -89,7 +85,7 @@ function App() {
         <Route
           path='/services/:title'
           element={
-            // <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+            // <RequiredAuth>
             <ServicesDetailsInfoPage />
             // </RequiredAuth>
           }
@@ -102,7 +98,7 @@ function App() {
         <Route
           path='/bookings'
           element={
-            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <BookingsPage />
             </RequiredAuth>
           }
@@ -111,7 +107,7 @@ function App() {
           <Route
             path='/payment'
             element={
-              <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <Elements stripe={loadStripe(stripeApiKey)}>
                   <PaymentPage />
                 </Elements>
@@ -122,7 +118,7 @@ function App() {
         <Route
           path='/success'
           element={
-            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <SuccessPage />
             </RequiredAuth>
           }
@@ -130,7 +126,7 @@ function App() {
         <Route
           path='/dashboard'
           element={
-            <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+            <RequiredAuth>
               <MyDashboardPage />
             </RequiredAuth>
           }
@@ -138,7 +134,7 @@ function App() {
           <Route
             index
             element={
-              <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <MyProfilePage />
               </RequiredAuth>
             }
@@ -146,7 +142,7 @@ function App() {
           <Route
             path='me/update-password'
             element={
-              <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <UpdatePasswordPage />
               </RequiredAuth>
             }
@@ -154,7 +150,7 @@ function App() {
           <Route
             path='me/appointments'
             element={
-              <RequiredAuth loading={loading} isAuthenticated={isAuthenticated}>
+              <RequiredAuth>
                 <AppointmentsPage />
               </RequiredAuth>
             }
@@ -162,11 +158,7 @@ function App() {
           <Route
             path='admin/new/service'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <NewServicePage />
               </RequiredAdmin>
             }
@@ -174,11 +166,7 @@ function App() {
           <Route
             path='admin/services'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <AllServicesPage />
               </RequiredAdmin>
             }
@@ -186,11 +174,7 @@ function App() {
           <Route
             path='admin/service/:id'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <UpdateServicePage />
               </RequiredAdmin>
             }
@@ -198,11 +182,7 @@ function App() {
           <Route
             path='admin/new/price'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <NewPricePage />
               </RequiredAdmin>
             }
@@ -210,11 +190,7 @@ function App() {
           <Route
             path='admin/prices'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <AllPricesPage />
               </RequiredAdmin>
             }
@@ -222,11 +198,7 @@ function App() {
           <Route
             path='admin/price/:id'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <UpdatePricePage />
               </RequiredAdmin>
             }
@@ -234,11 +206,7 @@ function App() {
           <Route
             path='admin/users'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <AllUsersPage />
               </RequiredAdmin>
             }
@@ -246,11 +214,7 @@ function App() {
           <Route
             path='admin/user/:id'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <UpdateUserPage />
               </RequiredAdmin>
             }
@@ -258,11 +222,7 @@ function App() {
           <Route
             path='admin/appointments'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <AllAppointmentsPage />
               </RequiredAdmin>
             }
@@ -270,11 +230,7 @@ function App() {
           <Route
             path='admin/appointment/:id'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <UpdateAppointmentPage />
               </RequiredAdmin>
             }
@@ -282,11 +238,7 @@ function App() {
           <Route
             path='admin/testimonials'
             element={
-              <RequiredAdmin
-                loading={loading}
-                isAuthenticated={isAuthenticated}
-                user={user}
-              >
+              <RequiredAdmin>
                 <AllTestimonialsPage />
               </RequiredAdmin>
             }

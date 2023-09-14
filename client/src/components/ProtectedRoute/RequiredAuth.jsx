@@ -3,9 +3,11 @@ import React from 'react';
 import { Loader } from '..';
 // external import
 import { Navigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const RequiredAuth = ({ loading, isAuthenticated, children }) => {
+const RequiredAuth = ({ children }) => {
   const location = useLocation();
+  const { loading, isAuthenticated } = useSelector((state) => state?.user);
 
   if (loading) {
     return <Loader />;
