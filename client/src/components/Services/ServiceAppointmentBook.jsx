@@ -5,14 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 // import { format } from 'date-fns';
 // internal import
 import { addBookingItems } from '../../actions/bookingActions';
 
 const ServiceAppointmentBook = ({ service, setShowModal }) => {
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state?.user);
 
@@ -57,7 +54,6 @@ const ServiceAppointmentBook = ({ service, setShowModal }) => {
     if (confirmFirstMeeting === true || confirmFirstMeeting === false) {
       dispatch(addBookingItems(appointmentData));
       toast.success(`You booked appointment for ${appointmentData?.title}!`);
-      navigate('/bookings');
       setShowModal(false);
     }
   };

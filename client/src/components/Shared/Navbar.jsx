@@ -32,7 +32,7 @@ const Navbar = () => {
       <li>
         <Link
           to={'/about'}
-          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
           onClick={() => {
             setIsOpen(false);
           }}
@@ -43,7 +43,7 @@ const Navbar = () => {
       <li>
         <Link
           to={'/services'}
-          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
           onClick={() => {
             setIsOpen(false);
           }}
@@ -54,7 +54,7 @@ const Navbar = () => {
       <li>
         <Link
           to={'/prices'}
-          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
           onClick={() => {
             setIsOpen(false);
           }}
@@ -65,7 +65,7 @@ const Navbar = () => {
       {/* <li>
         <Link
           to={'/blogs'}
-          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
           onClick={() => {
             setIsOpen(false);
           }}
@@ -76,7 +76,7 @@ const Navbar = () => {
       <li>
         <Link
           to={'/contacts'}
-          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+          className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
           onClick={() => {
             setIsOpen(false);
           }}
@@ -84,11 +84,11 @@ const Navbar = () => {
           Contacts
         </Link>
       </li>
-      {bookingItems && (
+      {/* {bookingItems && (
         <li>
           <Link
             to={'/bookings'}
-            className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+            className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
             onClick={() => {
               setIsOpen(false);
             }}
@@ -97,21 +97,35 @@ const Navbar = () => {
             {bookingItems?.length})
           </Link>
         </li>
-      )}
+      )} */}
       {isAuthenticated && user ? (
-        <li>
-          <button
-            className='m-2 lg:m-1 my-4 lg:my-[-4px] p-2 text-main lg:text-white bg-white lg:bg-main hover:text-main hover:bg-white border-[1px] hover:border-main rounded w-full lg:w-auto uppercase'
-            onClick={signOutHandler}
-          >
-            Sign out
-          </button>
-        </li>
+        <>
+          <li>
+            <Link
+              to={'/bookings'}
+              className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              My {bookingItems?.length > 1 ? 'Bookings' : 'Booking'} (
+              {bookingItems?.length > 0 ? bookingItems?.length : 0})
+            </Link>
+          </li>
+          <li>
+            <button
+              className='m-2 lg:m-1 my-4 lg:my-[-4px] p-2 text-main lg:text-white bg-white lg:bg-main hover:text-main hover:bg-white border-[1px] hover:border-main rounded w-full lg:w-auto uppercase'
+              onClick={signOutHandler}
+            >
+              Sign out
+            </button>
+          </li>
+        </>
       ) : (
         <li>
           <Link
             to={'/signin'}
-            className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF]'
+            className='m-2 lg:m-1 my-4 lg:my-0 p-2 lg:p-1 text-white lg:text-black lg:hover:text-main lg:hover:bg-[#FFFFFF] focus:bg-main lg:focus:bg-[#FFFFFF]'
             onClick={() => {
               setIsOpen(false);
             }}

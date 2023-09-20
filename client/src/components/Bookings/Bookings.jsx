@@ -3,13 +3,15 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-// internal import
+// internal imports
+import { Loader } from '..';
 import BookingCard from './BookingCard';
 
 const Bookings = () => {
   const navigate = useNavigate();
 
-  const { bookingItems } = useSelector((state) => state.booking);
+  const { loading } = useSelector((state) => state?.user);
+  const { bookingItems } = useSelector((state) => state?.booking);
 
   const checkOutHandler = () => {
     navigate('/payment');
@@ -28,6 +30,10 @@ const Bookings = () => {
       })
     );
   }, [bookingTotalFees]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>

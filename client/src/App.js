@@ -73,7 +73,7 @@ function App() {
 
     // enable right click
     // document.removeEventListener('contextmenu', handleDisableRightClick);
-  }, []);
+  }, [stripeApiKey]);
 
   return (
     <div className='App'>
@@ -82,14 +82,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/services' element={<ServicesPage />} />
-        <Route
-          path='/services/:title'
-          element={
-            // <RequiredAuth>
-            <ServicesDetailsInfoPage />
-            // </RequiredAuth>
-          }
-        />
+        <Route path='/services/:title' element={<ServicesDetailsInfoPage />} />
         <Route path='/prices' element={<PricesPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='/signin' element={<AuthPage />} />

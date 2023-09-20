@@ -13,11 +13,12 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-// internal import
+// internal imports
 import {
   addNewAppointment,
   clearErrors,
 } from '../../actions/appointmentActions';
+import { Loader } from '..';
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -29,10 +30,12 @@ const Payment = () => {
 
   const feesInfo = JSON.parse(sessionStorage.getItem('bookingTotalFees'));
 
-  const { user } = useSelector((state) => state?.user);
-  const { loading, error, success } = useSelector(
-    (state) => state?.newAppoinment
-  );
+  const { loading, user } = useSelector((state) => state?.user);
+  const {
+    loading: appointmentLoading,
+    error,
+    success,
+  } = useSelector((state) => state?.newAppoinment);
   const { bookingItems } = useSelector((state) => state?.booking);
 
   const paymentData = {
@@ -161,6 +164,10 @@ const Payment = () => {
       dispatch(clearErrors());
     }
   }, [dispatch, error]);
+
+  if (loading || appointmentLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className='container mx-auto my-4 lg:my-10 p-2 min-h-[80vh] sm:min-h-screen'>
